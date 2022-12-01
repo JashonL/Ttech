@@ -1,4 +1,4 @@
-package com.shuoxd.charge.service.http
+package com.tianji.ttech.service.http
 
 object ApiPath {
 
