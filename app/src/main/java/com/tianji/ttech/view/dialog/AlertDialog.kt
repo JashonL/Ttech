@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import com.tianji.ttech.base.BaseDialogFragment
-import com.shuoxd.charge.databinding.DialogAlertBinding
 import com.shuoxd.lib.util.gone
 import com.shuoxd.lib.util.visible
+import com.tianji.ttech.databinding.DialogAlertBinding
 
 /**
  * 通用Dialog
@@ -60,8 +60,8 @@ class AlertDialog : BaseDialogFragment(), View.OnClickListener {
     }
 
     private fun initView() {
-        binding.btCancel.setOnClickListener(this)
-        binding.btConfirm.setOnClickListener(this)
+        binding.btGray.setOnClickListener(this)
+        binding.btRed.setOnClickListener(this)
         if (TextUtils.isEmpty(title)) {
             binding.tvTitle.text = content
             binding.tvContent.gone()
@@ -71,20 +71,20 @@ class AlertDialog : BaseDialogFragment(), View.OnClickListener {
             binding.tvContent.text = content
         }
         if (!cancelText.isNullOrEmpty()) {
-            binding.btCancel.text = cancelText
+            binding.btGray.text = cancelText
         }
         if (!comfirText.isNullOrEmpty()) {
-            binding.btConfirm.text = comfirText
+            binding.btRed.text = comfirText
         }
     }
 
     override fun onClick(v: View?) {
         when {
-            v === binding.btCancel -> {
+            v === binding.btRed -> {
                 dismissAllowingStateLoss()
                 onCancelClick?.invoke()
             }
-            v === binding.btConfirm -> {
+            v === binding.btGray -> {
                 dismissAllowingStateLoss()
                 onComfirClick?.invoke()
             }

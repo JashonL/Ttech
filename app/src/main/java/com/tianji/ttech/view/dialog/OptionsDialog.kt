@@ -13,8 +13,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.shuoxd.lib.util.ViewUtil
-import com.shuoxd.charge.R
-import com.shuoxd.charge.databinding.DialogOptionsBinding
+import com.tianji.ttech.R
+import com.tianji.ttech.databinding.DialogOptionsBinding
 
 /**
  * 选项dialog
