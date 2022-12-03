@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import com.shuoxd.charge.view.dialog.AlertDialog
+import com.tianji.ttech.view.dialog.AlertDialog
 import com.tianji.ttech.R
 import com.tianji.ttech.databinding.DefaultActivityErrorPageBinding
 import java.lang.ref.WeakReference

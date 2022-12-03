@@ -1,4 +1,4 @@
-package com.shuoxd.charge.view.dialog
+package com.tianji.ttech.view.dialog
 
 import android.app.Dialog
 import android.os.Bundle

@@ -20,7 +20,7 @@
             android:gravity="center"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="@string/cancel"
+            android:text="@string/m6_cancel"
             android:textColor="@color/text_gray_99"
             android:textSize="@dimen/text_medium" />
 
@@ -29,7 +29,6 @@
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:gravity="center"
-            android:text="@string/select_unit"
             android:textColor="@color/text_black"
             android:textSize="@dimen/text_title"
             android:textStyle="bold" />
@@ -41,7 +40,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="16dp"
-            android:text="@string/confirm" />
+            android:text="@string/m7_confirm" />
 
     </RelativeLayout>
 
