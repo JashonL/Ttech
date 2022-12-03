@@ -1,4 +1,4 @@
-package com.shuoxd.charge.view
+package com.ttech.charge.view
 
 import android.content.Context
 import android.graphics.Color
@@ -7,14 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.annotation.StringDef
-import com.shuoxd.charge.R
-import com.shuoxd.charge.databinding.ChartTimeSelectLayoutBinding
-import com.shuoxd.lib.util.DateUtils
-import com.shuoxd.lib.util.Util
-import com.shuoxd.lib.util.gone
-import com.shuoxd.lib.util.visible
-import com.shuoxd.lib.view.dialog.DatePickerFragment
-import com.shuoxd.lib.view.dialog.OnDateSetListener
+import com.ttech.charge.R
+import com.ttech.charge.databinding.ChartTimeSelectLayoutBinding
+import com.ttech.lib.util.DateUtils
+import com.ttech.lib.util.Util
+import com.ttech.lib.util.gone
+import com.ttech.lib.util.visible
+import com.ttech.lib.view.dialog.DatePickerFragment
+import com.ttech.lib.view.dialog.OnDateSetListener
 import java.util.*
 
 /**

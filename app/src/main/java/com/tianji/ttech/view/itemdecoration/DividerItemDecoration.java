@@ -30,7 +30,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tianji.ttech.base.BasePageListAdapter;
-import com.shuoxd.lib.util.ViewUtil;
+import com.ttech.lib.util.ViewUtil;
 
 /**
  * LinearLayoutManager分割线

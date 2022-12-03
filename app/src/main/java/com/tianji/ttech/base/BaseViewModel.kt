@@ -1,13 +1,13 @@
 package com.tianji.ttech.base
 
 import androidx.lifecycle.ViewModel
-import com.shuoxd.lib.LibApplication
-import com.shuoxd.lib.service.ServiceManager
-import com.shuoxd.lib.service.account.IAccountService
-import com.shuoxd.lib.service.device.IDeviceService
-import com.shuoxd.lib.service.http.IHttpService
-import com.shuoxd.lib.service.location.ILocationService
-import com.shuoxd.lib.service.storage.IStorageService
+import com.ttech.lib.LibApplication
+import com.ttech.lib.service.ServiceManager
+import com.ttech.lib.service.account.IAccountService
+import com.ttech.lib.service.device.IDeviceService
+import com.ttech.lib.service.http.IHttpService
+import com.ttech.lib.service.location.ILocationService
+import com.ttech.lib.service.storage.IStorageService
 
 open class BaseViewModel : ViewModel(), ServiceManager.ServiceInterface {
 

@@ -1,4 +1,4 @@
-package com.shuoxd.charge.view
+package com.ttech.charge.view
 
 import android.content.Context
 import android.graphics.Typeface
@@ -6,8 +6,8 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
-import com.shuoxd.charge.R
-import com.shuoxd.charge.databinding.TabItemBinding
+import com.ttech.charge.R
+import com.ttech.charge.databinding.TabItemBinding
 
 /**
  * 自定义组合View-Tab

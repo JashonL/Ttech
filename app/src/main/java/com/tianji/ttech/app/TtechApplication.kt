@@ -3,15 +3,15 @@ package com.tianji.ttech.app
 import android.app.Application
 import android.os.Process
 import com.tianji.ttech.service.http.OkhttpService
-import com.shuoxd.lib.service.ServiceManager
-import com.shuoxd.lib.service.ServiceType
-import com.shuoxd.lib.service.account.IAccountService
-import com.shuoxd.lib.service.device.IDeviceService
-import com.shuoxd.lib.service.http.IHttpService
-import com.shuoxd.lib.service.location.ILocationService
-import com.shuoxd.lib.service.storage.DefaultStorageService
-import com.shuoxd.lib.service.storage.IStorageService
-import com.shuoxd.lib.util.Util
+import com.ttech.lib.service.ServiceManager
+import com.ttech.lib.service.ServiceType
+import com.ttech.lib.service.account.IAccountService
+import com.ttech.lib.service.device.IDeviceService
+import com.ttech.lib.service.http.IHttpService
+import com.ttech.lib.service.location.ILocationService
+import com.ttech.lib.service.storage.DefaultStorageService
+import com.ttech.lib.service.storage.IStorageService
+import com.ttech.lib.util.Util
 
 class TtechApplication : Application() ,ServiceManager.ServiceInterface{
 

@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.shuoxd.lib.util.ViewUtil
+import com.ttech.lib.util.ViewUtil
 import com.tianji.ttech.databinding.DialogPickerBinding
 
 /**

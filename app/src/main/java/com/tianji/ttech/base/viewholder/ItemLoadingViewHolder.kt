@@ -1,4 +1,4 @@
-package com.shuoxd.charge.base.viewholder
+package com.ttech.charge.base.viewholder
 
 import android.view.LayoutInflater
 import android.view.View

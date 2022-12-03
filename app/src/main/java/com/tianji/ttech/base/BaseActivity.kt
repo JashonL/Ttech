@@ -5,14 +5,14 @@ import android.os.Build
 import android.os.LocaleList
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.shuoxd.lib.LibApplication
-import com.shuoxd.lib.service.ServiceManager
-import com.shuoxd.lib.service.account.IAccountService
-import com.shuoxd.lib.service.device.IDeviceService
-import com.shuoxd.lib.service.device.Language
-import com.shuoxd.lib.service.http.IHttpService
-import com.shuoxd.lib.service.location.ILocationService
-import com.shuoxd.lib.service.storage.IStorageService
+import com.ttech.lib.LibApplication
+import com.ttech.lib.service.ServiceManager
+import com.ttech.lib.service.account.IAccountService
+import com.ttech.lib.service.device.IDeviceService
+import com.ttech.lib.service.device.Language
+import com.ttech.lib.service.http.IHttpService
+import com.ttech.lib.service.location.ILocationService
+import com.ttech.lib.service.storage.IStorageService
 
 abstract class BaseActivity : AppCompatActivity(), ServiceManager.ServiceInterface, IDisplay {
 

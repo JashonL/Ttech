@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.shuoxd.lib.view.StatusBarHeightView
+    <com.ttech.lib.view.StatusBarHeightView
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

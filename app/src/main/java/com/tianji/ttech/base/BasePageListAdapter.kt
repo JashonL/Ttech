@@ -6,8 +6,8 @@ import androidx.annotation.IntDef
 import androidx.recyclerview.widget.RecyclerView
 import com.tianji.ttech.base.viewholder.ItemLoadingEndViewHolder
 import com.tianji.ttech.base.viewholder.ItemLoadingErrorViewHolder
-import com.shuoxd.charge.base.viewholder.ItemLoadingViewHolder
-import com.shuoxd.lib.service.http.PageModel
+import com.ttech.charge.base.viewholder.ItemLoadingViewHolder
+import com.ttech.lib.service.http.PageModel
 
 /**
  * RecyclerView分页Adapter

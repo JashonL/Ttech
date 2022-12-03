@@ -89,7 +89,7 @@ class AndroidDisplay(activity: BaseActivity) : IDisplay {
     }
 
     private fun findPlaceholderContainerView(activity: BaseActivity): ViewGroup {
-        val viewGroup = activity.findViewById<ViewGroup>(com.shuoxd.lib.R.id.activity_placeholder_page)
+        val viewGroup = activity.findViewById<ViewGroup>(com.ttech.lib.R.id.activity_placeholder_page)
         return viewGroup ?: return activity.findViewById(Window.ID_ANDROID_CONTENT)
     }
 

@@ -1,4 +1,4 @@
-package com.shuoxd.charge.view
+package com.ttech.charge.view
 
 import android.content.Context
 import android.util.AttributeSet

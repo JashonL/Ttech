@@ -1,7 +1,7 @@
 package com.tianji.ttech.service.account
 
 import android.content.Context
-import com.shuoxd.lib.service.account.BaseAccountService
+import com.ttech.lib.service.account.BaseAccountService
 import com.tianji.ttech.app.Foreground
 
 class DefaultAccountService : BaseAccountService() {

@@ -1,4 +1,4 @@
-package com.shuoxd.charge.view.popuwindow
+package com.ttech.charge.view.popuwindow
 
 import android.content.Context
 import android.graphics.Color

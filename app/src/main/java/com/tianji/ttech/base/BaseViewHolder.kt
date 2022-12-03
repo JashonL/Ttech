@@ -4,12 +4,12 @@ import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
-import com.shuoxd.lib.service.ServiceManager
-import com.shuoxd.lib.service.account.IAccountService
-import com.shuoxd.lib.service.device.IDeviceService
-import com.shuoxd.lib.service.http.IHttpService
-import com.shuoxd.lib.service.location.ILocationService
-import com.shuoxd.lib.service.storage.IStorageService
+import com.ttech.lib.service.ServiceManager
+import com.ttech.lib.service.account.IAccountService
+import com.ttech.lib.service.device.IDeviceService
+import com.ttech.lib.service.http.IHttpService
+import com.ttech.lib.service.location.ILocationService
+import com.ttech.lib.service.storage.IStorageService
 import com.tianji.ttech.app.TtechApplication
 
 open class BaseViewHolder(

@@ -3,12 +3,11 @@ package com.tianji.ttech.service.http
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
-import com.shuoxd.lib.service.http.HttpErrorModel
-import com.shuoxd.lib.service.http.IHttpCallback
-import com.shuoxd.lib.service.http.IHttpService
-import com.shuoxd.lib.service.http.cookie.CookiesManager
-import com.shuoxd.lib.util.GsonManager
-import com.shuoxd.lib.util.LogUtil
+import com.ttech.lib.service.http.HttpErrorModel
+import com.ttech.lib.service.http.IHttpCallback
+import com.ttech.lib.service.http.IHttpService
+import com.ttech.lib.util.GsonManager
+import com.ttech.lib.util.LogUtil
 import com.tianji.ttech.BuildConfig
 import com.tianji.ttech.R
 import com.tianji.ttech.app.TtechApplication
@@ -150,7 +149,7 @@ class OkhttpService : IHttpService() {
                         response.code
                         callback.onFailure(
                             HttpErrorModel.ERROR_CODE_SERVER,
-                            TtechApplication.instance().getString(R.string.m41_network_error)
+                            TtechApplication.instance().getString(com.shuoxd.lib.R.string.network_error)
                         )
                     }
                 }

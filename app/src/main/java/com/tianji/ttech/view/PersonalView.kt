@@ -1,16 +1,11 @@
-package com.shuoxd.charge.view
+package com.ttech.charge.view
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import com.shuoxd.lib.util.gone
-import com.shuoxd.lib.util.invisible
-import com.shuoxd.lib.util.visible
-import com.shuoxd.charge.R
-import com.shuoxd.charge.databinding.PersonalViewBinding
-import com.shuoxd.charge.databinding.SettingItemViewBinding
+import com.ttech.charge.R
+import com.ttech.charge.databinding.PersonalViewBinding
 
 /**
  * 自定义组合View-设置页面Item

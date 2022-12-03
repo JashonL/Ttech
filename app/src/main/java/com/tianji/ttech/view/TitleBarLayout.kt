@@ -1,4 +1,4 @@
-package com.shuoxd.charge.view
+package com.ttech.charge.view
 
 import android.app.Activity
 import android.content.Context
@@ -6,12 +6,12 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
-import com.shuoxd.charge.R
-import com.shuoxd.charge.databinding.TitleBarLayoutBinding
-import com.shuoxd.lib.util.gone
-import com.shuoxd.lib.util.setDrawableEnd
-import com.shuoxd.lib.util.setDrawableNull
-import com.shuoxd.lib.util.visible
+import com.ttech.charge.R
+import com.ttech.charge.databinding.TitleBarLayoutBinding
+import com.ttech.lib.util.gone
+import com.ttech.lib.util.setDrawableEnd
+import com.ttech.lib.util.setDrawableNull
+import com.ttech.lib.util.visible
 
 /**
  * 自定义组合View-标题栏

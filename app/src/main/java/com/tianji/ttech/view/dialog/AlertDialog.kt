@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import com.tianji.ttech.base.BaseDialogFragment
-import com.shuoxd.lib.util.gone
-import com.shuoxd.lib.util.visible
+import com.ttech.lib.util.gone
+import com.ttech.lib.util.visible
 import com.tianji.ttech.databinding.DialogAlertBinding
 
 /**

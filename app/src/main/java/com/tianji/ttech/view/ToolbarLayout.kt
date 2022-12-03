@@ -1,16 +1,13 @@
-package com.shuoxd.charge.view
+package com.ttech.charge.view
 
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.LinearLayout
-import androidx.annotation.IntDef
-import com.shuoxd.charge.R
-import com.shuoxd.charge.databinding.TitleBarLayoutBinding
-import com.shuoxd.charge.databinding.ToolbarBinding
+import com.ttech.charge.R
+import com.ttech.charge.databinding.ToolbarBinding
 
 class ToolbarLayout @JvmOverloads constructor(
     context: Context,
