@@ -21,7 +21,6 @@
     </declare-styleable>
 
 
-
     <declare-styleable name="CheckItemView">
         <attr name="checkTitle" format="string" />
     </declare-styleable>
@@ -32,11 +31,30 @@
     </declare-styleable>
 
 
+    <declare-styleable name="EditTextComposeView">
+        <!--左边图标-->
+        <attr name="compose_left_icon" format="reference" />
+        <!--内容提示-->
+        <attr name="compose_hide" format="string|reference" />
+
+
+        <!--右边图标 文字-->
+        <attr name="compose_right_show" format="boolean" />
+        <attr name="compose_rigth_icon" format="reference" />
+        <attr name="compose_rigth_text" format="reference|string" />
+        <attr name="compose_right_type" format="enum" >
+            <enum name="right_type_text" value="1"/>
+            <enum name="right_type_icon" value="2"/>
+        </attr>
+
+
+    </declare-styleable>
+
 
     <declare-styleable name="ToolbarLayout">
         <attr name="toolbarLeftIcon" format="reference" />
         <attr name="toolbarTitle" format="string" />
-        <attr name="toolbarRightIcon" format="reference"/>
+        <attr name="toolbarRightIcon" format="reference" />
     </declare-styleable>
 
 
@@ -54,7 +72,7 @@
     <declare-styleable name="DataItemView">
         <attr name="lefticon" format="reference" />
         <attr name="title" format="string" />
-        <attr name="value" format="string"/>
+        <attr name="value" format="string" />
 
     </declare-styleable>
 

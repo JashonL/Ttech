@@ -119,4 +119,12 @@ object DateUtils {
         calendar.timeInMillis = date
         return format.format(calendar.time)
     }
+
+
+    fun parserDate(date: Date, format: String): String {
+        val simFormat = SimpleDateFormat(format, Locale.US)
+        return simFormat.format(date)
+    }
+
+
 }

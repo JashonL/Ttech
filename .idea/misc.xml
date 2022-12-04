@@ -13,13 +13,17 @@
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable/shape_login.xml" value="0.1235" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable/shape_register.xml" value="0.2985" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/activity_login_register.xml" value="0.358695652173913" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/activity_main.xml" value="0.24954710144927536" />
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/date_select.xml" value="0.358695652173913" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/default_activity_error_page.xml" value="0.358695652173913" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/dialog_alert.xml" value="0.358695652173913" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/dialog_options.xml" value="0.358695652173913" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/dialog_picker.xml" value="0.358695652173913" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/editext_compose.xml" value="0.358695652173913" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/item_loading_end_view_holder.xml" value="0.358695652173913" />
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/list_pop_layout.xml" value="0.5" />
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/pop_list_item.xml" value="0.358695652173913" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36614583333333334" />
       </map>
     </option>

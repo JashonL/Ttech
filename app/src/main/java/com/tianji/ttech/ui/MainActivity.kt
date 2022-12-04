@@ -1,4 +1,4 @@
-package com.tianji.ttech
+package com.tianji.ttech.ui
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
