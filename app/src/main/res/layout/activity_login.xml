@@ -30,9 +30,67 @@
     <com.tianji.ttech.view.EditTextComposeView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
-        android:layout_margin="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_30"
+        app:compose_hide="@string/m5_email_address"
         app:compose_left_icon="@drawable/login_user"
         app:compose_right_show="false" />
+
+
+    <com.tianji.ttech.view.EditTextComposeView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_30"
+        app:compose_hide="@string/m5_email_address"
+        app:compose_left_icon="@drawable/lock"
+        app:compose_right_show="false" />
+
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_30"
+        android:background="@drawable/shape_login"
+        android:gravity="center"
+        android:text="@string/m6_cancel"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_content_sp_14" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_30"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/m6_remember_me" />
+
+
+        <TextView
+            android:id="@+id/tv_forget_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/m3_forget_password"
+            android:textColor="@color/black_333333"
+            android:textSize="@dimen/size_content_sp_14" />
+
+
+    </LinearLayout>
 
 
 </LinearLayout>

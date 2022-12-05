@@ -135,7 +135,7 @@ class OkhttpService : IHttpService() {
                 mainHandler.post {
                     callback.onFailure(
                         HttpErrorModel.ERROR_CODE_NETWORK,
-                        TtechApplication.instance().getString(com.shuoxd.lib.R.string.network_error)
+                        TtechApplication.instance().getString(R.string.m41_network_error)
                     )
                 }
             }
@@ -149,7 +149,7 @@ class OkhttpService : IHttpService() {
                         response.code
                         callback.onFailure(
                             HttpErrorModel.ERROR_CODE_SERVER,
-                            TtechApplication.instance().getString(com.shuoxd.lib.R.string.network_error)
+                            TtechApplication.instance().getString(R.string.m41_network_error)
                         )
                     }
                 }

@@ -3,11 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2985" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable/button_gray_background.xml" value="0.2985" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable/button_red_background.xml" value="0.2985" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable/default_dialog_background.xml" value="0.2985" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.2985" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2985" />
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2985" />
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1235" />
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable/line_divider.xml" value="0.1235" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable/line_divider_2.xml" value="0.2985" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable/shape_editext.xml" value="0.2985" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/drawable/shape_login.xml" value="0.1235" />
@@ -21,10 +25,16 @@
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/dialog_options.xml" value="0.358695652173913" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/dialog_picker.xml" value="0.358695652173913" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/editext_compose.xml" value="0.358695652173913" />
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/fragment_dashboard.xml" value="0.358695652173913" />
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/fragment_home.xml" value="0.358695652173913" />
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/fragment_notifications.xml" value="0.358695652173913" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/item_loading_end_view_holder.xml" value="0.358695652173913" />
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/item_loading_error_view_holder.xml" value="0.358695652173913" />
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/item_loading_view_holder.xml" value="0.358695652173913" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/list_pop_layout.xml" value="0.5" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/layout/pop_list_item.xml" value="0.358695652173913" />
         <entry key="..\:/WorkPlace/Ttech/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36614583333333334" />
+        <entry key="..\:/WorkPlace/Ttech/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1955" />
       </map>
     </option>
   </component>

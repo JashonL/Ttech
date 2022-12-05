@@ -34,7 +34,7 @@ class EditTextComposeView @JvmOverloads constructor(
 
         context.theme.obtainStyledAttributes(
             attrs,
-            R.styleable.CheckItemView,
+            R.styleable.EditTextComposeView,
             0, 0
         ).apply {
             try {
@@ -60,7 +60,7 @@ class EditTextComposeView @JvmOverloads constructor(
 
     private fun initViews() {
         bingding.ivIcon.setImageDrawable(leftIcon)
-        bingding.etContent.setText(hideString)
+        bingding.etContent.hint = hideString
 
 
 
