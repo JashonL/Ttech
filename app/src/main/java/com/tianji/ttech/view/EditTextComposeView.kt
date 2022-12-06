@@ -85,4 +85,9 @@ class EditTextComposeView @JvmOverloads constructor(
     }
 
 
+    public fun getValue(): String {
+        return bingding.etContent.text.toString()
+    }
+
+
 }

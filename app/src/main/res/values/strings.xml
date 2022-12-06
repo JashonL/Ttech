@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Autobot Charge</string>
+    <string name="app_name">TENTEK</string>
 
     <string name="m2_parse_error_msg">Failed to parse data</string>
     <string name="m3_bad_network_msg">Internet problem</string>
@@ -13,16 +13,18 @@
     <string name="m2_register">Register</string>
     <string name="m3_catch_every_sunbeam">—  Catch Every Sunbeam  —</string>
     <string name="m4_auto">Auto</string>
-
     <string name="m5_email_address">Email Address</string>
     <string name="m6_remember_me">Remember me</string>
+    <string name="m7_username_cant_empty">The Username cannot be empty</string>
+    <string name="m8_password_cant_empty">The password cannot be empty</string>
+    <string name="m9_save">Save</string>
+    <string name="m10_sms_retrieval">SMS retrieval</string>
 
 
-
-
-
-
-
+    <string name="m11_app_want_to_visit_format">%s wants to access your %s</string>
+    <string name="m12_to_app_set_permission_format">You have not allowed %s to get your %s permission, you can enable it in the app settings</string>
+    <string name="m13_password_characters">The password is 6-30 characters, a combination
+of letters, numbers and symbols.</string>
 
 
 
@@ -141,7 +143,7 @@
     <string name="m80_time_zone">Time Zone</string>
 
     <string name="m81_please_check_agree_agreement">Please check Agree Agreement</string>
-    <string name="m82_password_cant_empty">The password cannot be empty</string>
+
     <string name="m83_passwords_are_inconsistent">The two passwords are different</string>
     <string name="m84_password_cannot_be_less_than_6_digits">The password must be at least six digits long</string>
     <string name="m85_no_phone_number">No mobile phone number was entered</string>

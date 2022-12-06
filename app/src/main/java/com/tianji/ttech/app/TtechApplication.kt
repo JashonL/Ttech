@@ -2,10 +2,14 @@ package com.tianji.ttech.app
 
 import android.app.Application
 import android.os.Process
+import com.growatt.atess.ui.launch.fragment.UserAgreementDialog
+import com.tianji.ttech.service.account.DefaultAccountService
 import com.tianji.ttech.service.http.OkhttpService
+import com.ttech.lib.LibApplication
 import com.ttech.lib.service.ServiceManager
 import com.ttech.lib.service.ServiceType
 import com.ttech.lib.service.account.IAccountService
+import com.ttech.lib.service.device.DefaultDeviceService
 import com.ttech.lib.service.device.IDeviceService
 import com.ttech.lib.service.http.IHttpService
 import com.ttech.lib.service.location.ILocationService
@@ -13,7 +17,7 @@ import com.ttech.lib.service.storage.DefaultStorageService
 import com.ttech.lib.service.storage.IStorageService
 import com.ttech.lib.util.Util
 
-class TtechApplication : Application() ,ServiceManager.ServiceInterface{
+class TtechApplication : LibApplication() ,ServiceManager.ServiceInterface{
 
 
 
@@ -50,6 +54,12 @@ class TtechApplication : Application() ,ServiceManager.ServiceInterface{
 
     private fun registerService(){
         ServiceManager.instance().registerService(ServiceType.HTTP, OkhttpService())
+
+        ServiceManager.instance()
+            .registerService(ServiceType.STORAGE, DefaultStorageService(this))
+        ServiceManager.instance().registerService(ServiceType.DEVICE, DefaultDeviceService(this))
+        ServiceManager.instance().registerService(ServiceType.ACCOUNT, DefaultAccountService())
+
     }
 
 
@@ -77,6 +87,12 @@ class TtechApplication : Application() ,ServiceManager.ServiceInterface{
 
 
 
+    /**
+     * 是否同意隐私政策
+     */
+    fun isAgree(): Boolean {
+        return storageService().getBoolean(UserAgreementDialog.KEY_IS_AGREE_AGREEMENT, false)
+    }
 
 
 

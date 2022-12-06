@@ -1,5 +1,7 @@
 package com.tianji.ttech.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,21 @@ import com.tianji.ttech.databinding.ActivityLoginBinding
 import com.tianji.ttech.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+
+        private const val KEY_HOME_TAB = "key_home_tab"
+
+        fun start(context: Context) {
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
+        }
+
+
+    }
+
+
+
 
     private lateinit var binding: ActivityLoginBinding
 
