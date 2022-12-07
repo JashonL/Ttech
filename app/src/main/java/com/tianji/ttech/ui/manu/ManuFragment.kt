@@ -1,4 +1,6 @@
 package com.tianji.ttech.ui.manu
 
-class ManuFragment {
+import com.tianji.ttech.base.BaseFragment
+
+class ManuFragment : BaseFragment(){
 }

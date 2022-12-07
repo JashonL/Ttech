@@ -13,6 +13,7 @@ import com.tianji.ttech.app.TtechApplication
 
 abstract class BaseFragment : Fragment(), ServiceManager.ServiceInterface, IDisplay {
 
+
     override fun apiService(): IHttpService {
         return TtechApplication.instance().apiService()
     }
@@ -56,4 +57,13 @@ abstract class BaseFragment : Fragment(), ServiceManager.ServiceInterface, IDisp
     override fun hidePageLoadingView() {
         (activity as? BaseActivity)?.hidePageLoadingView()
     }
+
+    override fun showResultDialog(
+        result: String?,
+        onCancelClick: (() -> Unit)?,
+        onComfirClick: (() -> Unit)?
+    ) {
+        (activity as? BaseActivity)?.showResultDialog(result, onCancelClick, onComfirClick)
+    }
+
 }

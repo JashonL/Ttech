@@ -29,7 +29,11 @@ of letters, numbers and symbols.</string>
     <string name="m15_installer_code_not_empty">Installer ID cannot be empty</string>
 
 
-
+    <string name="m16_home">Home</string>
+    <string name="m17_energy">Energy</string>
+    <string name="m18_array">Array</string>
+    <string name="m19_station">Station</string>
+    <string name="m20_manu">Manu</string>
 
 
 

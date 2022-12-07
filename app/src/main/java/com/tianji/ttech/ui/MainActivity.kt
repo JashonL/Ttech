@@ -1,57 +1,102 @@
 package com.tianji.ttech.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.tianji.ttech.databinding.ActivityLoginBinding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
+import com.tianji.ttech.R
+import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.ActivityMainBinding
+import com.tianji.ttech.ui.array.ArrayFragment
+import com.tianji.ttech.ui.energy.EnergyFragment
+import com.tianji.ttech.ui.home.HomeFragment
+import com.tianji.ttech.ui.manu.ManuFragment
+import com.tianji.ttech.ui.station.StationFragment
+import com.ttech.lib.util.ToastUtil
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
-
-        private const val KEY_HOME_TAB = "key_home_tab"
-
         fun start(context: Context) {
             val intent = Intent(context, MainActivity::class.java)
             context.startActivity(intent)
+        }
+    }
+
+    private lateinit var binding: ActivityMainBinding
+    private val fragments by lazy(LazyThreadSafetyMode.NONE) {
+        mutableListOf(
+            HomeFragment(),
+            EnergyFragment(),
+            ArrayFragment(),
+            StationFragment(),
+            ManuFragment()
+        )
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+        //初始化Viewpager2
+        val adapter = Adapter(this)
+        val mainViewpager = binding.mainViewpager
+        mainViewpager.adapter = adapter
+        adapter.refresh(fragments)
+
+        mainViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                binding.navView.menu.getItem(position).isChecked = true
+            }
+        })
+
+
+        binding.navView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_home -> mainViewpager.currentItem = 0
+                R.id.navigation_eneger -> mainViewpager.currentItem = 1
+                R.id.navigation_array -> mainViewpager.currentItem = 2
+                R.id.navigation_station -> mainViewpager.currentItem = 3
+                R.id.navigation_menu -> mainViewpager.currentItem = 4
+            }
+            false
         }
 
 
     }
 
 
+    inner class Adapter(fragmentActivity: FragmentActivity) :
+        FragmentStateAdapter(fragmentActivity) {
 
+        private val fragments = mutableListOf<Fragment>()
 
-    private lateinit var binding: ActivityLoginBinding
+        override fun getItemCount(): Int {
+            return fragments.size
+        }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        override fun createFragment(position: Int): Fragment {
+            return fragments[position]
+        }
 
-        //底部控件
-//        val navView: BottomNavigationView = binding.navView
-
-
-
-   /*
-
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)*/
+        @SuppressLint("NotifyDataSetChanged")
+        fun refresh(fragments: MutableList<Fragment>) {
+            this.fragments.clear()
+            this.fragments.addAll(fragments)
+            notifyDataSetChanged()
+        }
     }
+
 }

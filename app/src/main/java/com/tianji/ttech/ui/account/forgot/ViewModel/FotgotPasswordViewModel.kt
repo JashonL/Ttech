@@ -7,7 +7,6 @@ import com.tianji.ttech.service.http.ApiPath
 import com.ttech.lib.service.http.HttpCallback
 import com.ttech.lib.service.http.HttpErrorModel
 import com.ttech.lib.service.http.HttpResult
-import com.ttech.lib.service.http.IHttpCallback
 import kotlinx.coroutines.launch
 
 class FotgotPasswordViewModel : BaseViewModel() {

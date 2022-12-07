@@ -1,5 +1,6 @@
 package com.tianji.ttech.ui.account.register
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -21,6 +22,7 @@ import com.tianji.ttech.ui.common.activity.CountryActivity
 import com.tianji.ttech.ui.common.activity.WebActivity
 import com.tianji.ttech.utils.AppUtil
 import com.ttech.lib.util.ActivityBridge
+import com.ttech.lib.util.MD5Util
 import com.ttech.lib.util.ToastUtil
 import com.ttech.lib.util.Util
 import kotlinx.coroutines.delay
@@ -163,7 +165,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
         binding.ivSelect.setOnClickListener(this)
         binding.etZone.setOnClickListener(this)
         binding.etCountry.setOnClickListener(this)
-
+        binding.btLogin.setOnClickListener(this)
         binding.etVertificationCode.setOnRightClickListener {
             if (TextUtils.isEmpty(getPhoneOrEmailText())) {
                 ToastUtil.show(getString(R.string.m89_no_email))
@@ -261,12 +263,15 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
         } else if (TextUtils.isEmpty(installerCoder)) {
             ToastUtil.show(getString(R.string.m15_installer_code_not_empty))
         } else {
+            showDialog()
+            val md5 = MD5Util.md5(password)
+
             viewModel.register(
                 country!!,
                 timeZone!!,
                 username!!,
+                md5?:"",
                 code!!,
-                password,
                 installerCoder!!
             )
         }

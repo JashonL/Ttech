@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tianji.ttech.base.BaseViewModel
 import com.tianji.ttech.service.http.ApiPath
+import com.ttech.lib.service.account.User
 import com.ttech.lib.service.http.HttpCallback
 import com.ttech.lib.service.http.HttpErrorModel
 import com.ttech.lib.service.http.HttpResult
@@ -43,8 +44,8 @@ class RegisterViewModel : BaseViewModel() {
 
             }
             apiService().postForm(ApiPath.Mine.REGISTER, params, object :
-                HttpCallback<HttpResult<String>>() {
-                override fun success(result: HttpResult<String>) {
+                HttpCallback<HttpResult<User>>() {
+                override fun success(result: HttpResult<User>) {
                     if (result.isBusinessSuccess()) {
                         registerLiveData.value = null
                     } else {

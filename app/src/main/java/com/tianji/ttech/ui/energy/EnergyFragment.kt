@@ -1,4 +1,6 @@
 package com.tianji.ttech.ui.energy
 
-class EnergyFragment {
+import com.tianji.ttech.base.BaseFragment
+
+class EnergyFragment : BaseFragment(){
 }

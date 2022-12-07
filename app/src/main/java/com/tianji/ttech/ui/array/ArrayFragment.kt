@@ -1,4 +1,6 @@
 package com.tianji.ttech.ui.array
 
-class ArrayFragment {
+import com.tianji.ttech.base.BaseFragment
+
+class ArrayFragment : BaseFragment(){
 }

@@ -24,7 +24,7 @@ class TtechApplication : LibApplication() ,ServiceManager.ServiceInterface{
     companion object {
         private lateinit var instance:TtechApplication
         fun instance()= instance
-
+        const val APP_OS = 0
     }
 
 

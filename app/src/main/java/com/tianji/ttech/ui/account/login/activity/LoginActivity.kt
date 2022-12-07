@@ -9,13 +9,16 @@ import androidx.activity.viewModels
 import com.tianji.ttech.ui.common.activity.WebActivity
 import com.growatt.atess.ui.common.viewmodel.StaticResourceViewModel
 import com.tianji.ttech.R
+import com.tianji.ttech.app.TtechApplication.Companion.APP_OS
 import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivityLoginBinding
 import com.tianji.ttech.ui.MainActivity
 import com.tianji.ttech.ui.account.forgot.ForgotPasswordActivity
 import com.tianji.ttech.ui.account.login.viewmodel.LoginViewModel
 import com.ttech.lib.service.account.User
+import com.ttech.lib.util.MD5Util
 import com.ttech.lib.util.ToastUtil
+import com.ttech.lib.util.Util
 
 class LoginActivity : BaseActivity(), View.OnClickListener {
 
@@ -117,9 +120,26 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             else -> {
                 //校验成功
                 showDialog()
-                viewModel.login(userName!!, password!!)
+                login(password!!,userName!!)
             }
         }
     }
+
+
+    private fun login(password: String, userName: String) {
+        if (!TextUtils.isEmpty(password)) {
+            showDialog()
+            val pwd_md5 = MD5Util.md5(password)
+            var version = Util.getVersion(this)
+            val phoneModel = Util.getPhoneModel()
+            if (version == null) version = "";
+            if (pwd_md5 != null) {
+                viewModel.login(userName, pwd_md5, APP_OS, phoneModel, version)
+            }
+        }
+
+    }
+
+
 
 }
