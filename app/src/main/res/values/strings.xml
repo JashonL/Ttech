@@ -25,7 +25,8 @@
     <string name="m12_to_app_set_permission_format">You have not allowed %s to get your %s permission, you can enable it in the app settings</string>
     <string name="m13_password_characters">The password is 6-30 characters, a combination
 of letters, numbers and symbols.</string>
-
+    <string name="m14_seach">Search</string>
+    <string name="m15_installer_code_not_empty">Installer ID cannot be empty</string>
 
 
 
@@ -281,6 +282,7 @@ confirmation after plug in your car。</string>
     <string name="m183_authorization_management">Authorization management</string>
     <string name="m184_pin">Pin</string>
     <string name="m185_pin_not_empty">Pin Not Empty</string>
+    <string name="m186_installer_code">Installer Code</string>
 
 
 

@@ -12,6 +12,7 @@ import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivityLoginBinding
 import com.tianji.ttech.ui.MainActivity
+import com.tianji.ttech.ui.account.forgot.ForgotPasswordActivity
 import com.tianji.ttech.ui.account.login.viewmodel.LoginViewModel
 import com.ttech.lib.service.account.User
 import com.ttech.lib.util.ToastUtil
@@ -94,6 +95,11 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             v === binding.btnLogin -> {
                 checkInfo()
             }
+
+            v===binding.tvForgetPassword->{
+                ForgotPasswordActivity.start(this)
+            }
+
         }
     }
 
@@ -111,7 +117,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             else -> {
                 //校验成功
                 showDialog()
-                viewModel.login(userName, password)
+                viewModel.login(userName!!, password!!)
             }
         }
     }

@@ -47,6 +47,15 @@
             <enum name="right_type_icon" value="2"/>
         </attr>
 
+        <!--是否密码-->
+        <attr name="compose_item_ispassword" format="boolean"/>
+
+
+        <attr name="compose_content_type" format="enum" >
+            <enum name="content_input" value="1"/>
+            <enum name="content_text" value="2"/>
+        </attr>
+
 
     </declare-styleable>
 

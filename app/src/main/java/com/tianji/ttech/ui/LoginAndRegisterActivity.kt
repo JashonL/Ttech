@@ -3,11 +3,10 @@ package com.tianji.ttech.ui
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
-import androidx.databinding.DataBindingUtil.setContentView
+import com.tianji.ttech.ui.account.register.RegisterActivity
 import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivityLoginRegisterBinding
 import com.tianji.ttech.ui.account.login.activity.LoginActivity
-import com.tianji.ttech.ui.account.register.RegisterActivity
 
 class LoginAndRegisterActivity :BaseActivity(),OnClickListener{
 

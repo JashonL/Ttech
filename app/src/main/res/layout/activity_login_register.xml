@@ -94,7 +94,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/bt_register"
+                android:id="@+id/bt_login"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_45"
                 android:layout_marginStart="@dimen/dp_30"
@@ -108,7 +108,7 @@
 
 
             <Button
-                android:id="@+id/bt_login"
+                android:id="@+id/bt_register"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_45"
                 android:layout_marginStart="@dimen/dp_30"

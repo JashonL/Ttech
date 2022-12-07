@@ -45,6 +45,13 @@ object ApiPath {
          */
         const val UPLOADAVATAR ="/v1/user/uploadAvatar"
 
+        /**
+         * 忘记密码
+         */
+        const val RETRIEVEPASSWORD="v1/user/retrievePassword"
+
+
+
     }
 
     object Charge {
@@ -158,6 +165,16 @@ object ApiPath {
 
 
     }
+
+
+
+    object Commom{
+        /**
+         * 服务-使用手册列表
+         */
+        const val GETCOUNTRYLIST = "v1/user/getCountryList"
+    }
+
 
     object Service {
         /**
