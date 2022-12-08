@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".ui.common.activity.CountryActivity">
 
-    <com.ttech.lib.view.StatusBarHeightView
+    <com.ttech.lib.view.StatusBarWhiteHeightView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_white" />

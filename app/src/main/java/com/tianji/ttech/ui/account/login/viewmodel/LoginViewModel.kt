@@ -3,6 +3,7 @@ package com.tianji.ttech.ui.account.login.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tianji.ttech.base.BaseViewModel
+import com.tianji.ttech.model.LoginModel
 import com.tianji.ttech.service.http.ApiPath
 import com.ttech.lib.service.account.User
 import com.ttech.lib.service.http.HttpCallback
@@ -41,11 +42,11 @@ class LoginViewModel : BaseViewModel() {
             apiService().postForm(
                 ApiPath.Mine.LOGIN,
                 params,
-                object : HttpCallback<HttpResult<User>>() {
-                    override fun success(result: HttpResult<User>) {
-                        val user = result.obj
-                        if (result.isBusinessSuccess()&&user!=null){
-                            loginLiveData.value = Pair(user, null)
+                object : HttpCallback<HttpResult<LoginModel>>() {
+                    override fun success(result: HttpResult<LoginModel>) {
+                        val loginModel = result.obj
+                        if (result.isBusinessSuccess()&&loginModel!=null){
+                            loginLiveData.value = Pair(loginModel.user, null)
                         }else{
                             loginLiveData.value = Pair(null, result.msg ?: "")
                         }

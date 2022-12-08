@@ -69,6 +69,16 @@
             android:exported="true"
             android:screenOrientation="nosensor"/>
 
+        <activity
+            android:name=".ui.manu.activity.SettingActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor"/>
+
+        <activity
+            android:name=".ui.manu.activity.ModifyPasswordActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor"/>
+
 
 
 

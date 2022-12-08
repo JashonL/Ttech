@@ -9,8 +9,11 @@ import com.bumptech.glide.Glide
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivitySettingBinding
+import com.tianji.ttech.ui.common.activity.CountryActivity
 import com.tianji.ttech.ui.manu.viewmodel.SettingViewModel
+import com.tianji.ttech.view.dialog.InputDialog
 import com.ttech.lib.service.account.IAccountService
+import com.ttech.lib.util.ActivityBridge
 import com.ttech.lib.util.ToastUtil
 
 
@@ -47,7 +50,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
         binding.itemPassword.setOnClickListener(this)
         binding.itemCountry.setOnClickListener(this)
         binding.itemInstallationCode.setOnClickListener(this)
-        binding.btLogout.setOnClickListener(this)
+
 
         accountService().addUserProfileChangeListener(this)
     }
@@ -63,7 +66,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
 
         binding.itemUserName.setSubName(accountService().user()?.email)
         binding.itemCountry.setSubName(accountService().user()?.country)
-        binding.itemInstallationCode.setSubName(accountService().user()?.phoneNum)
+        binding.itemInstallationCode.setSubName(accountService().user()?.userType)
     }
 
     private fun initData() {
@@ -97,13 +100,48 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
 //            v === binding.itemCountry -> ModifyInstallerNoActivity.start(this)
 //            v === binding.itemInstallationCode -> ModifyInstallerNoActivity.start(this)
 
-            v === binding.btLogout -> {
-                showDialog()
-                viewModel.logout()
+            v===binding.itemCountry->selectCountry()
+
+            v===binding.itemInstallationCode->{
+                val installerCode = accountService().user()?.installerCode
+                val title = getString(R.string.m186_installer_code)
+                showInstallationDialog(title,installerCode.toString())
             }
+
         }
     }
 
+    private fun showInstallationDialog(title:String,content:String) {
+            InputDialog.showDialog(
+                supportFragmentManager,
+                content,
+                getString(R.string.m18_confirm),
+                getString(R.string.m16_cancel),
+                title
+            ) {
+
+            }
+
+    }
+
+
+    private fun selectCountry() {
+        ActivityBridge.startActivity(
+            this,
+            CountryActivity.getIntent(this),
+            object : ActivityBridge.OnActivityForResult {
+                override fun onActivityForResult(
+                    context: Context?,
+                    resultCode: Int,
+                    data: Intent?
+                ) {
+                    if (resultCode == RESULT_OK && data?.hasExtra(CountryActivity.KEY_AREA) == true) {
+                        val country = data.getStringExtra(CountryActivity.KEY_AREA) ?: ""
+                        binding.itemCountry.setSubName(country)
+                    }
+                }
+            })
+    }
 
 
 

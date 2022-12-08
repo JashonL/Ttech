@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_bar_height"
-    android:background="@color/color_white"
+    android:background="@color/color_app_main"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     tools:context=".view.TitleBarLayout">
@@ -20,7 +20,7 @@
         android:gravity="center"
         android:maxWidth="280dp"
         android:singleLine="true"
-        android:textColor="@color/text_black"
+        android:textColor="@color/white"
         android:textSize="@dimen/text_title"
         android:textStyle="bold"
         tools:drawableEnd="@drawable/ic_down" />
@@ -48,7 +48,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:gravity="center"
-        android:textColor="@color/text_gray_99"
+        android:textColor="@color/white"
         android:textSize="@dimen/text_medium"
         tools:text="@string/m10_sms_retrieval" />
 

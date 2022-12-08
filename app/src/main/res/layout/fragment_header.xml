@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/color_white"
     android:orientation="vertical"
+    android:id="@+id/header"
     tools:context=".view.TitleBarLayout">
 
     <com.ttech.lib.view.StatusBarHeightView

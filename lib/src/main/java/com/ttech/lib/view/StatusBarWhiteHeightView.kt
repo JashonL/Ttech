@@ -8,7 +8,7 @@ import com.ttech.lib.R
 import com.ttech.lib.util.ViewUtil
 import com.ttech.lib.view.statusbar.StatusBarCompat
 
-class StatusBarHeightView @JvmOverloads constructor(
+class StatusBarWhiteHeightView @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -17,7 +17,7 @@ class StatusBarHeightView @JvmOverloads constructor(
     init {
         ViewUtil.getActivityFromContext(context)?.also {
             StatusBarCompat.translucentStatusBar(it, true)
-            StatusBarCompat.setWindowLightStatusBar(it, true)
+            StatusBarCompat.setWindowLightStatusBar(it, false)
 //            StatusBarCompat.setStatusBarColor(it, ContextCompat.getColor(it, R.color.white))
         }
     }

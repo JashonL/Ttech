@@ -10,12 +10,16 @@ package com.ttech.lib.service.account
  */
 data class User(
     val id: String,
+    val userType: String,
     val email: String,
-    var userType: String,
-    var phoneNum: String,
-    var country: String,
-    var city: String,
-    var timeZone: String,
-    var password:String,
-    var address:String
+    val phoneOs: String,
+    val phoneModel: String,
+    val appVersion: String,
+    val country: String,
+    val avatarAddress: String,
+    val timeZone: String,
+    val installerCode: String
 )
+
+
+

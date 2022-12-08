@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
 
-    <com.ttech.lib.view.StatusBarHeightView
+    <com.ttech.lib.view.StatusBarWhiteHeightView
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

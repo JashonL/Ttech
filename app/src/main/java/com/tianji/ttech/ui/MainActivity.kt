@@ -63,13 +63,15 @@ class MainActivity : AppCompatActivity() {
         })
 
 
+
+
         binding.navView.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.navigation_home -> mainViewpager.currentItem = 0
-                R.id.navigation_eneger -> mainViewpager.currentItem = 1
-                R.id.navigation_array -> mainViewpager.currentItem = 2
-                R.id.navigation_station -> mainViewpager.currentItem = 3
-                R.id.navigation_menu -> mainViewpager.currentItem = 4
+                R.id.navigation_home -> mainViewpager.setCurrentItem(0,false)
+                R.id.navigation_eneger -> mainViewpager.setCurrentItem(1,false)
+                R.id.navigation_array -> mainViewpager.setCurrentItem(2,false)
+                R.id.navigation_station -> mainViewpager.setCurrentItem(3,false)
+                R.id.navigation_menu -> mainViewpager.setCurrentItem(4,false)
             }
             false
         }

@@ -54,115 +54,11 @@ object ApiPath {
 
     }
 
-    object Charge {
-
+    object Plant {
         /**
-         * 未授权的电桩列表
+         * 忘记密码
          */
-        const val CHARGER_LIST_ORIGINAL = "v1/charger/chargerListOriginal"
-
-
-        /**
-         * 电桩列表
-         */
-        const val CHARGE_LIST = "v1/charger/chargerList"
-
-        /**
-         * 获取交易枪的详情
-         */
-        const val TRANSACTION_OVERVIEW = "v1/transaction/getTransactionOverview"
-
-        /**
-         * 解锁
-         */
-        const val UNLOCKCONNECTOR = "/v1/charger/unlockConnector"
-
-        /**
-         * 开始充电
-         */
-        const val REMOTESTARTTRANSACTION = "v1/transaction/remoteStartTransaction"
-
-        /**
-         * 停止充电
-         */
-        const val REMOTESTOPTRANSACTION = "v1/transaction/remoteStopTransaction"
-
-        /**
-         * 绑定充电桩
-         */
-        const val ADDCHARGER = "v1/charger/addCharger"
-        /**
-         * 获取充电记录
-         */
-        const val TRANSACTIONLIST="v1/transaction/transactionList/"
-        /**
-         * 设置费率
-         */
-        const val SETRATE="v1/charger/modifyChargerInfo"
-        /**
-         * 获取授权列表
-         */
-        const val GETAUTHLIST="v1/charger/authChargerList/"
-
-        /**
-         * 添加授权用户
-         */
-        const val AUTHCHARGER="v1/charger/authCharger"
-
-
-        /**
-         * 删除充电桩
-         */
-        const val DELETECHARGER="v1/charger/removeCharger"
-
-        /**
-         * 获取计划充电信息
-         */
-        const val GETSCHEDULEDCHARGINGBYUSERID="v1/global/getScheduledChargingByUserId"
-
-
-
-        /**
-         * 获取计划充电信息
-         */
-        const val SETSCHEDULEDCHARGING="v1/global/setScheduledCharging"
-
-
-
-        /**
-         * 获取非高峰充电
-         */
-        const val GETOFFPEAKCHARGINGBYUSERID="v1/global/getOffPeakChargingByUserId"
-
-        /**
-         * 设置非高峰充电
-         */
-        const val SETOFFPEAKCHARGING="v1/global/setOffPeakCharging"
-
-
-        /**
-         * 获取充电桩授权状态
-         */
-        const val CONNECTORAUTHORIZESTATUS="v1/charger/connectorAuthorizeStatus"
-
-
-
-        /**
-         * 修改充电桩授权状态
-         */
-        const val AUTHORIZECONNECTOR="v1/charger/authorizeConnector"
-
-
-
-
-        /**
-         * 设置计划充电状态
-         */
-
-        const val SETSCHEDULEDCHARGINGSTATUS="v1/global/setScheduledChargingStatus"
-
-
-
+        const val STATIONLIST="v1/station/stationList/1"
 
     }
 

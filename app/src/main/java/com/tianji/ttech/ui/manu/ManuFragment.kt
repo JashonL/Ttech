@@ -21,8 +21,16 @@ class ManuFragment : BaseFragment(), View.OnClickListener {
     ): View {
         _binding = FragmentHomeMineBinding.inflate(inflater, container, false)
         initData()
+        setListeners()
         return binding.root
     }
+
+
+    private fun setListeners() {
+        binding.llAccount.setOnClickListener(this)
+    }
+
+
 
     private fun initData() {
         val email = accountService().user()?.email
