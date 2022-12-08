@@ -56,9 +56,14 @@ object ApiPath {
 
     object Plant {
         /**
-         * 忘记密码
+         * 请求电站列表
          */
-        const val STATIONLIST="v1/station/stationList/1"
+//        const val STATIONLIST="v1/station/stationList/1" 分页
+
+
+        const val STATIONLIST = "v1/station/stationList"
+
+
 
     }
 

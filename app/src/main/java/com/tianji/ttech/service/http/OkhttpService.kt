@@ -11,6 +11,7 @@ import com.ttech.lib.util.LogUtil
 import com.tianji.ttech.BuildConfig
 import com.tianji.ttech.R
 import com.tianji.ttech.app.TtechApplication
+import com.ttech.lib.service.http.cookie.CookiesManager
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -39,7 +40,7 @@ class OkhttpService : IHttpService() {
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
-//        .cookieJar(CookiesManager(TtechApplication.instance()))
+        .cookieJar(CookiesManager(TtechApplication.instance()))
         .addNetworkInterceptor(HttpLoggingInterceptor {
             LogUtil.i(TAG, it)
         }.also {
