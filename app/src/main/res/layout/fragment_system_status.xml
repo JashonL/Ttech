@@ -1,323 +1,373 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:paddingTop="@dimen/dp_20">
+    android:layout_height="match_parent">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/dp_20"
-        android:layout_marginBottom="@dimen/dp_30"
-        android:background="@drawable/shape_corner"
-        android:gravity="center"
-        android:minWidth="@dimen/dp_100"
-        android:padding="@dimen/dp_5"
-        android:text="@string/m98_no_online"
-        android:textColor="@color/color_green"
-        android:textSize="@dimen/size_content_sp_16"
-        app:drawableStartCompat="@drawable/wifi_normal"
-        app:layout_constraintBottom_toTopOf="@+id/iv_sys_ppv"
-        app:layout_constraintRight_toRightOf="parent" />
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_20"
+                app:cardCornerRadius="@dimen/dp_20"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_400"
+                    android:background="@color/white"
+                    android:paddingTop="@dimen/dp_20">
 
 
-    <View
-        android:id="@+id/v_circle"
-        android:layout_width="@dimen/dp_100"
-        android:layout_height="@dimen/dp_100"
-        android:background="@drawable/gray_circle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_20"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:background="@drawable/shape_corner"
+                        android:gravity="center"
+                        android:minWidth="@dimen/dp_100"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/m98_no_online"
+                        android:textColor="@color/black_333333"
+                        android:textSize="@dimen/size_content_sp_16"
+                        app:drawableStartCompat="@drawable/wifi_normal"
+                        app:layout_constraintBottom_toTopOf="@+id/iv_sys_ppv"
+                        app:layout_constraintRight_toRightOf="parent" />
 
 
-    <View
-        android:id="@+id/v_top"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        app:layout_constraintLeft_toLeftOf="@+id/v_circle"
-        app:layout_constraintRight_toRightOf="@+id/v_circle"
-        app:layout_constraintTop_toTopOf="@+id/v_circle" />
+                    <View
+                        android:id="@+id/v_circle"
+                        android:layout_width="@dimen/dp_100"
+                        android:layout_height="@dimen/dp_100"
+                        android:background="@drawable/gray_circle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ems"
-        app:layout_constraintBottom_toBottomOf="@+id/v_circle"
-        app:layout_constraintLeft_toLeftOf="@+id/v_circle"
-        app:layout_constraintRight_toRightOf="@+id/v_circle"
-        app:layout_constraintTop_toTopOf="@+id/v_circle" />
+                    <View
+                        android:id="@+id/v_top"
+                        android:layout_width="1dp"
+                        android:layout_height="1dp"
+                        app:layout_constraintLeft_toLeftOf="@+id/v_circle"
+                        app:layout_constraintRight_toRightOf="@+id/v_circle"
+                        app:layout_constraintTop_toTopOf="@+id/v_circle" />
 
 
-    <View
-        android:id="@+id/iv_left"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toBottomOf="@+id/v_circle"
-        app:layout_constraintLeft_toLeftOf="@+id/v_circle"
-        app:layout_constraintTop_toTopOf="@+id/v_circle" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ems"
+                        app:layout_constraintBottom_toBottomOf="@+id/v_circle"
+                        app:layout_constraintLeft_toLeftOf="@+id/v_circle"
+                        app:layout_constraintRight_toRightOf="@+id/v_circle"
+                        app:layout_constraintTop_toTopOf="@+id/v_circle" />
 
 
-    <ImageView
-        android:id="@+id/iv_planet_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/planet_blue"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_left"
-        app:layout_constraintLeft_toLeftOf="@+id/iv_left"
-        app:layout_constraintRight_toRightOf="@+id/iv_left"
-        app:layout_constraintTop_toTopOf="@+id/iv_left" />
+                    <View
+                        android:id="@+id/iv_left"
+                        android:layout_width="1dp"
+                        android:layout_height="1dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/v_circle"
+                        app:layout_constraintLeft_toLeftOf="@+id/v_circle"
+                        app:layout_constraintTop_toTopOf="@+id/v_circle" />
 
 
-    <ImageView
-        android:id="@+id/iv_planet_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/planet_blue"
-        app:layout_constraintBottom_toBottomOf="@+id/v_top"
-        app:layout_constraintLeft_toLeftOf="@+id/v_top"
-        app:layout_constraintRight_toRightOf="@+id/v_top"
-        app:layout_constraintTop_toTopOf="@+id/v_top" />
+                    <ImageView
+                        android:id="@+id/iv_planet_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/planet_blue"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_left"
+                        app:layout_constraintLeft_toLeftOf="@+id/iv_left"
+                        app:layout_constraintRight_toRightOf="@+id/iv_left"
+                        app:layout_constraintTop_toTopOf="@+id/iv_left" />
 
 
-    <View
-        android:id="@+id/iv_right"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toBottomOf="@+id/v_circle"
-        app:layout_constraintRight_toRightOf="@+id/v_circle"
-        app:layout_constraintTop_toTopOf="@+id/v_circle" />
+                    <ImageView
+                        android:id="@+id/iv_planet_top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/planet_blue"
+                        app:layout_constraintBottom_toBottomOf="@+id/v_top"
+                        app:layout_constraintLeft_toLeftOf="@+id/v_top"
+                        app:layout_constraintRight_toRightOf="@+id/v_top"
+                        app:layout_constraintTop_toTopOf="@+id/v_top" />
 
 
-    <ImageView
-        android:id="@+id/iv_planet_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/planet_blue"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_right"
-        app:layout_constraintLeft_toLeftOf="@+id/iv_right"
-        app:layout_constraintRight_toRightOf="@+id/iv_right"
-        app:layout_constraintTop_toTopOf="@+id/iv_right" />
+                    <View
+                        android:id="@+id/iv_right"
+                        android:layout_width="1dp"
+                        android:layout_height="1dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/v_circle"
+                        app:layout_constraintRight_toRightOf="@+id/v_circle"
+                        app:layout_constraintTop_toTopOf="@+id/v_circle" />
 
 
-    <View
-        android:id="@+id/iv_bottom"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toBottomOf="@+id/v_circle"
-        app:layout_constraintLeft_toLeftOf="@+id/v_circle"
-        app:layout_constraintRight_toRightOf="@+id/v_circle" />
+                    <ImageView
+                        android:id="@+id/iv_planet_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/planet_blue"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_right"
+                        app:layout_constraintLeft_toLeftOf="@+id/iv_right"
+                        app:layout_constraintRight_toRightOf="@+id/iv_right"
+                        app:layout_constraintTop_toTopOf="@+id/iv_right" />
 
 
-    <ImageView
-        android:id="@+id/iv_planet_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/planet_blue"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_bottom"
-        app:layout_constraintLeft_toLeftOf="@+id/iv_bottom"
-        app:layout_constraintRight_toRightOf="@+id/iv_bottom"
-        app:layout_constraintTop_toTopOf="@+id/iv_bottom" />
+                    <View
+                        android:id="@+id/iv_bottom"
+                        android:layout_width="1dp"
+                        android:layout_height="1dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/v_circle"
+                        app:layout_constraintLeft_toLeftOf="@+id/v_circle"
+                        app:layout_constraintRight_toRightOf="@+id/v_circle" />
 
 
-    <ImageView
-        android:id="@+id/iv_sys_bat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_30"
-        android:src="@drawable/system_bat"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_planet_bottom" />
+                    <ImageView
+                        android:id="@+id/iv_planet_bottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/planet_blue"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_bottom"
+                        app:layout_constraintLeft_toLeftOf="@+id/iv_bottom"
+                        app:layout_constraintRight_toRightOf="@+id/iv_bottom"
+                        app:layout_constraintTop_toTopOf="@+id/iv_bottom" />
 
 
-    <TextView
-        android:id="@+id/tv_bat_power"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:minWidth="@dimen/dp_100"
-        android:text="@string/m98_no_online"
-        android:textColor="@color/color_green"
-        android:textSize="@dimen/size_content_sp_16"
-        app:layout_constraintBottom_toTopOf="@+id/tv_bat"
-        app:layout_constraintLeft_toRightOf="@+id/iv_sys_bat"
-        app:layout_constraintTop_toTopOf="@+id/iv_sys_bat" />
+                    <ImageView
+                        android:id="@+id/iv_sys_bat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:src="@drawable/system_bat"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_planet_bottom" />
 
 
-    <TextView
-        android:id="@+id/tv_bat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:minWidth="@dimen/dp_100"
-        android:text="@string/m98_no_online"
-        android:textColor="@color/color_green"
-        android:textSize="@dimen/size_content_sp_16"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_sys_bat"
-        app:layout_constraintLeft_toRightOf="@+id/iv_sys_bat"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bat_power" />
+                    <TextView
+                        android:id="@+id/tv_bat_power"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="@dimen/dp_100"
+                        android:text="@string/m98_no_online"
+                        android:textColor="@color/black_333333"
+                        android:textSize="@dimen/size_content_sp_16"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_bat"
+                        app:layout_constraintLeft_toRightOf="@+id/iv_sys_bat"
+                        app:layout_constraintTop_toTopOf="@+id/iv_sys_bat" />
 
 
-    <ImageView
-        android:id="@+id/iv_sys_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_30"
-        android:layout_marginEnd="@dimen/dp_20"
-        android:src="@drawable/system_home"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_planet_bottom" />
+                    <TextView
+                        android:id="@+id/tv_bat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="@dimen/dp_100"
+                        android:text="@string/m98_no_online"
+                        android:textColor="@color/black_333333"
+                        android:textSize="@dimen/size_content_sp_16"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_sys_bat"
+                        app:layout_constraintLeft_toRightOf="@+id/iv_sys_bat"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_bat_power" />
 
 
-    <TextView
-        android:id="@+id/tv_home_power"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:minWidth="@dimen/dp_100"
-        android:text="@string/m98_no_online"
-        android:textColor="@color/color_green"
-        android:textSize="@dimen/size_content_sp_16"
-        app:layout_constraintBottom_toTopOf="@+id/tv_home"
-        app:layout_constraintRight_toLeftOf="@+id/iv_sys_home"
-        app:layout_constraintTop_toTopOf="@+id/iv_sys_home" />
+                    <ImageView
+                        android:id="@+id/iv_sys_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_20"
+                        android:src="@drawable/system_home"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_planet_bottom" />
 
 
-    <TextView
-        android:id="@+id/tv_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:minWidth="@dimen/dp_100"
-        android:text="@string/m98_no_online"
-        android:textColor="@color/color_green"
-        android:textSize="@dimen/size_content_sp_16"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_sys_home"
-        app:layout_constraintRight_toLeftOf="@+id/iv_sys_home"
-        app:layout_constraintTop_toBottomOf="@+id/tv_home_power" />
+                    <TextView
+                        android:id="@+id/tv_home_power"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="@dimen/dp_100"
+                        android:text="@string/m98_no_online"
+                        android:textColor="@color/black_333333"
+                        android:textSize="@dimen/size_content_sp_16"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_home"
+                        app:layout_constraintRight_toLeftOf="@+id/iv_sys_home"
+                        app:layout_constraintTop_toTopOf="@+id/iv_sys_home" />
 
 
-    <ImageView
-        android:id="@+id/iv_sys_load"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/dp_20"
-        android:layout_marginBottom="@dimen/dp_30"
-        android:src="@drawable/system_load"
-        app:layout_constraintBottom_toTopOf="@+id/iv_planet_top"
-        app:layout_constraintRight_toRightOf="parent" />
+                    <TextView
+                        android:id="@+id/tv_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="@dimen/dp_100"
+                        android:text="@string/m98_no_online"
+                        android:textColor="@color/black_333333"
+                        android:textSize="@dimen/size_content_sp_16"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_sys_home"
+                        app:layout_constraintRight_toLeftOf="@+id/iv_sys_home"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_home_power" />
 
 
-    <TextView
-        android:id="@+id/tv_load_power"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:minWidth="@dimen/dp_100"
-        android:text="@string/m98_no_online"
-        android:textColor="@color/color_green"
-        android:textSize="@dimen/size_content_sp_16"
-        app:layout_constraintBottom_toTopOf="@+id/tv_load"
-        app:layout_constraintRight_toLeftOf="@+id/iv_sys_load"
-        app:layout_constraintTop_toTopOf="@+id/iv_sys_load" />
+                    <ImageView
+                        android:id="@+id/iv_sys_load"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_20"
+                        android:src="@drawable/system_load"
+                        app:layout_constraintBottom_toTopOf="@+id/iv_planet_top"
+                        app:layout_constraintRight_toRightOf="parent" />
 
 
-    <TextView
-        android:id="@+id/tv_load"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:minWidth="@dimen/dp_100"
-        android:text="@string/m98_no_online"
-        android:textColor="@color/color_green"
-        android:textSize="@dimen/size_content_sp_16"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_sys_load"
-        app:layout_constraintRight_toLeftOf="@+id/iv_sys_load"
-        app:layout_constraintTop_toBottomOf="@+id/tv_load_power" />
+                    <TextView
+                        android:id="@+id/tv_load_power"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="@dimen/dp_100"
+                        android:text="@string/m98_no_online"
+                        android:textColor="@color/black_333333"
+                        android:textSize="@dimen/size_content_sp_16"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_load"
+                        app:layout_constraintRight_toLeftOf="@+id/iv_sys_load"
+                        app:layout_constraintTop_toTopOf="@+id/iv_sys_load" />
 
 
-    <ImageView
-        android:id="@+id/iv_sys_grid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_20"
-        android:layout_marginBottom="@dimen/dp_30"
-        android:src="@drawable/system_grid"
-        app:layout_constraintBottom_toTopOf="@+id/iv_planet_top"
-        app:layout_constraintLeft_toLeftOf="parent" />
+                    <TextView
+                        android:id="@+id/tv_load"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="@dimen/dp_100"
+                        android:text="@string/m98_no_online"
+                        android:textColor="@color/black_333333"
+                        android:textSize="@dimen/size_content_sp_16"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_sys_load"
+                        app:layout_constraintRight_toLeftOf="@+id/iv_sys_load"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_load_power" />
 
 
-    <TextView
-        android:id="@+id/tv_grid_power"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:minWidth="@dimen/dp_100"
-        android:text="@string/m98_no_online"
-        android:textColor="@color/color_green"
-        android:textSize="@dimen/size_content_sp_16"
-        app:layout_constraintBottom_toTopOf="@+id/tv_grid"
-        app:layout_constraintLeft_toRightOf="@+id/iv_sys_grid"
-        app:layout_constraintTop_toTopOf="@+id/iv_sys_grid" />
+                    <ImageView
+                        android:id="@+id/iv_sys_grid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:src="@drawable/system_grid"
+                        app:layout_constraintBottom_toTopOf="@+id/iv_planet_top"
+                        app:layout_constraintLeft_toLeftOf="parent" />
 
 
-    <TextView
-        android:id="@+id/tv_grid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:minWidth="@dimen/dp_100"
-        android:text="@string/m98_no_online"
-        android:textColor="@color/color_green"
-        android:textSize="@dimen/size_content_sp_16"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_sys_grid"
-        app:layout_constraintLeft_toRightOf="@+id/iv_sys_grid"
-        app:layout_constraintTop_toBottomOf="@+id/tv_grid_power" />
+                    <TextView
+                        android:id="@+id/tv_grid_power"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="@dimen/dp_100"
+                        android:text="@string/m98_no_online"
+                        android:textColor="@color/black_333333"
+                        android:textSize="@dimen/size_content_sp_16"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_grid"
+                        app:layout_constraintLeft_toRightOf="@+id/iv_sys_grid"
+                        app:layout_constraintTop_toTopOf="@+id/iv_sys_grid" />
 
 
-    <TextView
-        android:id="@+id/tv_ppv_power"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:minWidth="@dimen/dp_100"
-        android:text="@string/m98_no_online"
-        android:textColor="@color/black_333333"
-        android:textSize="@dimen/size_content_sp_16"
-        app:layout_constraintBottom_toTopOf="@+id/tv_ppv"
-        app:layout_constraintLeft_toRightOf="@+id/iv_sys_ppv"
-        app:layout_constraintTop_toTopOf="@+id/iv_sys_ppv" />
+                    <TextView
+                        android:id="@+id/tv_grid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="@dimen/dp_100"
+                        android:text="@string/m98_no_online"
+                        android:textColor="@color/black_333333"
+                        android:textSize="@dimen/size_content_sp_16"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_sys_grid"
+                        app:layout_constraintLeft_toRightOf="@+id/iv_sys_grid"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_grid_power" />
 
 
-    <TextView
-        android:id="@+id/tv_ppv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:minWidth="@dimen/dp_100"
-        android:text="@string/m98_no_online"
-        android:textColor="@color/black_333333"
-        android:textSize="@dimen/size_content_sp_16"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_sys_ppv"
-        app:layout_constraintLeft_toRightOf="@+id/iv_sys_ppv"
-        app:layout_constraintTop_toBottomOf="@+id/tv_ppv_power" />
+                    <TextView
+                        android:id="@+id/tv_ppv_power"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="@dimen/dp_100"
+                        android:text="@string/m98_no_online"
+                        android:textColor="@color/black_333333"
+                        android:textSize="@dimen/size_content_sp_16"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_ppv"
+                        app:layout_constraintLeft_toRightOf="@+id/iv_sys_ppv"
+                        app:layout_constraintTop_toTopOf="@+id/iv_sys_ppv" />
 
 
-    <ImageView
-        android:id="@+id/iv_sys_ppv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_30"
-        android:src="@drawable/system_ppv"
-        app:layout_constraintBottom_toTopOf="@+id/iv_sys_grid"
-        app:layout_constraintLeft_toLeftOf="@+id/v_circle"
-        app:layout_constraintRight_toRightOf="@+id/v_circle" />
+                    <TextView
+                        android:id="@+id/tv_ppv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="@dimen/dp_100"
+                        android:text="@string/m98_no_online"
+                        android:textColor="@color/black_333333"
+                        android:textSize="@dimen/size_content_sp_16"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_sys_ppv"
+                        app:layout_constraintLeft_toRightOf="@+id/iv_sys_ppv"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_ppv_power" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/iv_sys_ppv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:src="@drawable/system_ppv"
+                        app:layout_constraintBottom_toTopOf="@+id/iv_sys_grid"
+                        app:layout_constraintLeft_toLeftOf="@+id/v_circle"
+                        app:layout_constraintRight_toRightOf="@+id/v_circle" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/app_name"
+                app:layout_constraintBottom_toTopOf="@+id/tv_last_update"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_last_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:text="Last update 23 min"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+
+</RelativeLayout>
+

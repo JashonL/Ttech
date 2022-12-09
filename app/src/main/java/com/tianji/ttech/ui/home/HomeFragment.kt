@@ -74,17 +74,15 @@ class HomeFragment : BaseFragment(), OnClickListener {
                 val second = it.second
                 if (second == null || second.isEmpty()) {//没有电站  显示空
                     _binding.header.tvTitle.text = ""
-                    _binding.emptyView.root.visible()
+                    _binding.srlRefresh.visible()
                     _binding.fragmentSystem.gone()
                 }else {
-                    _binding.emptyView.root.gone()
+                    _binding.srlRefresh.gone()
                     _binding.fragmentSystem.visible()
-
                     //默认选中第一个电站
                     _binding.header.tvTitle.text = second[0].stationName
                     //显示系统图
                     showSystemSatus(second[0])
-
                 }
             }
         }
