@@ -38,14 +38,15 @@ class ListPopuwindow(context: Context, list: List<ListPopModel>) :
     }
 
 
-    lateinit var binding: ListPopLayoutBinding
+    var binding: ListPopLayoutBinding
 
 
     init {
         val inflater = LayoutInflater.from(context)
-        this.contentView = inflater.inflate(R.layout.list_pop_layout, null) //布局xml
-        ListPopLayoutBinding.bind(this.contentView)
-
+//        this.contentView = inflater.inflate(R.layout.list_pop_layout, null) //布局xml
+//        ListPopLayoutBinding.bind(this.contentView)
+        binding = ListPopLayoutBinding.inflate(inflater)
+        this.contentView = binding.root
 
         initContentView(context, list)
 
@@ -98,8 +99,8 @@ class ListPopuwindow(context: Context, list: List<ListPopModel>) :
         @SuppressLint("NotifyDataSetChanged")
         private fun itemChoose(position: Int) {
             //将所有选项设置成未选
-            for (i in list.indices){
-                list[i].choose=i==position
+            for (i in list.indices) {
+                list[i].choose = i == position
             }
             notifyDataSetChanged()
         }

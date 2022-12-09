@@ -1,8 +1,10 @@
 package com.tianji.ttech.app
 
-import android.app.Application
 import android.os.Process
 import com.growatt.atess.ui.launch.fragment.UserAgreementDialog
+import com.scwang.smart.refresh.header.MaterialHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.tianji.ttech.R
 import com.tianji.ttech.service.account.DefaultAccountService
 import com.tianji.ttech.service.http.OkhttpService
 import com.ttech.lib.LibApplication
@@ -25,6 +27,13 @@ class TtechApplication : LibApplication() ,ServiceManager.ServiceInterface{
         private lateinit var instance:TtechApplication
         fun instance()= instance
         const val APP_OS = 0
+
+        init {
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+                layout.setPrimaryColorsId(R.color.color_app_main, R.color.white) //全局设置主题颜色
+                MaterialHeader(context)
+            }
+        }
     }
 
 

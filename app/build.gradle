@@ -98,4 +98,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
     //recycleview
     implementation "androidx.recyclerview:recyclerview:1.2.1"
+
+    //下拉刷新与加载更多 https://github.com/scwang90/SmartRefreshLayout
+    implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5'
+    implementation 'io.github.scwang90:refresh-header-material:2.0.5'
 }
