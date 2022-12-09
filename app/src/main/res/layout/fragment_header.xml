@@ -37,7 +37,6 @@
             android:drawablePadding="1dp"
             android:ellipsize="end"
             android:gravity="center"
-            android:maxWidth="280dp"
             android:singleLine="true"
             android:text="station1"
             android:textColor="@color/white"
@@ -46,7 +45,9 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:drawableEnd="@drawable/ic_down" />
+            app:drawableEndCompat="@drawable/ic_down" />
+
+
 
 
         <androidx.constraintlayout.utils.widget.ImageFilterView

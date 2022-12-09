@@ -17,14 +17,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_system"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/header"
-            tools:layout="@layout/fragment_system_status" />
+            android:layout_height="wrap_content">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_system"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header"
+                tools:layout="@layout/fragment_system_status" />
+
+            <include
+                android:id="@+id/empty_view"
+                android:visibility="gone"
+                layout="@layout/home_empty_view" />
+
+        </FrameLayout>
+
 
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
