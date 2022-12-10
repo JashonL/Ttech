@@ -7,7 +7,9 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.fragment.app.findFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.tianji.ttech.R
@@ -15,6 +17,7 @@ import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentHomeBinding
 import com.tianji.ttech.model.StationModel
 import com.tianji.ttech.ui.common.viewmodel.SelectAreaViewModel
+import com.tianji.ttech.ui.home.pv.PvStatusFragment
 import com.tianji.ttech.ui.home.storage.HomeStatusFragment
 import com.tianji.ttech.ui.station.StationViewModel
 import com.tianji.ttech.view.dialog.OptionsDialog
@@ -76,7 +79,7 @@ class HomeFragment : BaseFragment(), OnClickListener {
                     _binding.header.tvTitle.text = ""
                     _binding.srlRefresh.visible()
                     _binding.fragmentSystem.gone()
-                }else {
+                } else {
                     _binding.srlRefresh.gone()
                     _binding.fragmentSystem.visible()
                     //默认选中第一个电站
@@ -90,27 +93,44 @@ class HomeFragment : BaseFragment(), OnClickListener {
     }
 
 
-
-    private fun showSystemSatus(station: StationModel){
+    private fun showSystemSatus(station: StationModel) {
         val stationType = station.stationType
         //根据电站类型显示不同界面
         childFragmentManager.commit(true) {
+            val findFragment = _binding.fragmentSystem.findFragment<Fragment>()
             if ("PV Station" == stationType) {//纯光伏电站
-                add(R.id.fragment_system, HomeStatusFragment())
-            } else {
+                if (findFragment is PvStatusFragment) {
+                    findFragment.getDataByStationId(station.id)
+                } else {
+                    val pvStatusFragment = PvStatusFragment()
+                    //传参过去
+                    val bundle=Bundle()
+                    bundle.putString("stationId",station.id)
+                    pvStatusFragment.arguments=bundle
+                    replace(R.id.fragment_system, pvStatusFragment)
+                }
 
+            } else {
+                if (findFragment is HomeStatusFragment) {
+                    findFragment.getDataByStationId(station.id)
+                } else {
+                    val homeStatusFragment = HomeStatusFragment()
+                    //传参过去
+                    val bundle=Bundle()
+                    bundle.putString("stationId",station.id)
+                    homeStatusFragment.arguments=bundle
+                    replace(R.id.fragment_system, homeStatusFragment)
+                }
             }
         }
 
     }
 
 
-
     private fun fetchPlantList() {
         showDialog()
         viewModel.getPlantList()
     }
-
 
 
     override fun onClick(p0: View?) {
@@ -137,7 +157,6 @@ class HomeFragment : BaseFragment(), OnClickListener {
             context?.let { ListPopuwindow.showPop(it, options, _binding.header.tvTitle) }
         }
     }
-
 
 
     override fun onStart() {

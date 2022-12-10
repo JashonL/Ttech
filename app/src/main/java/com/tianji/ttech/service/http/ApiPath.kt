@@ -33,23 +33,22 @@ object ApiPath {
         /**
          * 找回密码
          */
-        const val FINDPASSWORD ="/v1/user/findPassword"
+        const val FINDPASSWORD = "/v1/user/findPassword"
 
         /**
          * 获取邮箱验证码
          */
-        const val SENDEMAILCODE ="/v1/user/sendEmailCode"
+        const val SENDEMAILCODE = "/v1/user/sendEmailCode"
 
         /**
          * 上传用户头像
          */
-        const val UPLOADAVATAR ="/v1/user/uploadAvatar"
+        const val UPLOADAVATAR = "/v1/user/uploadAvatar"
 
         /**
          * 忘记密码
          */
-        const val RETRIEVEPASSWORD="v1/user/retrievePassword"
-
+        const val RETRIEVEPASSWORD = "v1/user/retrievePassword"
 
 
     }
@@ -64,12 +63,16 @@ object ApiPath {
         const val STATIONLIST = "v1/station/stationList"
 
 
+        /**
+         * 请求储能机状态
+         */
+        const val GETDATAOVERVIEW = "v1/manage/getDataOverview"
+
 
     }
 
 
-
-    object Commom{
+    object Commom {
         /**
          * 服务-使用手册列表
          */

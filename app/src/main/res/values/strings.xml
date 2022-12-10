@@ -47,6 +47,16 @@ of letters, numbers and symbols.</string>
     <string name="m29_passwords_are_inconsistent">两次密码不一致</string>
     <string name="m30_password_cannot_be_less_than_6_digits">密码不能少于6位数</string>
     <string name="m31_passwords_are_inconsistent">两次密码不一致</string>
+    <string name="m32_load">Load</string>
+    <string name="m33_bat">Bat</string>
+
+
+
+
+
+
+
+
 
 
     <string name="m5_privacy_dialog_content">Enerview旨在保护您的数据隐私与安全的基础上，帮助您高效管理电站。请仔细阅读并充分理解一下条款后再点击同意。</string>
@@ -54,7 +64,10 @@ of letters, numbers and symbols.</string>
     <string name="m6_cancel">取消</string>
     <string name="m7_confirm">确定</string>
     <string name="m8_please_select">Please Select</string>
-
+    <string name="m9_solar">Solar</string>
+    <string name="m10_energy_today">Energy(Today)</string>
+    <string name="m11_energy_total">Energy(Total)</string>
+    <string name="m12_grid">Grid</string>
 
 
 
