@@ -7,6 +7,7 @@ import com.growatt.atess.ui.launch.monitor.UserAgreementMonitor
 import com.tianji.ttech.app.TtechApplication
 import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivityLaunchBinding
+import com.tianji.ttech.ui.LoginAndRegisterActivity
 import com.tianji.ttech.ui.MainActivity
 import com.tianji.ttech.ui.account.login.activity.LoginActivity
 import com.ttech.lib.view.statusbar.StatusBarCompat
@@ -60,7 +61,7 @@ class LaunchActivity :BaseActivity() {
         if (accountService().isLogin()) {
             MainActivity.start(this)
         } else {
-            LoginActivity.start(this)
+            LoginAndRegisterActivity.start(this)
         }
         finish()
     }

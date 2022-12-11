@@ -18,7 +18,8 @@ data class User(
     val country: String,
     val avatarAddress: String,
     val timeZone: String,
-    val installerCode: String
+    val installerCode: String,
+    var password:String
 )
 
 

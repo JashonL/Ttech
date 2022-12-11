@@ -12,8 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Ttech"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
 
@@ -21,65 +21,66 @@
             android:name=".ui.LoginAndRegisterActivity"
             android:exported="true"
             android:screenOrientation="nosensor">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
 
         <activity
             android:name=".ui.launch.activity.LaunchActivity"
             android:exported="true"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor">
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
 
 
         <activity
             android:name=".ui.account.register.RegisterActivity"
             android:exported="true"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
 
 
         <activity
             android:name=".ui.account.login.activity.LoginActivity"
             android:exported="true"
-            android:screenOrientation="nosensor"/>
-
+            android:screenOrientation="nosensor" />
 
 
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name" />
 
 
         <activity
             android:name=".ui.common.activity.WebActivity"
             android:exported="true"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.common.activity.CountryActivity"
             android:exported="true"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.account.forgot.ForgotPasswordActivity"
             android:exported="true"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.manu.activity.SettingActivity"
             android:exported="true"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.manu.activity.ModifyPasswordActivity"
             android:exported="true"
-            android:screenOrientation="nosensor"/>
-
-
+            android:screenOrientation="nosensor" />
 
 
     </application>
