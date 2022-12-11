@@ -37,17 +37,6 @@ class HomeFragment : BaseFragment(), OnClickListener {
     private val viewModel: StationViewModel by viewModels()
 
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        LogUtil.i("homestatusFragment", "HomeFragment onAttach")
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        LogUtil.i("homestatusFragment", "HomeFragment onCreate")
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -94,6 +83,7 @@ class HomeFragment : BaseFragment(), OnClickListener {
 
 
     private fun showSystemSatus(station: StationModel) {
+        viewModel.currentStation = station
         val stationType = station.stationType
         //根据电站类型显示不同界面
         childFragmentManager.commit(true) {
@@ -104,9 +94,9 @@ class HomeFragment : BaseFragment(), OnClickListener {
                 } else {
                     val pvStatusFragment = PvStatusFragment()
                     //传参过去
-                    val bundle=Bundle()
-                    bundle.putString("stationId",station.id)
-                    pvStatusFragment.arguments=bundle
+                    val bundle = Bundle()
+                    bundle.putString("stationId", station.id)
+                    pvStatusFragment.arguments = bundle
                     replace(R.id.fragment_system, pvStatusFragment)
                 }
 
@@ -116,9 +106,9 @@ class HomeFragment : BaseFragment(), OnClickListener {
                 } else {
                     val homeStatusFragment = HomeStatusFragment()
                     //传参过去
-                    val bundle=Bundle()
-                    bundle.putString("stationId",station.id)
-                    homeStatusFragment.arguments=bundle
+                    val bundle = Bundle()
+                    bundle.putString("stationId", station.id)
+                    homeStatusFragment.arguments = bundle
                     replace(R.id.fragment_system, homeStatusFragment)
                 }
             }
@@ -154,49 +144,25 @@ class HomeFragment : BaseFragment(), OnClickListener {
             for (plant in second) {
                 options.add(ListPopModel(plant.stationName, false))
             }
-            context?.let { ListPopuwindow.showPop(it, options, _binding.header.tvTitle) }
+
+            val curItem: String = if (viewModel.currentStation != null) {
+                viewModel.currentStation!!.id
+            } else {
+                ""
+            }
+            context?.let {
+                ListPopuwindow.showPop(
+                    it,
+                    options,
+                    _binding.header.tvTitle,
+                    curItem
+                ) {
+                    showSystemSatus(second[it])
+                }
+            }
         }
     }
 
-
-    override fun onStart() {
-        super.onStart()
-        LogUtil.i("homestatusFragment", "HomeFragment onStart")
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        LogUtil.i("homestatusFragment", "HomeFragment onResume")
-    }
-
-
-    override fun onPause() {
-        super.onPause()
-        LogUtil.i("homestatusFragment", "HomeFragment onPause")
-    }
-
-
-    override fun onStop() {
-        super.onStop()
-        LogUtil.i("homestatusFragment", "HomeFragment onStop")
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        LogUtil.i("homestatusFragment", "HomeFragment onDestroyView")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        LogUtil.i("homestatusFragment", "HomeFragment onDestroy")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        LogUtil.i("homestatusFragment", "HomeFragment onDetach")
-    }
 
 
 }

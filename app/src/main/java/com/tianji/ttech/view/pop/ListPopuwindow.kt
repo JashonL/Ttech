@@ -20,6 +20,7 @@ import com.tianji.ttech.databinding.PopListItemBinding
 import com.tianji.ttech.view.popuwindow.ListPopModel
 import com.ttech.lib.util.gone
 import com.ttech.lib.util.visible
+import java.util.*
 
 
 /**
@@ -27,13 +28,18 @@ import com.ttech.lib.util.visible
  * 目前只支持单选
  */
 
-class ListPopuwindow(context: Context, list: List<ListPopModel>) :
-    PopupWindow() {
+class ListPopuwindow(context: Context, list: List<ListPopModel>, curItem: String) :
+    PopupWindow(), OnItemClickListener {
+
+    public var chooseLisener: ((pos: Int) -> Unit)? = null
 
 
     companion object {
-        fun showPop(context: Context, list: List<ListPopModel>, dropView: View) {
-            ListPopuwindow(context, list).showAsDropDown(dropView)
+        fun showPop(
+            context: Context, list: List<ListPopModel>,
+            dropView: View, curItem: String, chooselisener: ((pos: Int) -> Unit)? = null
+        ) {
+            ListPopuwindow(context, list, curItem).showAsDropDown(dropView)
         }
     }
 
@@ -48,7 +54,7 @@ class ListPopuwindow(context: Context, list: List<ListPopModel>) :
         binding = ListPopLayoutBinding.inflate(inflater)
         this.contentView = binding.root
 
-        initContentView(context, list)
+        initContentView(context, list, curItem)
 
         this.width = LinearLayout.LayoutParams.WRAP_CONTENT //父布局减去padding
         this.height = LinearLayout.LayoutParams.WRAP_CONTENT
@@ -64,21 +70,41 @@ class ListPopuwindow(context: Context, list: List<ListPopModel>) :
     }
 
 
-    private fun initContentView(context: Context, list: List<ListPopModel>) {
+    private fun initContentView(context: Context, list: List<ListPopModel>, curItem: String) {
+        for (i in list.indices) {
+            list[i].choose = list[i].title == curItem
+        }
         binding.rlvList.layoutManager = LinearLayoutManager(context)
-        binding.rlvList.adapter = ListAdapter(context, list.toMutableList())
+        binding.rlvList.adapter = ListAdapter(context, list.toMutableList(), this)
+    }
+
+
+    override fun onItemClick(v: View?, position: Int) {
+        super.onItemClick(v, position)
+        if (chooseLisener != null) {
+            chooseLisener?.invoke(position)
+        }
+
+    }
+
+
+    fun setOnChooseListener(listener: ((pos: Int) -> Unit)) {
+        this.chooseLisener = listener
     }
 
 
     //dapter
 
-    class ListAdapter(val context: Context, private val list: MutableList<ListPopModel>) :
-        RecyclerView.Adapter<ListViewHolder>(),
-        OnItemClickListener {
+    class ListAdapter(
+        val context: Context,
+        private val list: MutableList<ListPopModel>,
+        val listener: OnItemClickListener
+    ) :
+        RecyclerView.Adapter<ListViewHolder>() {
 
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-            return ListViewHolder.create(context, this)
+            return ListViewHolder.create(context, listener)
         }
 
         override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
@@ -91,6 +117,7 @@ class ListPopuwindow(context: Context, list: List<ListPopModel>) :
         }
 
 
+/*
         override fun onItemClick(v: View?, position: Int) {
             super.onItemClick(v, position)
             itemChoose(position)
@@ -104,6 +131,7 @@ class ListPopuwindow(context: Context, list: List<ListPopModel>) :
             }
             notifyDataSetChanged()
         }
+*/
 
     }
 

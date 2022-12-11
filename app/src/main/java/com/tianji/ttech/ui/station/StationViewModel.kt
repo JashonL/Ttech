@@ -14,6 +14,7 @@ class StationViewModel : BaseViewModel() {
 
     val getPlantListLiveData = MutableLiveData<Pair<Boolean, Array<StationModel>?>>()
 
+    var currentStation: StationModel? = null
 
 
     /**
@@ -39,11 +40,6 @@ class StationViewModel : BaseViewModel() {
                 })
         }
     }
-
-
-
-
-
 
 
 }
