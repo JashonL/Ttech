@@ -1,4 +1,4 @@
-package com.tianji.ttech.ui.station
+package com.tianji.ttech.ui.station.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope

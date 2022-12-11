@@ -15,7 +15,7 @@ import com.tianji.ttech.ui.array.ArrayFragment
 import com.tianji.ttech.ui.energy.EnergyFragment
 import com.tianji.ttech.ui.home.HomeFragment
 import com.tianji.ttech.ui.manu.ManuFragment
-import com.tianji.ttech.ui.station.StationFragment
+import com.tianji.ttech.ui.station.fragment.StationFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,8 +48,8 @@ class MainActivity : AppCompatActivity() {
         val adapter = Adapter(this)
         val mainViewpager = binding.mainViewpager
         mainViewpager.adapter = adapter
+        mainViewpager.offscreenPageLimit = mainViewpager.childCount
         adapter.refresh(fragments)
-
         mainViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 binding.navView.menu.getItem(position).isChecked = true

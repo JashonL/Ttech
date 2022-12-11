@@ -49,13 +49,61 @@ of letters, numbers and symbols.</string>
     <string name="m31_passwords_are_inconsistent">两次密码不一致</string>
     <string name="m32_load">Load</string>
     <string name="m33_bat">Bat</string>
+    <string name="m34_plant">Plant</string>
 
+    <string name="m35_please_input_plant_or_sn">请输入电站名称或电站设备中的序列号</string>
 
+    <string name="m36_all">全部</string>
+    <string name="m37_online">在线</string>
+    <string name="m38_offline">离线</string>
+    <string name="m39_trouble">故障</string>
+    <string name="m40_all_format">全部(%d)</string>
+    <string name="m41_online_format">在线(%d)</string>
+    <string name="m42_offline_format">离线(%d)</string>
+    <string name="m43_trouble_format">故障(%d)</string>
+    <string name="m44_add_plant">添加电站</string>
+    <string name="m45_current_power">实时功率</string>
+    <string name="m46_please_select_install_date">请选择安装日期</string>
+    <string name="m47_please_input_total_component_power">请输入组件总功率</string>
 
+    <string name="m48_kwh">kWh</string>
+    <string name="m49_mwh">MWh</string>
+    <string name="m50_kwp">kWp</string>
+    <string name="m51_mwp">MWp</string>
+    <string name="m52_kw">kW</string>
+    <string name="m53_mw">MW</string>
+    <string name="m54_hz">Hz</string>
+    <string name="m55_kva">KVA</string>
+    <string name="m56_kvar">KVar</string>
+    <string name="m57_v">V</string>
+    <string name="m58_a">A</string>
+    <string name="m59_kg">kg</string>
+    <string name="m60_t">t</string>
 
+    <string name="m61_power_output">功率/电量</string>
+    <string name="m62_soc">SOC</string>
+    <string name="m63_charge_discharge_output">充放电</string>
 
+    <string name="m64_wind_direction_format">风向:%s</string>
+    <string name="m65_wind_speed_format">风速:%s</string>
+    <string name="m66_info_space_not_permission">浏览账号没有权限</string>
+    <string name="m67_next_step">下一步</string>
+    <string name="m68_plant_name">电站名称</string>
+    <string name="m69_please_select_country_or_area_2">请选择国家/地区</string>
+    <string name="m70_please_input_plant_name">请填写电站名称</string>
+    <string name="m71_install_date">安装日期</string>
 
+    <string name="m72_plant_address">电站地址</string>
+    <string name="m73_unselected_country_or_area">未选择国家/地区</string>
+    <string name="m74_take_a_picture">拍照</string>
+    <string name="m75_from_the_album">从相册选取</string>
 
+    <string name="m76_device_count">设备数量</string>
+    <string name="m77_total_component_power">组件总功率</string>
+    <string name="m78_today_generate_electricity">今日发电</string>
+    <string name="m79_month_generate_electricity">当月发电</string>
+    <string name="m80_total_generate_electricity">累计发电</string>
+    <string name="m81_nothing_plant_format">无%s电站</string>
 
 
 
@@ -68,7 +116,6 @@ of letters, numbers and symbols.</string>
     <string name="m10_energy_today">Energy(Today)</string>
     <string name="m11_energy_total">Energy(Total)</string>
     <string name="m12_grid">Grid</string>
-
 
 
 

@@ -13,7 +13,10 @@ import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivityLoginRegisterBinding
 import com.tianji.ttech.ui.account.login.activity.LoginActivity
 import com.tianji.ttech.ui.account.login.viewmodel.LoginViewModel
+import com.tianji.ttech.ui.common.activity.WebActivity
+import com.ttech.lib.service.account.User
 import com.ttech.lib.util.MD5Util
+import com.ttech.lib.util.ToastUtil
 import com.ttech.lib.util.Util
 
 class LoginAndRegisterActivity :BaseActivity(),OnClickListener{
@@ -34,12 +37,31 @@ class LoginAndRegisterActivity :BaseActivity(),OnClickListener{
         super.onCreate(savedInstanceState)
         binding = ActivityLoginRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initData()
         setLiseners()
         initViews()
     }
 
 
 
+    private fun initData() {
+        viewModel.loginLiveData.observe(this) {
+            dismissDialog()
+            if (it.second == null) {
+                val user = it.first
+                loginSuccess(user)
+            } else {
+                ToastUtil.show(it.second)
+            }
+        }
+
+    }
+
+
+    private fun loginSuccess(user: User?) {
+        MainActivity.start(this)
+        finish()
+    }
 
     private fun initViews() {
         val user = accountService().user()

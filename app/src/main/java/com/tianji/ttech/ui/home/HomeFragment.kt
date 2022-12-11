@@ -1,30 +1,23 @@
 package com.tianji.ttech.ui.home
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.findFragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentHomeBinding
 import com.tianji.ttech.model.StationModel
-import com.tianji.ttech.ui.common.viewmodel.SelectAreaViewModel
 import com.tianji.ttech.ui.home.pv.PvStatusFragment
 import com.tianji.ttech.ui.home.storage.HomeStatusFragment
-import com.tianji.ttech.ui.station.StationViewModel
-import com.tianji.ttech.view.dialog.OptionsDialog
+import com.tianji.ttech.ui.station.viewmodel.StationViewModel
 import com.tianji.ttech.view.pop.ListPopuwindow
 import com.tianji.ttech.view.popuwindow.ListPopModel
-import com.ttech.lib.util.LogUtil
-import com.ttech.lib.util.ToastUtil
 import com.ttech.lib.util.gone
 import com.ttech.lib.util.visible
 
@@ -43,7 +36,6 @@ class HomeFragment : BaseFragment(), OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        LogUtil.i("homestatusFragment", "HomeFragment onCreateView")
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         initData()
         setliseners()

@@ -1,13 +1,11 @@
 package com.tianji.ttech.view.pop
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +18,6 @@ import com.tianji.ttech.databinding.PopListItemBinding
 import com.tianji.ttech.view.popuwindow.ListPopModel
 import com.ttech.lib.util.gone
 import com.ttech.lib.util.visible
-import java.util.*
 
 
 /**
@@ -31,7 +28,7 @@ import java.util.*
 class ListPopuwindow(context: Context, list: List<ListPopModel>, curItem: String) :
     PopupWindow(), OnItemClickListener {
 
-    public var chooseLisener: ((pos: Int) -> Unit)? = null
+    private var chooseLisener: ((pos: Int) -> Unit)? = null
 
 
     companion object {
