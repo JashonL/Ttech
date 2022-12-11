@@ -104,7 +104,8 @@ of letters, numbers and symbols.</string>
     <string name="m79_month_generate_electricity">当月发电</string>
     <string name="m80_total_generate_electricity">累计发电</string>
     <string name="m81_nothing_plant_format">无%s电站</string>
-
+    <string name="m82_system_nomal">System Nomal</string>
+    <string name="m83_system_exception">System Exception</string>
 
 
     <string name="m5_privacy_dialog_content">Enerview旨在保护您的数据隐私与安全的基础上，帮助您高效管理电站。请仔细阅读并充分理解一下条款后再点击同意。</string>
@@ -116,12 +117,6 @@ of letters, numbers and symbols.</string>
     <string name="m10_energy_today">Energy(Today)</string>
     <string name="m11_energy_total">Energy(Total)</string>
     <string name="m12_grid">Grid</string>
-
-
-
-
-
-
 
 
     <!--排序开始-->
@@ -303,7 +298,6 @@ of letters, numbers and symbols.</string>
     <string name="m149_delete_account">Delete account</string>
 
 
-
     <string name="m150_old_password">Old Password</string>
     <string name="m151_new_password">New Password</string>
     <string name="m152_new_password_again">Enter the new password again</string>
@@ -354,8 +348,6 @@ confirmation after plug in your car。</string>
     <string name="m184_pin">Pin</string>
     <string name="m185_pin_not_empty">Pin Not Empty</string>
     <string name="m186_installer_code">Installer Code</string>
-
-
 
 
 </resources>

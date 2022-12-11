@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentSystemInvStatusBinding
 import com.tianji.ttech.ui.home.pv.viewmodel.PvStationViewmodel
@@ -53,6 +54,18 @@ class PvStatusFragment : BaseFragment() {
             _binding.tvPower.text = it?.power
             _binding.tvEnergyToday.text = it?.energyToday
             _binding.tvEnergyTotal.text = it?.energyTotal
+
+
+
+            val onlineStatus = it?.onlineStatus
+            if ("1" == onlineStatus){
+                _binding.ivStatus.setImageResource(R.drawable.check_normal)
+                _binding.tvStatus.text = getString(R.string.m82_system_nomal)
+            }else{
+                _binding.ivStatus.setImageResource(R.drawable.exception)
+                _binding.tvStatus.text = getString(R.string.m83_system_exception)
+
+            }
 
         }
 

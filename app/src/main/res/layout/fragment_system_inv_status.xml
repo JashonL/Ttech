@@ -279,14 +279,22 @@
                 app:layout_constraintTop_toBottomOf="@+id/ll_energy_total" />
 
 
-            <CheckBox
+            <ImageView
+                android:id="@+id/iv_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/app_name"
                 app:layout_constraintBottom_toTopOf="@+id/tv_last_update"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_status"
+                app:layout_constraintLeft_toRightOf="@+id/iv_status"
+                app:layout_constraintTop_toTopOf="@+id/iv_status" />
 
             <TextView
                 android:id="@+id/tv_last_update"

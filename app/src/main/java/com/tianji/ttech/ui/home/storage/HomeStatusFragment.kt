@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentSystemStatusBinding
 import com.tianji.ttech.ui.home.pv.viewmodel.PvStationViewmodel
@@ -54,6 +55,21 @@ class HomeStatusFragment : BaseFragment() {
             _binding.tvSolarPower.text = it?.solar
             _binding.tvBatPower.text = it?.bat
             _binding.tvLoadPower.text = it?.load
+
+
+            val onlineStatus = it?.onlineStatus
+            if ("1" == onlineStatus){
+                _binding.ivStatus.setImageResource(R.drawable.check_normal)
+                _binding.tvStatus.text = getString(R.string.m82_system_nomal)
+            }else{
+                _binding.ivStatus.setImageResource(R.drawable.exception)
+                _binding.tvStatus.text = getString(R.string.m83_system_exception)
+
+            }
+
+
+
+
         }
 
         //获取数据
@@ -81,37 +97,7 @@ class HomeStatusFragment : BaseFragment() {
     }
 
 
-    override fun onStart() {
-        super.onStart()
-    }
 
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-
-    override fun onStop() {
-        super.onStop()
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-    }
 
 
 }

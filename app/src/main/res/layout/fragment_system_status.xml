@@ -306,8 +306,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:minWidth="@dimen/dp_100"
-                        android:text="666W"
                         android:paddingStart="@dimen/dp_5"
+                        android:text="666W"
                         android:textColor="@color/black_333333"
                         android:textSize="@dimen/size_content_sp_16"
                         app:layout_constraintBottom_toTopOf="@+id/tv_solar_power"
@@ -321,10 +321,10 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:minWidth="@dimen/dp_100"
+                        android:paddingStart="@dimen/dp_5"
                         android:text="@string/m9_solar"
                         android:textColor="@color/color_999999"
                         android:textSize="@dimen/size_content_sp_16"
-                        android:paddingStart="@dimen/dp_5"
                         app:layout_constraintBottom_toBottomOf="@+id/iv_sys_ppv"
                         app:layout_constraintLeft_toRightOf="@+id/iv_sys_ppv"
                         app:layout_constraintTop_toBottomOf="@+id/tv_solar" />
@@ -347,14 +347,23 @@
             </androidx.cardview.widget.CardView>
 
 
-            <CheckBox
+            <ImageView
+                android:id="@+id/iv_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/app_name"
                 app:layout_constraintBottom_toTopOf="@+id/tv_last_update"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_status"
+                app:layout_constraintLeft_toRightOf="@+id/iv_status"
+                app:layout_constraintTop_toTopOf="@+id/iv_status" />
+
 
             <TextView
                 android:id="@+id/tv_last_update"
