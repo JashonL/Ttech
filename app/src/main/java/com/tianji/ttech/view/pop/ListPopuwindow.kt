@@ -25,7 +25,12 @@ import com.ttech.lib.util.visible
  * 目前只支持单选
  */
 
-class ListPopuwindow(context: Context, list: List<ListPopModel>, curItem: String) :
+class ListPopuwindow(
+    context: Context,
+    list: List<ListPopModel>,
+    curItem: String,
+    chooseLisener: ((pos: Int) -> Unit)? = null
+) :
     PopupWindow(), OnItemClickListener {
 
     private var chooseLisener: ((pos: Int) -> Unit)? = null
@@ -36,7 +41,7 @@ class ListPopuwindow(context: Context, list: List<ListPopModel>, curItem: String
             context: Context, list: List<ListPopModel>,
             dropView: View, curItem: String, chooselisener: ((pos: Int) -> Unit)? = null
         ) {
-            ListPopuwindow(context, list, curItem).showAsDropDown(dropView)
+            ListPopuwindow(context, list, curItem, chooselisener).showAsDropDown(dropView)
         }
     }
 
@@ -61,9 +66,10 @@ class ListPopuwindow(context: Context, list: List<ListPopModel>, curItem: String
         // 设置最终的背景,也可以通过context.resources.getColor(resId)设置自己的颜色
         val colorDrawable = ColorDrawable(Color.parseColor("#00000000"))
         this.setBackgroundDrawable(colorDrawable) //设置背景
-        this.setTouchInterceptor { view, _ -> false };
+        this.setTouchInterceptor { _, _ -> false };
         isTouchable = true
         this.isFocusable = true
+        this.chooseLisener = chooseLisener
     }
 
 
@@ -82,6 +88,7 @@ class ListPopuwindow(context: Context, list: List<ListPopModel>, curItem: String
             chooseLisener?.invoke(position)
         }
 
+        this.dismiss()
     }
 
 

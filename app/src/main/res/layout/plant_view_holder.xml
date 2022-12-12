@@ -206,7 +206,7 @@
                 android:layout_marginStart="2dp"
                 android:textColor="@color/text_gray_99"
                 android:textSize="@dimen/text_tab"
-                tools:text="今日发电/累计发电" />
+                android:text="今日发电/累计发电" />
 
             <TextView
                 android:id="@+id/tv_power"

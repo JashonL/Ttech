@@ -33,9 +33,13 @@ data class PlantModel @JvmOverloads constructor(
     val installtionDate: String,
     val address: String,
     val incomeUnit: String,
-    val pictureAddress:String,
-    val userId:String,
-    val onlineStatus:String
+    val pictureAddress: String,
+    val userId: String,
+    val onlineStatus: String,
+    val currencyPower: String,
+    val pvcapacity: String,
+    val today: String?,
+    val total: String?
 ) : Parcelable {
 
     companion object {
@@ -78,7 +82,7 @@ data class PlantModel @JvmOverloads constructor(
     }
 
     fun getETodayText(): String {
-        return Util.getDoubleText(eToday)
+        return Util.getDoubleText(today?.toDouble())
     }
 
     fun getETodayWithUnitText(): String {
@@ -87,7 +91,7 @@ data class PlantModel @JvmOverloads constructor(
     }
 
     fun getETotalText(): String {
-        return Util.getDoubleText(eTotal)
+        return Util.getDoubleText(total?.toDouble())
     }
 
     fun getETotalWithUnitText(): String {

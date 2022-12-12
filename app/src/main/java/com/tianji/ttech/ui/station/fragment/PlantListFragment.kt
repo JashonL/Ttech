@@ -229,10 +229,14 @@ class PlantListFragment(
 
         fun bindData(plantModel: PlantModel, fragment: PlantListFragment) {
 
+            Glide.with(fragment).load(plantModel.stationName)
+                .placeholder(R.drawable.ic_placeholder)
+                .into(binding.ivPlantImage)
+
             binding.llCity.background =
                 ViewUtil.createShape(getColor(R.color.color_33000000), 0, 0, 2, 2)
             binding.tvCity.text = plantModel.city
-            binding.tvPlantName.text = plantModel.plantName
+            binding.tvPlantName.text = plantModel.stationName
             when (plantModel.hasDeviceOnLine) {
                 PlantModel.PLANT_STATUS_ONLINE -> {
                     binding.tvPlantStatus.text = getString(R.string.m37_online)
@@ -252,9 +256,9 @@ class PlantListFragment(
             }
             binding.llCurrentPower.background =
                 ViewUtil.createShape(getColor(R.color.color_1A0087FD), 2)
-            binding.tvCurrentPower.text = plantModel.currentPacStr
-            binding.tvInstallDate.text = plantModel.createDateText
-            binding.tvTotalComponentPower.text = plantModel.nominalPowerStr
+            binding.tvCurrentPower.text = plantModel.currencyPower
+            binding.tvInstallDate.text = plantModel.installtionDate
+            binding.tvTotalComponentPower.text = plantModel.pvcapacity
             binding.tvPower.text = getTvSpan(plantModel)
             binding.root.tag = plantModel
         }
