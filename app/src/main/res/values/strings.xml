@@ -106,6 +106,19 @@ of letters, numbers and symbols.</string>
     <string name="m81_nothing_plant_format">无%s电站</string>
     <string name="m82_system_nomal">System Nomal</string>
     <string name="m83_system_exception">System Exception</string>
+    <string name="m84_net_use">Net Use</string>
+    <string name="m85_impact">impact</string>
+
+    <string name="m86_co2">co2</string>
+    <string name="m87_coal">coal</string>
+    <string name="m88_Deforestation">Deforestation</string>
+    <string name="m89_total">Total</string>
+
+
+
+
+
+
 
 
     <string name="m5_privacy_dialog_content">Enerview旨在保护您的数据隐私与安全的基础上，帮助您高效管理电站。请仔细阅读并充分理解一下条款后再点击同意。</string>
@@ -195,9 +208,9 @@ of letters, numbers and symbols.</string>
     <string name="m67_kg">kg</string>
     <string name="m68_t">t</string>
     <string name="m69_hour">hour</string>
-    <string name="m70_day">date</string>
+    <string name="m70_day">day</string>
 
-    <string name="m71_month">monyear</string>
+    <string name="m71_month">month</string>
     <string name="m72_year">year</string>
     <string name="m73_sms_find_back">Message back</string>
     <string name="m74_please_input_username">Please enter a user name</string>

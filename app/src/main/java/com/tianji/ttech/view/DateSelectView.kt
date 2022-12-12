@@ -59,11 +59,13 @@ class DateSelectView @JvmOverloads constructor(
         when {
             v === binding.ivNext -> {
                 nowDate = DateUtils.addDateDays(nowDate, 1)
+                parserDate()
             }
 
 
             v === binding.ivPre -> {
                 nowDate = DateUtils.addDateDays(nowDate, -1)
+                parserDate()
             }
 
             v === binding.tvDate -> {
