@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentSystemStatusBinding
-import com.tianji.ttech.ui.home.pv.viewmodel.PvStationViewmodel
 import kotlinx.coroutines.delay
 
 class HomeStatusFragment : BaseFragment() {

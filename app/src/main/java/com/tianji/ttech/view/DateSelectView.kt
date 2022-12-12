@@ -101,27 +101,6 @@ class DateSelectView @JvmOverloads constructor(
     }
 
 
-    /**
-     * 设备状态
-     */
-    @StringDef(
-        DateType.DAY,
-        DateType.MONTH,
-        DateType.YEAR,
-        DateType.TOTAL
-    )
-    @Retention(AnnotationRetention.SOURCE)
-    @Target(
-        AnnotationTarget.VALUE_PARAMETER,
-        AnnotationTarget.PROPERTY
-    )
-    annotation class DateType {
-        companion object {
-            const val DAY = "1"
-            const val MONTH = "2"
-            const val YEAR = "3"
-            const val TOTAL = "4"
-        }
-    }
+
 
 }

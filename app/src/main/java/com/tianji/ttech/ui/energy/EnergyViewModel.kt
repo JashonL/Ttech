@@ -9,12 +9,15 @@ import com.tianji.ttech.ui.common.model.DataType
 import com.ttech.lib.service.http.HttpCallback
 import com.ttech.lib.service.http.HttpErrorModel
 import com.ttech.lib.service.http.HttpResult
+import com.ttech.lib.util.DateUtils
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class EnergyViewModel : BaseViewModel() {
 
     val getPlantListLiveData = MutableLiveData<Pair<Boolean, Array<StationModel>?>>()
     var currentStation: StationModel? = null
+
     var dateType = DataType.TOTAL
 
     private val chartApi = listOf(
@@ -26,6 +29,18 @@ class EnergyViewModel : BaseViewModel() {
 
 
     var time: String = ""
+
+
+    fun setTime(date: Date) {
+        time = when (dateType) {
+            DataType.DAY -> DateUtils.yyyy_MM_dd_format(date)
+            DataType.MONTH -> DateUtils.yyyy_MM_format(date)
+            DataType.YEAR -> DateUtils.yyyy_format(date)
+            else -> {
+                DateUtils.yyyy_format(date)
+            }
+        }
+    }
 
 
     /**
@@ -51,5 +66,32 @@ class EnergyViewModel : BaseViewModel() {
                 })
         }
     }
+
+
+
+    /**
+     * 获取电站数据
+     */
+    fun getPlantImpactData() {
+        viewModelScope.launch {
+            val params = hashMapOf<String, String>().apply {
+                put("stationId", currentStation?.id.toString())
+                put("time", time)
+            }
+            apiService().postForm(
+                chartApi[dateType],
+                params,
+                object : HttpCallback<HttpResult<Array<StationModel>>>() {
+                    override fun success(result: HttpResult<Array<StationModel>>) {
+                        getPlantListLiveData.value = Pair(result.isBusinessSuccess(), result.obj)
+                    }
+
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        getPlantListLiveData.value = Pair(false, null)
+                    }
+                })
+        }
+    }
+
 
 }

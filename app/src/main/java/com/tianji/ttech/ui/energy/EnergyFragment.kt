@@ -4,17 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.fragment.app.findFragment
 import androidx.fragment.app.viewModels
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentEnergyBinding
 import com.tianji.ttech.model.StationModel
+import com.tianji.ttech.ui.energy.chart.EnergyChartFragment
 import com.tianji.ttech.ui.station.viewmodel.StationViewModel
+import com.tianji.ttech.view.DateSelectView
 import com.tianji.ttech.view.pop.ListPopuwindow
 import com.tianji.ttech.view.popuwindow.ListPopModel
 import com.ttech.lib.util.gone
 import com.ttech.lib.util.visible
+import java.util.*
 
 class EnergyFragment : BaseFragment(), View.OnClickListener {
 
@@ -25,6 +30,9 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
     private val energyViewModel: EnergyViewModel by viewModels()
 
 
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,12 +40,27 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
     ): View {
         _binding = FragmentEnergyBinding.inflate(inflater, container, false)
         setliseners()
+        initViews()
         initData()
         return _binding.root
     }
 
+    private fun initViews() {
+        //初始化时间 年月日
+        setDate()
+        _binding.date.dataSelectView.setListener(object : DateSelectView.OntimeselectedListener {
+            override fun onDateSelectedListener(date: Date) {
+                //1.日期改变时
+                energyViewModel.setTime(date)
+                //2.重新请求数据
+                getPlantData()
+            }
+        })
+    }
+
 
     private fun initData() {
+        //初始化请求
         viewModel.getPlantListLiveData.observe(viewLifecycleOwner) {
             _binding.srlEmptyview.finishRefresh()
             if (it.first) {
@@ -50,14 +73,16 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
 
 
                 } else {
-
                     _binding.srlRefresh.visible()
                     _binding.srlEmptyview.gone()
 
                     //默认选中第一个电站
                     _binding.header.tvTitle.text = second[0].stationName
-                    //显示系统图
-                    showEnergyChart(second[0])
+                    energyViewModel.currentStation = second[0]
+
+                    //1.开始请求数据
+                    getPlantData()
+
                 }
             }
         }
@@ -65,10 +90,15 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
     }
 
 
+    private fun setDate() {
+        energyViewModel.setTime(_binding.date.dataSelectView.nowDate)
+    }
+
+
     private fun setliseners() {
         _binding.header.tvTitle.setOnClickListener(this)
         _binding.date.tvDateType.setOnClickListener(this)
-        _binding.srlRefresh.setOnRefreshListener {
+        _binding.srlEmptyview.setOnRefreshListener {
             fetchPlantList()
         }
     }
@@ -116,8 +146,11 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
                     _binding.header.tvTitle,
                     curItem
                 ) {
-                    _binding.header.tvTitle.text=options[it].title
-                    showEnergyChart(second[it])
+                    _binding.header.tvTitle.text = options[it].title
+                    //选择电站
+                    energyViewModel.currentStation = second[it]
+                    //重新请求数据
+                    getPlantData()
                 }
             }
         }
@@ -145,22 +178,24 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
                 ""
             ) {
                 //根据日期请求图表数据
-                _binding.date.tvDateType.text=options[it].title
+                _binding.date.tvDateType.text = options[it].title
+                energyViewModel.dateType = it
 
-
-
-
+                //重新请求求数据
+                getPlantData()
             }
         }
     }
 
 
-    private fun showEnergyChart(station: StationModel) {
-        viewModel.currentStation = station
-        val stationType = station.stationType
-        //根据电站类型显示不同界面
-        childFragmentManager.commit(true) {
-        }
+    /**
+     * 请求数据
+     */
+    private fun getPlantData() {
+        //1.请求图表数据
+//        energyViewModel.getPlantChartData()
+        //2.请求收益 和二氧化碳
+        energyViewModel.getPlantImpactData()
 
     }
 

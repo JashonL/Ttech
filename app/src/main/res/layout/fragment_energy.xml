@@ -26,7 +26,6 @@
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 
-
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/srl_refresh"
         android:layout_width="match_parent"
@@ -48,7 +47,13 @@
                     android:id="@+id/date"
                     layout="@layout/title_date" />
 
-                <include layout="@layout/energy_chart_module" />
+                <!--                <include layout="@layout/energy_chart_module" />-->
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/chart_container"
+                    android:name="com.tianji.ttech.ui.energy.chart.EnergyChartFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
 
                 <include layout="@layout/energy_consumption" />
