@@ -4,24 +4,60 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentEnergyChartBinding
+import com.tianji.ttech.model.energy.ChartModel
+import com.tianji.ttech.ui.energy.EnergyViewModel
+import com.ttech.lib.util.gone
+import com.ttech.lib.util.visible
 
 class EnergyChartFragment : BaseFragment() {
 
     private lateinit var _binding: FragmentEnergyChartBinding
+
+    private val energyViewModel: EnergyViewModel by viewModels(ownerProducer = { requireParentFragment()})
 
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentEnergyChartBinding.inflate(inflater, container, false)
-        return super.onCreateView(inflater, container, savedInstanceState)
+
+        initData()
+        return _binding.root
     }
 
 
+    private fun initData() {
+        //初始化请求
+        energyViewModel.stationLiveData.observe(viewLifecycleOwner) {
+            val second = it.second
+            if (second != null) {
+                setTotalData(second)
+            }
+        }
+
+
+    }
+
+
+    private fun setTotalData(chartData: ChartModel) {
+        val energyTotal = chartData.energyTotal
+        val solarTotal = chartData.solarTotal
+        val batTotal = chartData.batTotal
+        val gridTotal = chartData.gridTotal
+        val loadTotal = chartData.loadTotal
+
+        _binding.chartViewVlude.tvBat.text = batTotal
+        _binding.chartViewVlude.tvGrid.text = gridTotal
+        _binding.chartViewVlude.tvPpv.text = solarTotal
+        _binding.chartViewVlude.tvHome.text = loadTotal
+        _binding.chartViewVlude.tvNetUse.text = energyTotal+"kWh"
+
+    }
 
 
 

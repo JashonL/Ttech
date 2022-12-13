@@ -3,6 +3,7 @@ package com.tianji.ttech.utils
 import com.tianji.ttech.R
 import com.tianji.ttech.app.TtechApplication
 import com.ttech.lib.util.Util
+import java.math.BigDecimal
 
 /**
  * 数值换算工具，根据规则换算出单位
@@ -100,4 +101,19 @@ object ValueUtil {
             }
         }
     }
+
+
+    /**
+     * @param f   源数据
+     * @param num 保留的位数
+     * @return
+     */
+    fun roundDouble2String(f: Double, num: Int): String? {
+        val bg = BigDecimal(f)
+        val f1: Double = bg.setScale(num, BigDecimal.ROUND_HALF_UP).toDouble()
+        return f1.toString()
+    }
+
+
+
 }

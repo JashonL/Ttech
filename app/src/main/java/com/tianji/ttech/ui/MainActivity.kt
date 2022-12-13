@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = Adapter(this)
         val mainViewpager = binding.mainViewpager
         mainViewpager.adapter = adapter
-        mainViewpager.offscreenPageLimit = mainViewpager.childCount
+//        mainViewpager.offscreenPageLimit = mainViewpager.childCount
         adapter.refresh(fragments)
         mainViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {

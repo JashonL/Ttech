@@ -43,64 +43,130 @@
         </LinearLayout>
 
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="horizontal">
 
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/ll_home"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:paddingTop="@dimen/dp_10"
-                android:text="50.2"
-                android:textSize="@dimen/size_content_sp_14"
-                android:textStyle="bold"
-                app:drawableTopCompat="@drawable/chart_home" />
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ll_ppv">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/chart_home" />
 
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tv_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:gravity="center"
+                    android:text="50.2"
+                    android:textSize="@dimen/size_content_sp_14"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_ppv"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/dp_30"
                 android:gravity="center"
-                android:paddingTop="@dimen/dp_10"
-                android:text="50.2"
-                android:textSize="@dimen/size_content_sp_14"
-                android:textStyle="bold"
-                app:drawableTopCompat="@drawable/chart_ppv" />
+                android:orientation="vertical"
+                app:layout_constraintLeft_toRightOf="@+id/ll_home"
+                app:layout_constraintRight_toLeftOf="@+id/ll_grid">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/chart_ppv" />
 
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tv_ppv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:gravity="center"
+                    android:text="50.2"
+                    android:textSize="@dimen/size_content_sp_14"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_grid"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/dp_30"
                 android:gravity="center"
-                android:paddingTop="@dimen/dp_10"
-                android:text="50.2"
-                android:textSize="@dimen/size_content_sp_14"
-                android:textStyle="bold"
-                app:drawableTopCompat="@drawable/chart_grid" />
+                android:orientation="vertical"
+                app:layout_constraintLeft_toRightOf="@+id/ll_ppv"
+                app:layout_constraintRight_toLeftOf="@+id/ll_bat">
 
-            <TextView
-                android:layout_width="wrap_content"
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/chart_grid" />
+
+
+                <TextView
+                    android:id="@+id/tv_grid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:gravity="center"
+                    android:text="50.2"
+                    android:textSize="@dimen/size_content_sp_14"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_bat"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/dp_30"
                 android:gravity="center"
-                android:paddingTop="@dimen/dp_10"
-                android:text="50.2"
-                android:textSize="@dimen/size_content_sp_14"
-                android:textStyle="bold"
-                app:drawableTopCompat="@drawable/chart_bat" />
+                android:orientation="vertical"
+                app:layout_constraintLeft_toRightOf="@+id/ll_grid"
+                app:layout_constraintRight_toRightOf="parent">
 
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/chart_bat" />
+
+                <TextView
+                    android:id="@+id/tv_bat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:gravity="center"
+                    android:text="50.2"
+                    android:textSize="@dimen/size_content_sp_14"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>
-
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcv_chart"

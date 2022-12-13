@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/energy_chart_module" />
+    <include layout="@layout/energy_chart_module" android:id="@+id/chart_view_vlude"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

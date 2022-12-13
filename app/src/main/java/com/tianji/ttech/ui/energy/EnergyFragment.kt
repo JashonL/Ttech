@@ -30,9 +30,6 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
     private val energyViewModel: EnergyViewModel by viewModels()
 
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,6 +53,14 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
                 getPlantData()
             }
         })
+
+
+        //绑定图表视图
+        childFragmentManager.commit {
+            add(R.id.chart_container, EnergyChartFragment())
+        }
+
+
     }
 
 
@@ -193,7 +198,7 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
      */
     private fun getPlantData() {
         //1.请求图表数据
-//        energyViewModel.getPlantChartData()
+        energyViewModel.getPlantChartData()
         //2.请求收益 和二氧化碳
         energyViewModel.getPlantImpactData()
 
