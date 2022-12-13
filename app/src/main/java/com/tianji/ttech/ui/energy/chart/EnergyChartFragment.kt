@@ -4,10 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.findFragment
 import androidx.fragment.app.viewModels
+import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentEnergyChartBinding
 import com.tianji.ttech.model.energy.ChartModel
+import com.tianji.ttech.ui.chart.BarChartFragment
+import com.tianji.ttech.ui.common.model.DataType
 import com.tianji.ttech.ui.energy.EnergyViewModel
 import com.ttech.lib.util.gone
 import com.ttech.lib.util.visible
@@ -16,7 +22,7 @@ class EnergyChartFragment : BaseFragment() {
 
     private lateinit var _binding: FragmentEnergyChartBinding
 
-    private val energyViewModel: EnergyViewModel by viewModels(ownerProducer = { requireParentFragment()})
+    private val energyViewModel: EnergyViewModel by viewModels(ownerProducer = { requireParentFragment() })
 
 
     override fun onCreateView(
@@ -25,7 +31,6 @@ class EnergyChartFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEnergyChartBinding.inflate(inflater, container, false)
-
         initData()
         return _binding.root
     }
@@ -55,13 +60,38 @@ class EnergyChartFragment : BaseFragment() {
         _binding.chartViewVlude.tvGrid.text = gridTotal
         _binding.chartViewVlude.tvPpv.text = solarTotal
         _binding.chartViewVlude.tvHome.text = loadTotal
-        _binding.chartViewVlude.tvNetUse.text = energyTotal+"kWh"
+        _binding.chartViewVlude.tvNetUse.text = energyTotal + "kWh"
+
+
+        val dateType = energyViewModel.dateType
+        val findFragment = _binding.chartViewVlude.fcvChart.findFragment<Fragment>()
+
+        if (dateType == DataType.DAY) {//显示曲线图
+            //刷新数据
+            childFragmentManager.commit {
+                if (findFragment is LineChartFragment) {
+                    findFragment.refresh(energyViewModel.chartLiveData.value,"kW")
+                } else {
+                    val lineChartFragment = LineChartFragment()
+                    replace(R.id.chart_container, lineChartFragment)
+                    lineChartFragment.refresh(energyViewModel.chartLiveData.value,"kW")
+                }
+            }
+        } else {
+            //刷新数据
+            childFragmentManager.commit {
+                if (findFragment is BarChartFragment) {
+                    findFragment.refresh(energyViewModel.chartLiveData.value,"kW")
+                } else {
+                    val barChartFragment = BarChartFragment()
+                    replace(R.id.chart_container, barChartFragment)
+                    barChartFragment.refresh(energyViewModel.chartLiveData.value,"kW")
+                }
+            }
+        }
+
 
     }
-
-
-
-
 
 
 }

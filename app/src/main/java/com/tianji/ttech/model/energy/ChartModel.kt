@@ -6,9 +6,9 @@ data class ChartModel(
     val batTotal: String,
     val loadTotal: String,
     val energyTotal: String,
-    val solarList: List<Float>,
-    val gridList: List<Float>,
-    val batList: List<Float>,
-    val loadList: List<Float>
+    val solarList: Array<Float>,
+    val gridList: Array<Float>,
+    val batList: Array<Float>,
+    val loadList: Array<Float>
 )
 

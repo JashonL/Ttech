@@ -23,12 +23,12 @@ import com.tianji.ttech.utils.ValueUtil;
 
 import java.util.List;
 
-public class MultipleLineChartMarkView extends MarkerView {
+public class MultipleChartMarkView extends MarkerView {
 
     private TextView tvDate;
     private TextView tvValue;
 
-    public MultipleLineChartMarkView(Context context) {
+    public MultipleChartMarkView(Context context) {
         super(context, R.layout.layout_multiple_mark_view);
         tvDate = findViewById(R.id.tv_date);
         tvValue = findViewById(R.id.tv_value);

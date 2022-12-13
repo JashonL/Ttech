@@ -6,6 +6,8 @@ import com.tianji.ttech.base.BaseViewModel
 import com.tianji.ttech.model.StationModel
 import com.tianji.ttech.model.energy.ChartModel
 import com.tianji.ttech.service.http.ApiPath
+import com.tianji.ttech.ui.chart.ChartListDataModel
+import com.tianji.ttech.ui.chart.ChartYDataList
 import com.tianji.ttech.ui.common.model.DataType
 import com.ttech.lib.service.http.HttpCallback
 import com.ttech.lib.service.http.HttpErrorModel
@@ -21,7 +23,7 @@ class EnergyViewModel : BaseViewModel() {
     val stationLiveData = MutableLiveData<Pair<Boolean, ChartModel?>>()
 
 
-
+    val chartLiveData = MutableLiveData<ChartListDataModel>()
 
 
     var currentStation: StationModel? = null
@@ -65,6 +67,27 @@ class EnergyViewModel : BaseViewModel() {
                 params,
                 object : HttpCallback<HttpResult<ChartModel>>() {
                     override fun success(result: HttpResult<ChartModel>) {
+                        val chartModel = result.obj
+
+                        chartModel?.let {
+                            val loadList = it.loadList
+                            val timeList = mutableListOf<String>()
+                            for (i in loadList.indices) {
+                                timeList.add(i.toString())
+                            }
+
+                            val dataList = mutableListOf(
+                                ChartYDataList(it.batList, "bat"),
+                                ChartYDataList(it.gridList, "grid"),
+                                ChartYDataList(it.solarList, "solar"),
+                                ChartYDataList(it.loadList, "load"),
+                            )
+
+                            val chartListDataModel =
+                                ChartListDataModel(timeList.toTypedArray(), dataList.toTypedArray())
+                            chartLiveData.value = chartListDataModel
+
+                        }
                         stationLiveData.value = Pair(result.isBusinessSuccess(), result.obj)
                     }
 
