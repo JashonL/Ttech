@@ -12,6 +12,7 @@ import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentEnergyBinding
 import com.tianji.ttech.model.StationModel
+import com.tianji.ttech.ui.common.model.DataType
 import com.tianji.ttech.ui.energy.chart.EnergyChartFragment
 import com.tianji.ttech.ui.station.viewmodel.StationViewModel
 import com.tianji.ttech.view.DateSelectView
@@ -59,8 +60,7 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
         childFragmentManager.commit {
             add(R.id.chart_container, EnergyChartFragment())
         }
-
-
+        _binding.date.tvDateType.text = DataType.getDateNameByType(energyViewModel.dateType)
     }
 
 

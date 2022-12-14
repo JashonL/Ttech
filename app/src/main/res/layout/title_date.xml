@@ -34,7 +34,6 @@
         android:layout_height="match_parent"
         android:layout_marginEnd="@dimen/dp_20"
         android:drawablePadding="@dimen/dp_10"
-        android:text="@string/m71_month"
         android:gravity="center"
         android:textColor="@color/black_333333"
         android:textSize="@dimen/size_content_sp_12"

@@ -51,7 +51,6 @@
 
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/chart_container"
-                    android:name="com.tianji.ttech.ui.energy.chart.EnergyChartFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

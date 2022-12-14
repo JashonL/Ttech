@@ -1,4 +1,4 @@
-package com.tianji.ttech.ui.energy.chart
+package com.tianji.ttech.ui.chart
 
 import android.graphics.Color
 import android.os.Bundle
@@ -12,19 +12,14 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
-import com.tianji.ttech.databinding.FragmentBarChartBinding
 import com.tianji.ttech.databinding.FragmentLineChartBinding
 import com.tianji.ttech.model.ChartTypeModel
-import com.tianji.ttech.ui.chart.ChartListDataModel
-import com.tianji.ttech.ui.chart.MultipleChartMarkView
-import com.ttech.lib.util.DateUtils
 import com.ttech.lib.util.Util
 
 class LineChartFragment :BaseFragment(){
 
-    private var _binding: FragmentLineChartBinding? = null
+    private lateinit var _binding: FragmentLineChartBinding
 
-    private val binding get() = _binding!!
 
     private val colors = ChartTypeModel.createChartColors()
 
@@ -34,12 +29,12 @@ class LineChartFragment :BaseFragment(){
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLineChartBinding.inflate(inflater, container, false)
-        return binding.root
+        return _binding.root
     }
 
 
     fun refresh(chartListDataModel: ChartListDataModel?, unit: String) {
-        binding.tvUnit.text = unit
+        _binding.tvUnit.text = unit
         chartListDataModel?.let {
             showChartData(it)
         }
@@ -56,7 +51,7 @@ class LineChartFragment :BaseFragment(){
 
     private fun initChartView(data: ChartListDataModel) {
         val timeList = data.timeList
-        binding.lineChart.also {
+        _binding.lineChart.also {
             it.setDrawGridBackground(false)
             it.description.isEnabled = false //不显示描述（右下角）
             it.setTouchEnabled(true)//设置是否能触摸
@@ -101,12 +96,12 @@ class LineChartFragment :BaseFragment(){
 
             })
 
-            marker.chartView = binding.barChart*/
-            binding.lineChart.marker = MultipleChartMarkView(requireContext())
+            marker.chartView = _binding.barChart*/
+            _binding.lineChart.marker = MultipleChartMarkView(requireContext())
         }
 
         //X轴
-        binding.lineChart.xAxis.also {
+        _binding.lineChart.xAxis.also {
             it.isEnabled = true //设置X轴启用
             it.position = XAxis.XAxisPosition.BOTTOM //设置X轴坐标值显示的位置
             it.setDrawGridLines(true) //设置y轴坐标值是否需要画竖线
@@ -130,7 +125,7 @@ class LineChartFragment :BaseFragment(){
         }
 
         //Y轴
-        binding.lineChart.axisLeft.also {
+        _binding.lineChart.axisLeft.also {
             it.axisLineColor = resources.getColor(android.R.color.transparent)//设置Y轴线的颜色
             it.textColor = resources.getColor(R.color.text_gray_99) //设置Y轴文本颜色
             it.axisMinimum = 0f//设置坐标的最小值
@@ -156,7 +151,7 @@ class LineChartFragment :BaseFragment(){
     private fun setchartData(data: ChartListDataModel) {
 
         //设置highlight为空，刷新后不显示MarkerView
-        binding.lineChart.highlightValue(null)
+        _binding.lineChart.highlightValue(null)
 
         val timeList = data.getXTimeList()
         val chartYDataList = data.getYDataList()
@@ -185,7 +180,7 @@ class LineChartFragment :BaseFragment(){
 
 
             //X轴
-            binding.lineChart.xAxis.also {
+            _binding.lineChart.xAxis.also {
                 it.axisMaximum = lineDataValues[lineDataValues.size - 1].x//设置坐标的最大值
                 it.axisMinimum = lineDataValues[0].x//设置坐标的最小值
             }
@@ -214,11 +209,11 @@ class LineChartFragment :BaseFragment(){
             lineData.addDataSet(lineDataSet)
         }
 
-        binding.lineChart.xAxis.granularity = granularity ?: 5f//根据X轴的数据，设置坐标的间隔尺度
+        _binding.lineChart.xAxis.granularity = granularity ?: 5f//根据X轴的数据，设置坐标的间隔尺度
 
         //设置图例，数据种类颜色标识
         if ((data.dataList?.size ?: 0) > 1) {
-            binding.lineChart.legend.also {
+            _binding.lineChart.legend.also {
                 it.isEnabled = true//是否显示类型图例
                 it.form = Legend.LegendForm.LINE//图标样式
                 it.formLineWidth = 2f//线条宽度
@@ -232,12 +227,12 @@ class LineChartFragment :BaseFragment(){
                 it.yEntrySpace = 5f//设置上下间距
             }
         } else {
-            binding.lineChart.legend.isEnabled = false //是否显示类型图例
+            _binding.lineChart.legend.isEnabled = false //是否显示类型图例
         }
 
-        binding.lineChart.data = lineData
-        binding.lineChart.invalidate()
-        binding.lineChart.animateXY(1000, 1000)
+        _binding.lineChart.data = lineData
+        _binding.lineChart.invalidate()
+        _binding.lineChart.animateXY(1000, 1000)
 
     }
 
@@ -245,6 +240,5 @@ class LineChartFragment :BaseFragment(){
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
     }
 }

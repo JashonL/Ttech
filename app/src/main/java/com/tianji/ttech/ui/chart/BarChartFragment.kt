@@ -24,9 +24,8 @@ import com.ttech.lib.util.Util
  */
 class BarChartFragment : BaseFragment() {
 
-    private var _binding: FragmentBarChartBinding? = null
+    private lateinit var _binding: FragmentBarChartBinding
 
-    private val binding get() = _binding!!
 
     private val colors = ChartTypeModel.createChartColors()
 
@@ -36,12 +35,12 @@ class BarChartFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBarChartBinding.inflate(inflater, container, false)
-        return binding.root
+        return _binding.root
     }
 
 
     fun refresh(chartListDataModel: ChartListDataModel?, unit: String) {
-        binding.tvUnit.text = unit
+        _binding.tvUnit.text = unit
         chartListDataModel?.let {
             showChartData(it)
         }
@@ -58,7 +57,7 @@ class BarChartFragment : BaseFragment() {
 
     private fun initChartView(data: ChartListDataModel) {
         val timeList = data.timeList
-        binding.barChart.also {
+        _binding.barChart.also {
             it.setDrawGridBackground(false)
             it.description.isEnabled = false //不显示描述（右下角）
             it.setTouchEnabled(true)//设置是否能触摸
@@ -103,12 +102,12 @@ class BarChartFragment : BaseFragment() {
 
             })
 
-            marker.chartView = binding.barChart*/
-            binding.barChart.marker = MultipleChartMarkView(requireContext())
+            marker.chartView = _binding.barChart*/
+            _binding.barChart.marker = MultipleChartMarkView(requireContext())
         }
 
         //X轴
-        binding.barChart.xAxis.also {
+        _binding.barChart.xAxis.also {
             it.isEnabled = true //设置X轴启用
             it.position = XAxis.XAxisPosition.BOTTOM //设置X轴坐标值显示的位置
             it.setDrawGridLines(true) //设置y轴坐标值是否需要画竖线
@@ -132,7 +131,7 @@ class BarChartFragment : BaseFragment() {
         }
 
         //Y轴
-        binding.barChart.axisLeft.also {
+        _binding.barChart.axisLeft.also {
             it.axisLineColor = resources.getColor(android.R.color.transparent)//设置Y轴线的颜色
             it.textColor = resources.getColor(R.color.text_gray_99) //设置Y轴文本颜色
             it.axisMinimum = 0f//设置坐标的最小值
@@ -158,12 +157,12 @@ class BarChartFragment : BaseFragment() {
     private fun setchartData(data: ChartListDataModel) {
         if (data.getXTimeList().isEmpty() || data.getYDataList().isEmpty()
         ) {
-            binding.barChart.data = null
-            binding.barChart.invalidate()
+            _binding.barChart.data = null
+            _binding.barChart.invalidate()
             return
         }
         //设置highlight为空，刷新后不显示MarkerView
-        binding.barChart.highlightValue(null)
+        _binding.barChart.highlightValue(null)
 
         val timeList = data.getXTimeList()
         val chartYDataList = data.getYDataList()
@@ -201,7 +200,7 @@ class BarChartFragment : BaseFragment() {
 
         //设置图例，数据种类颜色标识
         if ((data.dataList?.size ?: 0) > 1) {
-            binding.barChart.legend.also {
+            _binding.barChart.legend.also {
                 it.isEnabled = true//是否显示类型图标
                 it.form = Legend.LegendForm.LINE//图例样式
                 it.formLineWidth = 2f//线条宽度
@@ -215,7 +214,7 @@ class BarChartFragment : BaseFragment() {
                 it.yEntrySpace = 5f//设置上下间距
             }
         } else {
-            binding.barChart.legend.isEnabled = false //是否显示类型图例
+            _binding.barChart.legend.isEnabled = false //是否显示类型图例
         }
 
 
@@ -235,21 +234,21 @@ class BarChartFragment : BaseFragment() {
             groupSpace = groupWidth - (barWidth + barSpace) * groupBarCount
         }
 
-        binding.barChart.data = barData
+        _binding.barChart.data = barData
         barData.barWidth = barWidth
 
         val startX = 0f
         val endX = startX + groupWidth * timeList.size
         //X轴
-        binding.barChart.xAxis.also {
+        _binding.barChart.xAxis.also {
             //包头不包尾
             it.axisMinimum = startX//设置坐标的最小值
             it.axisMaximum = endX//设置坐标的最大值
         }
 
-        binding.barChart.groupBars(startX, groupSpace, barSpace)
-        binding.barChart.invalidate()
-        binding.barChart.animateXY(1000, 1000)
+        _binding.barChart.groupBars(startX, groupSpace, barSpace)
+        _binding.barChart.invalidate()
+        _binding.barChart.animateXY(1000, 1000)
 
     }
 
@@ -257,6 +256,5 @@ class BarChartFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
     }
 }

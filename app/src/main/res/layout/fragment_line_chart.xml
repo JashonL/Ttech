@@ -6,7 +6,7 @@
     android:background="@color/color_white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".ui.energy.chart.LineChartFragment">
+    tools:context=".ui.chart.LineChartFragment">
 
     <TextView
         android:id="@+id/tv_unit"
