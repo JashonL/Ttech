@@ -16,8 +16,9 @@ import com.tianji.ttech.model.PlantStatusNumModel
 /**
  * 电站列表TAB
  */
-class PlantTabFragment(val searchWord: String = "") : BaseFragment(),
+class PlantTabFragment : BaseFragment(),
     OnPlantStatusNumChangeListener {
+
 
     private var _binding: FragmentPlantTabBinding? = null
     private val binding get() = _binding!!
@@ -34,7 +35,10 @@ class PlantTabFragment(val searchWord: String = "") : BaseFragment(),
     }
 
     private fun refreshPlantStatusNum(plantStatusNumModel: PlantStatusNumModel) {
-        binding.tabLayout.setTabText(getString(R.string.m40_all_format, plantStatusNumModel.allNum), 0)
+        binding.tabLayout.setTabText(
+            getString(R.string.m40_all_format, plantStatusNumModel.allNum),
+            0
+        )
         binding.tabLayout.setTabText(
             getString(
                 R.string.m41_online_format,
@@ -73,10 +77,27 @@ class PlantTabFragment(val searchWord: String = "") : BaseFragment(),
     inner class Adapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
         private val fragments = arrayOf(
-            PlantListFragment(PlantModel.PLANT_STATUS_ALL, this@PlantTabFragment, searchWord),
-            PlantListFragment(PlantModel.PLANT_STATUS_ONLINE, this@PlantTabFragment, searchWord),
-            PlantListFragment(PlantModel.PLANT_STATUS_OFFLINE, this@PlantTabFragment, searchWord),
-            PlantListFragment(PlantModel.PLANT_STATUS_TROUBLE, this@PlantTabFragment, searchWord)
+            PlantListFragment().also {
+                val bundle = Bundle()
+                bundle.putInt("status", PlantModel.PLANT_STATUS_ALL)
+                it.arguments = bundle
+            },
+            PlantListFragment().also {
+                val bundle = Bundle()
+                bundle.putInt("status", PlantModel.PLANT_STATUS_ONLINE)
+                it.arguments = bundle
+
+            },
+            PlantListFragment().also {
+                val bundle = Bundle()
+                bundle.putInt("status", PlantModel.PLANT_STATUS_OFFLINE)
+                it.arguments = bundle
+            },
+            PlantListFragment().also {
+                val bundle = Bundle()
+                bundle.putInt("status", PlantModel.PLANT_STATUS_TROUBLE)
+                it.arguments = bundle
+            }
         )
 
         override fun getItemCount(): Int {

@@ -1,5 +1,9 @@
 package com.tianji.ttech.ui.home
 
+import android.Manifest
+import android.app.Activity.RESULT_OK
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,15 +13,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.findFragment
 import androidx.fragment.app.viewModels
+import com.growatt.atess.ui.common.fragment.RequestPermissionHub
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentHomeBinding
 import com.tianji.ttech.model.StationModel
+import com.tianji.ttech.ui.common.activity.ScanActivity
+import com.tianji.ttech.ui.dataloger.AddDataLoggerActivity
 import com.tianji.ttech.ui.home.pv.PvStatusFragment
 import com.tianji.ttech.ui.home.storage.HomeStatusFragment
 import com.tianji.ttech.ui.station.viewmodel.StationViewModel
 import com.tianji.ttech.view.pop.ListPopuwindow
 import com.tianji.ttech.view.popuwindow.ListPopModel
+import com.ttech.lib.util.ActivityBridge
 import com.ttech.lib.util.gone
 import com.ttech.lib.util.visible
 
@@ -47,6 +55,8 @@ class HomeFragment : BaseFragment(), OnClickListener {
         _binding.srlRefresh.setOnRefreshListener {
             fetchPlantList()
         }
+
+        _binding.header.ivAdd.setOnClickListener(this)
 
     }
 
@@ -121,6 +131,17 @@ class HomeFragment : BaseFragment(), OnClickListener {
                 showPlantList()
             }
 
+            p0===_binding.header.ivAdd->{
+                    RequestPermissionHub.requestPermission(
+                        childFragmentManager ,
+                        arrayOf(Manifest.permission.CAMERA)
+                    ) {
+                        if (it) {
+                            scan()
+                        }
+                    }
+            }
+
 
         }
 
@@ -155,6 +176,23 @@ class HomeFragment : BaseFragment(), OnClickListener {
         }
     }
 
-
+    private fun scan() {
+        ActivityBridge.startActivity(
+            requireActivity(),
+            ScanActivity.getIntent(context),
+            object : ActivityBridge.OnActivityForResult {
+                override fun onActivityForResult(
+                    context: Context?,
+                    resultCode: Int,
+                    data: Intent?
+                ) {
+                    if (resultCode == RESULT_OK && data?.hasExtra(ScanActivity.KEY_CODE_TEXT) == true) {
+                        val dataLoggerSN = data.getStringExtra(ScanActivity.KEY_CODE_TEXT)
+                        //跳转到手动输入那里
+                        AddDataLoggerActivity.start(context,viewModel.currentStation?.id,dataLoggerSN)
+                    }
+                }
+            })
+    }
 
 }

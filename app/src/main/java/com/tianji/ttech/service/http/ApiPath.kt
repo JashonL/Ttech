@@ -64,7 +64,6 @@ object ApiPath {
         const val GETDATAOVERVIEW = "v1/manage/getDataOverview"
 
 
-
         /**
          * 货币列表
          */
@@ -81,7 +80,6 @@ object ApiPath {
         const val GET_CITY_LIST = "ATSregister/getProvAndCityList"
 
 
-
         /**
          * 添加电站
          */
@@ -91,7 +89,6 @@ object ApiPath {
          * 修改电站
          */
         const val UPDATE_PLANT = "ATSplant/updatePlant"
-
 
 
         /**
@@ -134,6 +131,16 @@ object ApiPath {
          * 服务-安装视频列表
          */
         const val GET_INSTALL_VIDEO = "ATService/getInstallVideo"
+    }
+
+
+    object Dataloger {
+
+        /**
+         * 添加采集器
+         */
+        const val ADDDATALOG = "v1/station/addDatalog"
+
     }
 
 }

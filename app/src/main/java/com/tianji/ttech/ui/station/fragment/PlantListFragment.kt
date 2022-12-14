@@ -1,5 +1,6 @@
 package com.tianji.ttech.ui.station.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -15,7 +16,6 @@ import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import com.growatt.atess.ui.plant.monitor.PlantMonitor
 import com.tianji.ttech.R
-import com.tianji.ttech.app.TtechApplication
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.base.BaseViewHolder
 import com.tianji.ttech.base.OnItemClickListener
@@ -26,8 +26,6 @@ import com.tianji.ttech.ui.home.viewmodel.PlantFilterViewModel
 import com.tianji.ttech.ui.station.activity.AddPlantActivity
 import com.tianji.ttech.ui.station.viewmodel.PlantInfoViewModel
 import com.tianji.ttech.ui.station.viewmodel.PlantListViewModel
-import com.tianji.ttech.view.dialog.AlertDialog
-import com.tianji.ttech.view.dialog.OptionsDialog
 import com.tianji.ttech.view.itemdecoration.DividerItemDecoration
 import com.ttech.lib.util.ToastUtil
 import com.ttech.lib.util.ViewUtil
@@ -37,12 +35,12 @@ import com.ttech.lib.util.visible
 /**
  * 电站列表
  */
-class PlantListFragment(
-    private val plantStatus: Int,
-    private val listener: OnPlantStatusNumChangeListener,
-    private val searchWord: String
-) :
-    BaseFragment() {
+class PlantListFragment : BaseFragment() {
+
+
+    private var plantStatus: Int? = null
+    private var searchWord: String? = null
+
 
     private var _binding: FragmentPlantListBinding? = null
 
@@ -50,6 +48,23 @@ class PlantListFragment(
     private val viewModel: PlantListViewModel by viewModels()
     private val filterViewModel: PlantFilterViewModel by activityViewModels()
     private val plantInfoViewModel: PlantInfoViewModel by viewModels()
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val arguments = arguments
+        plantStatus = arguments?.let {
+            val status = it.getInt("status")
+            status
+        }
+
+        searchWord = arguments?.let {
+            val searchWord = it.getString("searchWord")
+            searchWord
+        }
+
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,7 +99,7 @@ class PlantListFragment(
         }
         viewModel.getPlantStatusNumLiveData.observe(viewLifecycleOwner) {
             if (it.second == null) {
-                listener.onPlantStatusNumChange(it.first)
+//                listener.onPlantStatusNumChange(it.first)
             }
         }
         filterViewModel.getPlantFilterLiveData.observe(viewLifecycleOwner) {
@@ -130,7 +145,7 @@ class PlantListFragment(
 
     private fun refresh() {
         filterViewModel.getPlantFilterLiveData.value?.let {
-            viewModel.getPlantList(plantStatus, it, searchWord)
+            viewModel.getPlantList(plantStatus?:0, it, searchWord.toString())
         }
     }
 

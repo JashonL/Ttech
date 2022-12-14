@@ -114,6 +114,21 @@ of letters, numbers and symbols.</string>
     <string name="m88_Deforestation">Deforestation</string>
     <string name="m89_total">Total</string>
 
+    <string name="m90_serial_number_not_null">SN cannot be blank</string>
+    <string name="m91_check_code_not_null">Verification code cannot be blank</string>
+    <string name="m92_add_data_logger">Add data logger</string>
+    <string name="m93_input_data_logger_sn_and_check_code">Enter the logger SN and verification code</string>
+    <string name="m94_serial_number">SN</string>
+    <string name="m95_check_code">Verification</string>
+    <string name="m96_please_input_data_logger_sn">Please enter SN of data logger</string>
+    <string name="m97_please_input_data_logger_check_code">Please enter verification of data logger</string>
+    <string name="m98_connect">Connect…</string>
+    <string name="m99_configure_the_device">Configure the device to the networl</string>
+    <string name="m100_please_select_wifi">Please Select 2.4G wifi</string>
+
+
+
+
 
 
 

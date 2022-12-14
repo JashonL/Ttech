@@ -156,4 +156,31 @@ object Util {
     }
 
 
+    fun validateWebbox(serialNum: String?): String {
+        if (serialNum == null || "" == serialNum.trim { it <= ' ' }) {
+            return ""
+        }
+        val snBytes = serialNum.toByteArray()
+        var sum = 0
+        for (snByte in snBytes) {
+            sum += snByte.toInt()
+        }
+        val B = sum % 8
+        val text = Integer.toHexString(sum * sum)
+        val length = text.length
+        val resultTemp = text.substring(0, 2) + text.substring(length - 2, length) + B
+        var result = ""
+        val charArray = resultTemp.toCharArray()
+        for (c in charArray) {
+            var value=c
+            if (c.code == 0x30 || c.code == 0x4F || c.code == 0x6F) {
+                value++
+            }
+            result += value
+        }
+        return result.uppercase(Locale.getDefault())
+    }
+
+
+
 }

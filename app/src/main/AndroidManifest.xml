@@ -83,6 +83,28 @@
             android:screenOrientation="nosensor" />
 
 
+        <activity
+            android:name=".ui.dataloger.AddDataLoggerActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor" />
+
+
+        <activity
+            android:name=".ui.common.activity.ScanActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor" />
+
+        <activity
+            android:name=".ui.dataloger.SetUpNetActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor" />
+
+
+
+
+        <service android:name="com.ttech.bluetooth.util.service.BleConnectService" />
+
+
     </application>
 
 </manifest>
