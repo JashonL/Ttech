@@ -31,9 +31,6 @@ class BleConnectService : Service(), IBleConnect {
 
         //写入UUID
         private const val WRITE_ID = "0000ff01-0000-1000-8000-00805f9b34fb"
-
-        lateinit var instance: BleConnectService
-
     }
 
 
@@ -42,7 +39,6 @@ class BleConnectService : Service(), IBleConnect {
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
         //初始化蓝牙sdk
         BleManager.getInstance().init(application);
         BleManager.getInstance().enableLog(true)
@@ -54,7 +50,7 @@ class BleConnectService : Service(), IBleConnect {
         val scanRuleConfig = BleScanRuleConfig.Builder()
             .setAutoConnect(false)      // 连接时的autoConnect参数，可选，默认false
             .setScanTimeOut(10000)              // 扫描超时时间，可选，默认10秒
-            .build();
+            .build()
         BleManager.getInstance().initScanRule(scanRuleConfig);
 
     }
@@ -65,8 +61,6 @@ class BleConnectService : Service(), IBleConnect {
     }
 
 
-
-
     inner class LocalBinder : Binder() {
         val service: BleConnectService
             get() = this@BleConnectService
@@ -75,13 +69,13 @@ class BleConnectService : Service(), IBleConnect {
 
     private val mBinder: IBinder = LocalBinder()
 
-    override fun openBle() {
-        val blueEnable = BleManager.getInstance().isBlueEnable
-        //如果已经打开了，初始化对应控件并开始搜索
-        if (!blueEnable){
-            BleManager.getInstance().enableBluetooth()
-        }
+    override fun isBleEnable(): Boolean {
+        return BleManager.getInstance().isBlueEnable
+    }
 
+    override fun openBle() {
+        //如果已经打开了
+        BleManager.getInstance().enableBluetooth()
     }
 
 
@@ -98,6 +92,10 @@ class BleConnectService : Service(), IBleConnect {
             }
         })
 
+    }
+
+    override fun stopScan() {
+        BleManager.getInstance().cancelScan()
     }
 
     override fun connect(mac: String) {

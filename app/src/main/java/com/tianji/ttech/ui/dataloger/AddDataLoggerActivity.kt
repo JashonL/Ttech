@@ -3,6 +3,7 @@ package com.tianji.ttech.ui.dataloger
 import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -11,6 +12,7 @@ import com.growatt.atess.ui.common.fragment.RequestPermissionHub
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivityAddDataLoggerBinding
+import com.tianji.ttech.service.ble.BleManager
 import com.tianji.ttech.ui.station.viewmodel.AddDataLoggerViewModel
 import com.ttech.lib.util.ActivityBridge
 import com.ttech.lib.util.ToastUtil
@@ -60,9 +62,8 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
         viewModel.addDataLoggerLiveData.observe(this) {
             dismissDialog()
             if (it == null) {
-                //去配网
-                SetUpNetActivity.start(this)
-                finish()
+                //开始查找并且连接对应蓝牙
+                connectBle()
             } else {
                 ToastUtil.show(it)
             }
@@ -136,9 +137,49 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
     }
 
 
-    private fun toConfig() {
 
+
+    private fun connectBle() {
+        val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            arrayOf(
+                Manifest.permission.BLUETOOTH_SCAN,
+                Manifest.permission.BLUETOOTH_ADVERTISE,
+                Manifest.permission.BLUETOOTH_CONNECT
+            )
+        } else {
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        }
+
+        RequestPermissionHub.requestPermission(
+            supportFragmentManager,
+            permissions
+        ) {
+            if (it) {
+                viewModel.getBleManager(this, object : BleManager.bindServiceListeners {
+                    override fun onServiceConnected() {
+                        //判断是否已经打开蓝牙
+                        val bleEnable = viewModel.bleManager?.isBleEnable()
+                        if (bleEnable == true){
+                            //搜索对应的蓝牙设备 并且连接
+
+
+                        }else{
+                            //打开蓝牙
+                            viewModel.bleManager?.openBle()
+                        }
+                    }
+                    override fun onServiceDisconnected() {
+
+                    }
+
+                })
+            }
+        }
     }
+
 
 
 }

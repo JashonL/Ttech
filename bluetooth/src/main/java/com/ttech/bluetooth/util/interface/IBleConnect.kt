@@ -2,6 +2,10 @@ package com.ttech.bluetooth.util.`interface`
 
 interface IBleConnect {
 
+    /**
+     * 蓝牙是否已经打开
+     */
+    fun isBleEnable():Boolean?
 
 
 
@@ -15,6 +19,13 @@ interface IBleConnect {
      *扫描蓝牙
      */
     fun scan()
+
+
+    /**
+     * 停止扫描
+     */
+    fun stopScan()
+
 
 
     /**

@@ -1,14 +1,15 @@
 package com.tianji.ttech.ui.dataloger
 
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.ServiceConnection
 import android.os.Bundle
-import android.os.IBinder
+import android.os.Handler
+import androidx.activity.viewModels
 import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivitySetUpNetBinding
-import com.ttech.bluetooth.util.service.BleConnectService
+import com.tianji.ttech.service.ble.BleManager
+import com.tianji.ttech.ui.dataloger.viewmodel.SetUpNetViewModel
+import com.ttech.lib.util.LogUtil
 
 
 class SetUpNetActivity : BaseActivity() {
@@ -23,7 +24,8 @@ class SetUpNetActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySetUpNetBinding
 
-    var mBleService: BleConnectService? = null
+
+    private val viewModel: SetUpNetViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,28 +33,27 @@ class SetUpNetActivity : BaseActivity() {
         binding = ActivitySetUpNetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel.getBleManager(this, object : BleManager.bindServiceListeners {
+            override fun onServiceConnected() {
 
-        val intent = Intent(this, BleConnectService::class.java)
-        bindService(intent, mServiceConnection, BIND_AUTO_CREATE)
-        startService(intent)
+                //打开蓝牙
+                viewModel.bleManager?.openBle()
+
+            }
+
+            override fun onServiceDisconnected() {
+            }
+
+        })
 
 
 
 
     }
 
-    /**
-     * 服务
-     */
-    private val mServiceConnection: ServiceConnection = object : ServiceConnection {
-        override fun onServiceConnected(className: ComponentName, rawBinder: IBinder) {
-            mBleService = (rawBinder as BleConnectService.LocalBinder).service
-            mBleService?.openBle()
+    override fun onResume() {
+        super.onResume()
 
-        }
-
-        override fun onServiceDisconnected(classname: ComponentName) {
-        }
     }
 
 
