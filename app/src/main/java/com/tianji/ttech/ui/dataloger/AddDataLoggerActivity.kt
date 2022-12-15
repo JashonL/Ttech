@@ -14,7 +14,11 @@ import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivityAddDataLoggerBinding
 import com.tianji.ttech.service.ble.BleManager
 import com.tianji.ttech.ui.station.viewmodel.AddDataLoggerViewModel
+import com.ttech.bluetooth.util.`interface`.IBleConnetLisener
+import com.ttech.bluetooth.util.`interface`.IScanResult
+import com.ttech.bluetooth.util.bean.BleModel
 import com.ttech.lib.util.ActivityBridge
+import com.ttech.lib.util.LogUtil
 import com.ttech.lib.util.ToastUtil
 import com.ttech.lib.util.Util
 
@@ -137,14 +141,14 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
     }
 
 
-
-
     private fun connectBle() {
         val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             arrayOf(
+                Manifest.permission.BLUETOOTH_CONNECT,
                 Manifest.permission.BLUETOOTH_SCAN,
                 Manifest.permission.BLUETOOTH_ADVERTISE,
-                Manifest.permission.BLUETOOTH_CONNECT
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
             )
         } else {
             arrayOf(
@@ -162,15 +166,57 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
                     override fun onServiceConnected() {
                         //判断是否已经打开蓝牙
                         val bleEnable = viewModel.bleManager?.isBleEnable()
-                        if (bleEnable == true){
+                        if (bleEnable == true) {
                             //搜索对应的蓝牙设备 并且连接
+                            viewModel.bleManager?.scan(object : IScanResult {
+                                override fun scanning(model: BleModel) {
+                                    val name = model.name
+                                    binding.etDataLoggerSn.text?.let {
+                                        if (it.toString() == name) {
+                                            viewModel.bleManager?.stopScan()
+                                        }
 
 
-                        }else{
+                                    }
+                                }
+
+                                override fun scanResult(results: List<BleModel>) {
+                                    val text = binding.etDataLoggerSn.text.toString()
+                                    //找到对应的蓝牙-连接
+                                    results.forEach {
+                                        if (text==it.name){
+                                            val address = it.address
+
+                                            //去连接蓝牙
+                                            viewModel.bleManager?.connect(address?:"",object :IBleConnetLisener{
+                                                override fun connectError() {
+                                                    //连接失败了
+                                                }
+
+                                                override fun connectSuccess() {
+                                                    //连接成功跳转下一步
+                                                    SetUpNetActivity.start(this@AddDataLoggerActivity)
+                                                }
+
+                                                override fun responData(receviceData: ByteArray?) {
+
+                                                }
+
+                                            })
+                                            return
+                                        }
+
+                                    }
+                                }
+
+                            })
+
+                        } else {
                             //打开蓝牙
                             viewModel.bleManager?.openBle()
                         }
                     }
+
                     override fun onServiceDisconnected() {
 
                     }
@@ -179,7 +225,6 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
             }
         }
     }
-
 
 
 }

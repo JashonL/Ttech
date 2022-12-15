@@ -84,7 +84,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/et_data_logger_sn"
+                android:id="@+id/et_ssid"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -101,7 +101,7 @@
                 android:id="@+id/iv_scan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="2dp"
+                android:padding="@dimen/dp_10"
                 android:src="@drawable/icon_next" />
 
         </LinearLayout>

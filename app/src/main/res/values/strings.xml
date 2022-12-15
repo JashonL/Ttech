@@ -125,7 +125,10 @@ of letters, numbers and symbols.</string>
     <string name="m98_connect">Connect…</string>
     <string name="m99_configure_the_device">Configure the device to the networl</string>
     <string name="m100_please_select_wifi">Please Select 2.4G wifi</string>
-
+    <string name="m101_cancel">Cancel</string>
+    <string name="m102_comfir">Comfir</string>
+    <string name="m103_turn_on_gps">turn on gps</string>
+    <string name="m104_gps_to_getwifi">To get the wifi list, you need to turn on gps</string>
 
 
 

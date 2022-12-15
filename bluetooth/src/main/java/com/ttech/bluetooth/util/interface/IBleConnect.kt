@@ -18,7 +18,7 @@ interface IBleConnect {
     /**
      *扫描蓝牙
      */
-    fun scan()
+    fun scan(callback:IScanResult?)
 
 
     /**
@@ -31,14 +31,14 @@ interface IBleConnect {
     /**
      * 连接蓝牙
      */
-    fun connect(mac:String)
+    fun connect(mac:String,callback: IBleConnetLisener?)
 
 
     /**
      * 设置MTU
      */
 
-    fun setMtu(mtu:Int)
+    fun setMtu(mtu:Int,callback:IBleConnetLisener?)
 
 
     /**
@@ -51,7 +51,7 @@ interface IBleConnect {
      * 接收数据
      */
 
-    fun receiveData(data: ByteArray?)
+    fun receiveData(data: ByteArray?,callback:IBleConnetLisener?)
 
     /**
      * .断开蓝牙

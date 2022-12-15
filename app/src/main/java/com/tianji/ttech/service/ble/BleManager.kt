@@ -7,6 +7,8 @@ import android.content.ServiceConnection
 import android.os.IBinder
 import androidx.appcompat.app.AppCompatActivity
 import com.ttech.bluetooth.util.`interface`.IBleConnect
+import com.ttech.bluetooth.util.`interface`.IBleConnetLisener
+import com.ttech.bluetooth.util.`interface`.IScanResult
 import com.ttech.bluetooth.util.service.BleConnectService
 
 class BleManager(context: Context, bindServiceListeners: bindServiceListeners) : IBleConnect {
@@ -42,29 +44,32 @@ class BleManager(context: Context, bindServiceListeners: bindServiceListeners) :
         binder?.service?.openBle()
     }
 
-    override fun scan() {
-        binder?.service?.scan()
-
+    override fun scan(callback: IScanResult?) {
+        binder?.service?.scan(callback)
     }
+
+
 
     override fun stopScan() {
         binder?.service?.stopScan()
     }
 
-    override fun connect(mac: String) {
-        binder?.service?.connect(mac)
+    override fun connect(mac: String, callback: IBleConnetLisener?) {
+        binder?.service?.connect(mac,callback)
     }
 
-    override fun setMtu(mtu: Int) {
-        binder?.service?.setMtu(mtu)
+
+
+    override fun setMtu(mtu: Int,callback: IBleConnetLisener?) {
+        binder?.service?.setMtu(mtu,callback)
     }
 
     override fun sendData(value: ByteArray) {
         binder?.service?.sendData(value)
     }
 
-    override fun receiveData(data: ByteArray?) {
-        binder?.service?.receiveData(data)
+    override fun receiveData(data: ByteArray?,callback: IBleConnetLisener?) {
+        binder?.service?.receiveData(data,callback)
     }
 
     override fun disConnect() {

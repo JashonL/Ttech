@@ -1,11 +1,14 @@
 package com.ttech.bluetooth.util.service
 
+import android.Manifest
 import android.app.Service
 import android.bluetooth.BluetoothGatt
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
+import androidx.core.app.ActivityCompat
 import com.clj.fastble.BleManager
 import com.clj.fastble.callback.*
 import com.clj.fastble.data.BleDevice
@@ -13,6 +16,9 @@ import com.clj.fastble.exception.BleException
 import com.clj.fastble.scan.BleScanRuleConfig
 import com.ttech.bluetooth.util.CRC16
 import com.ttech.bluetooth.util.`interface`.IBleConnect
+import com.ttech.bluetooth.util.`interface`.IBleConnetLisener
+import com.ttech.bluetooth.util.`interface`.IScanResult
+import com.ttech.bluetooth.util.bean.BleModel
 import com.ttech.bluetooth.util.util.AESCBCUtils
 import com.ttech.bluetooth.util.util.ByteDataUtils.byte2Int
 import com.ttech.bluetooth.util.util.ByteDataUtils.bytesToHexString
@@ -78,33 +84,62 @@ class BleConnectService : Service(), IBleConnect {
         BleManager.getInstance().enableBluetooth()
     }
 
-
-    override fun scan() {
+    override fun scan(callback: IScanResult?) {
         BleManager.getInstance().scan(object : BleScanCallback() {
             override fun onScanStarted(success: Boolean) {
             }
 
             override fun onScanning(bleDevice: BleDevice?) {
+                if (ActivityCompat.checkSelfPermission(
+                        application,
+                        Manifest.permission.BLUETOOTH_CONNECT
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    val name = bleDevice?.device?.name
+                    val address = bleDevice?.device?.address
+                    callback?.scanning(
+                        BleModel(name, address)
+                    )
+                }
+
 
             }
 
             override fun onScanFinished(scanResultList: MutableList<BleDevice>?) {
+                if (ActivityCompat.checkSelfPermission(
+                        application,
+                        Manifest.permission.BLUETOOTH_CONNECT
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    val list = mutableListOf<BleModel>()
+                    scanResultList?.forEach {
+                        val name = it.device.name
+                        val address = it.device.address
+                        list.add(BleModel(name, address))
+                    }
+                    callback?.scanResult(list)
+                }
+
+
             }
         })
-
     }
+
 
     override fun stopScan() {
         BleManager.getInstance().cancelScan()
     }
 
-    override fun connect(mac: String) {
-
+    override fun connect(mac: String, callback: IBleConnetLisener?) {
         BleManager.getInstance().connect(mac, object : BleGattCallback() {
             override fun onStartConnect() {
             }
 
             override fun onConnectFail(bleDevice: BleDevice?, exception: BleException?) {
+
+
+                callback?.connectError()
+
             }
 
             override fun onConnectSuccess(
@@ -118,13 +153,13 @@ class BleConnectService : Service(), IBleConnect {
                 val service = gatt?.getService(SERVICE_UUID)
                 //是否需要更新
                 if (null == service) {
-                    Log.e(TAG, "service==null ")
+                    Log.e(TAG, "service==null")
                     return
                 }
                 mBleDevice = bleDevice
 
                 //连接成功之后 设置MTU
-                setMtu(100)
+                setMtu(100, callback)
 
             }
 
@@ -139,13 +174,16 @@ class BleConnectService : Service(), IBleConnect {
         })
     }
 
-    override fun setMtu(mtu: Int) {
+    override fun setMtu(mtu: Int, callback: IBleConnetLisener?) {
         BleManager.getInstance().setMtu(mBleDevice, mtu, object : BleMtuChangedCallback() {
             override fun onSetMTUFailure(exception: BleException?) {
 
             }
 
             override fun onMtuChanged(mtu: Int) {
+
+                callback?.connectSuccess()
+
                 //设置完mtu 监听蓝牙返回数据
                 BleManager.getInstance()
                     .notify(mBleDevice, SERVICE_ID, WRITE_ID, object : BleNotifyCallback() {
@@ -159,7 +197,7 @@ class BleConnectService : Service(), IBleConnect {
 
                         override fun onCharacteristicChanged(data: ByteArray?) {
                             //蓝牙回应数据
-                            receiveData(data)
+                            receiveData(data, callback)
 
                         }
 
@@ -189,7 +227,7 @@ class BleConnectService : Service(), IBleConnect {
     }
 
 
-    override fun receiveData(data: ByteArray?) {
+    override fun receiveData(data: ByteArray?, callback: IBleConnetLisener?) {
         if (data?.size!! < 8) return
         Log.d(TAG, "蓝牙回应数据......" + bytesToHexString(data))
         //数据校验
@@ -201,7 +239,7 @@ class BleConnectService : Service(), IBleConnect {
             if (checkAndshow()) {
                 //AES解密
                 aesPase()
-
+                callback?.responData(receviceData)
             } else {
                 receviceData = ByteArray(0)
             }
