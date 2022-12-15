@@ -23,11 +23,11 @@ import com.growatt.atess.ui.common.fragment.RequestPermissionHub
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivitySetUpNetBinding
+import com.tianji.ttech.monitor.WifiMonitor
 import com.tianji.ttech.ui.dataloger.viewmodel.SetUpNetViewModel
 import com.tianji.ttech.view.dialog.AlertDialog
 import com.ttech.bluetooth.util.util.LocalUtils
 import java.util.*
-import kotlin.collections.List
 
 
 class SetUpNetActivity : BaseActivity(), OnClickListener {
@@ -67,6 +67,16 @@ class SetUpNetActivity : BaseActivity(), OnClickListener {
         initListeners()
 
 
+        WifiMonitor.watch (lifecycle){
+            it?.let {
+                if (it.action==WifiManager.SCAN_RESULTS_AVAILABLE_ACTION){
+                    scanResults = wifiManager!!.scanResults
+                }
+            }
+
+
+        }
+
 /*
         viewModel.getBleManager(this, object : BleManager.bindServiceListeners {
             override fun onServiceConnected() {
@@ -82,6 +92,12 @@ class SetUpNetActivity : BaseActivity(), OnClickListener {
 
 
     }
+
+
+
+
+
+
 
     /**
      * 打开GPS获取当前连接的wifi名称  和获取wifi列表
