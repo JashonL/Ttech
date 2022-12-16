@@ -16,6 +16,7 @@ import org.json.JSONObject
 import java.io.File
 import java.math.BigDecimal
 import java.util.*
+import java.util.regex.Pattern
 import kotlin.system.exitProcess
 
 object Util {
@@ -181,6 +182,47 @@ object Util {
         return result.uppercase(Locale.getDefault())
     }
 
+
+    /**
+     * 是否包含特殊字符
+     *
+     * @return
+     */
+    fun specificSymbol(content: String): Boolean {
+        //是否包含特殊字符
+        var allSpecific = false
+        val regex = ".,?!:@;+=#/()_-`^*&..$<>[]{}"
+        for (i in content.indices) {
+            val isNumChart: Boolean = isLetterDigit2(content[i].toString())
+            var isSpecific = false
+            if (!isNumChart) {
+                for (element in regex) {
+                    if (element == content[i]) {
+                        isSpecific = true
+                        break
+                    }
+                }
+            }
+            if (!isNumChart && !isSpecific) {
+                allSpecific = true
+                break
+            }
+        }
+        return allSpecific
+    }
+
+
+    /**
+     * 字母 数字 下划线 空格
+     *
+     * @param s
+     * @return
+     */
+    fun isLetterDigit2(s: String?): Boolean {
+        val regex = "[a-z,0-9A-Z_ -]*"
+        val pattern: Pattern = Pattern.compile(regex)
+        return pattern.matcher(s).matches()
+    }
 
 
 }

@@ -13,6 +13,12 @@ import com.ttech.bluetooth.util.service.BleConnectService
 
 class BleManager(context: Context, bindServiceListeners: bindServiceListeners) : IBleConnect {
 
+    companion object{
+        //oss账户使用密钥
+        const val BLUETOOTH_OSS_KEY="growatt_iot_device_common_key_01"
+    }
+
+
     //保持所启动的Service的IBinder对象,同时定义一个ServiceConnection对象
     var binder: BleConnectService.LocalBinder? = null
     private val conn: ServiceConnection = object : ServiceConnection {
@@ -75,6 +81,7 @@ class BleManager(context: Context, bindServiceListeners: bindServiceListeners) :
     override fun disConnect() {
         binder?.service?.disConnect()
     }
+
 
 
     interface bindServiceListeners {

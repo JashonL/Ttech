@@ -6,7 +6,9 @@ import android.bluetooth.BluetoothGatt
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Binder
+import android.os.Build
 import android.os.IBinder
+import android.text.TextUtils
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.clj.fastble.BleManager
@@ -19,13 +21,24 @@ import com.ttech.bluetooth.util.`interface`.IBleConnect
 import com.ttech.bluetooth.util.`interface`.IBleConnetLisener
 import com.ttech.bluetooth.util.`interface`.IScanResult
 import com.ttech.bluetooth.util.bean.BleModel
+import com.ttech.bluetooth.util.receiver.BlueToothReceiver
+import com.ttech.bluetooth.util.receiver.BlueToothReceiver.Companion.BLUETOOTH_RECEIVER_DATA
+import com.ttech.bluetooth.util.receiver.BlueToothReceiver.Companion.BLUETOOTH_RECEIVER_VALUE
 import com.ttech.bluetooth.util.util.AESCBCUtils
 import com.ttech.bluetooth.util.util.ByteDataUtils.byte2Int
 import com.ttech.bluetooth.util.util.ByteDataUtils.bytesToHexString
 import com.ttech.bluetooth.util.util.ByteDataUtils.int2Byte
 import java.util.*
 
-
+/**
+ * 这里没有封装好，
+ * 没有将BLE管理类  和 Service分开来
+ *
+ * 正确的做法应该是  service只负责调用  Ble管理类来操作蓝牙
+ *
+ * 这里有待优化
+ *
+ */
 class BleConnectService : Service(), IBleConnect {
 
     companion object {
@@ -93,16 +106,16 @@ class BleConnectService : Service(), IBleConnect {
                 if (ActivityCompat.checkSelfPermission(
                         application,
                         Manifest.permission.BLUETOOTH_CONNECT
-                    ) == PackageManager.PERMISSION_GRANTED
+                    ) != PackageManager.PERMISSION_GRANTED
                 ) {
-                    val name = bleDevice?.device?.name
-                    val address = bleDevice?.device?.address
-                    callback?.scanning(
-                        BleModel(name, address)
-                    )
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) return
                 }
 
-
+                val name = bleDevice?.device?.name
+                val address = bleDevice?.device?.address
+                callback?.scanning(
+                    BleModel(name, address)
+                )
             }
 
             override fun onScanFinished(scanResultList: MutableList<BleDevice>?) {
@@ -111,20 +124,19 @@ class BleConnectService : Service(), IBleConnect {
                         Manifest.permission.BLUETOOTH_CONNECT
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    val list = mutableListOf<BleModel>()
-                    scanResultList?.forEach {
-                        val name = it.device.name
-                        val address = it.device.address
-                        list.add(BleModel(name, address))
-                    }
-                    callback?.scanResult(list)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) return
                 }
-
+                val list = mutableListOf<BleModel>()
+                scanResultList?.forEach {
+                    val name = it.device.name
+                    val address = it.device.address
+                    list.add(BleModel(name, address))
+                }
+                callback?.scanResult(list)
 
             }
         })
     }
-
 
     override fun stopScan() {
         BleManager.getInstance().cancelScan()
@@ -136,10 +148,7 @@ class BleConnectService : Service(), IBleConnect {
             }
 
             override fun onConnectFail(bleDevice: BleDevice?, exception: BleException?) {
-
-
                 callback?.connectError()
-
             }
 
             override fun onConnectSuccess(
@@ -181,7 +190,7 @@ class BleConnectService : Service(), IBleConnect {
             }
 
             override fun onMtuChanged(mtu: Int) {
-
+                Log.d(TAG, "MTU设置成功" + mtu)
                 callback?.connectSuccess()
 
                 //设置完mtu 监听蓝牙返回数据
@@ -215,9 +224,12 @@ class BleConnectService : Service(), IBleConnect {
             BleManager.getInstance()
                 .write(mBleDevice, SERVICE_ID, WRITE_ID, value, false, object : BleWriteCallback() {
                     override fun onWriteSuccess(current: Int, total: Int, justWrite: ByteArray?) {
+                        Log.d(TAG, "数据发送成功")
+
                     }
 
                     override fun onWriteFailure(exception: BleException?) {
+                        Log.d(TAG, "数据发送失败")
                     }
                 })
         } catch (e: Exception) {
@@ -228,8 +240,9 @@ class BleConnectService : Service(), IBleConnect {
 
 
     override fun receiveData(data: ByteArray?, callback: IBleConnetLisener?) {
+        Log.d(TAG, "蓝牙回应数据......" + data?.let { bytesToHexString(it) })
+
         if (data?.size!! < 8) return
-        Log.d(TAG, "蓝牙回应数据......" + bytesToHexString(data))
         //数据校验
         val receiveLen = byte2Int(byteArrayOf(data[0], data[1]))
         if (receiveLen != data.size - 2) {
@@ -239,7 +252,11 @@ class BleConnectService : Service(), IBleConnect {
             if (checkAndshow()) {
                 //AES解密
                 aesPase()
-                callback?.responData(receviceData)
+                val intent = Intent(BLUETOOTH_RECEIVER_DATA).also {
+                    it.putExtra(BLUETOOTH_RECEIVER_VALUE, receviceData)
+                }
+                BlueToothReceiver.notify(application, intent)
+
             } else {
                 receviceData = ByteArray(0)
             }
@@ -311,6 +328,8 @@ class BleConnectService : Service(), IBleConnect {
         receviceData = allData
 
     }
+
+
 
 
 }

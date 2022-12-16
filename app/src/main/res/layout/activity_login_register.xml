@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.ttech.lib.view.StatusBarWhiteHeightView
+    <com.ttech.lib.view.StatusBarHeightView
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

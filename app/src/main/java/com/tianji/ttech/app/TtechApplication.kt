@@ -27,6 +27,7 @@ class TtechApplication : LibApplication() ,ServiceManager.ServiceInterface{
         private lateinit var instance:TtechApplication
         fun instance()= instance
         const val APP_OS = 0
+        const val APP_NAME="TENTEK"
 
         init {
             SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->

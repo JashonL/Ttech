@@ -57,6 +57,7 @@
         android:showDividers="middle">
 
         <LinearLayout
+            android:id="@+id/ll_ssid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white"
@@ -98,7 +99,7 @@
                 android:textSize="@dimen/text_medium" />
 
             <ImageView
-                android:id="@+id/iv_scan"
+                android:id="@+id/iv_wifi_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_10"
@@ -134,7 +135,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/et_check_code"
+                android:id="@+id/et_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"

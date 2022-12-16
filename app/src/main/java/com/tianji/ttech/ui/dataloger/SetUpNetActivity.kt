@@ -1,6 +1,7 @@
 package com.tianji.ttech.ui.dataloger
 
 import android.Manifest
+import android.R
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -15,18 +16,27 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.text.TextUtils
+import android.view.Gravity
 import android.view.View
 import android.view.View.OnClickListener
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import com.growatt.atess.ui.common.fragment.RequestPermissionHub
-import com.tianji.ttech.R
+import com.tianji.ttech.app.TtechApplication
 import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivitySetUpNetBinding
+import com.tianji.ttech.model.ble.DatalogResponBean
 import com.tianji.ttech.monitor.WifiMonitor
+import com.tianji.ttech.service.ble.BleCommand.BLUETOOTH_KEY
+import com.tianji.ttech.service.ble.BleManager
 import com.tianji.ttech.ui.dataloger.viewmodel.SetUpNetViewModel
+import com.tianji.ttech.utils.ByteDataUtil
+import com.tianji.ttech.utils.ByteDataUtil.BlueToothData.DATALOG_GETDATA_0X18
 import com.tianji.ttech.view.dialog.AlertDialog
+import com.tianji.ttech.view.pop.ListPopuwindow
+import com.tianji.ttech.view.popuwindow.ListPopModel
+import com.ttech.bluetooth.util.receiver.BlueToothReceiver
 import com.ttech.bluetooth.util.util.LocalUtils
+import com.ttech.lib.util.LogUtil
 import java.util.*
 
 
@@ -57,46 +67,74 @@ class SetUpNetActivity : BaseActivity(), OnClickListener {
         binding = ActivitySetUpNetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //android 12 通过监听  获取wifi名称
         wifiManager = applicationContext.getSystemService(WIFI_SERVICE) as WifiManager?
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {//android 12  31
             connectivityManager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
             requestNetwork()
         }
+
+        //通知用户打开GPS
         initGps()
+
         initListeners()
 
-
-        WifiMonitor.watch (lifecycle){
+        //监听扫描获取wifi列表
+        WifiMonitor.watch(lifecycle) {
             it?.let {
-                if (it.action==WifiManager.SCAN_RESULTS_AVAILABLE_ACTION){
+                if (it.action == WifiManager.SCAN_RESULTS_AVAILABLE_ACTION) {
                     scanResults = wifiManager!!.scanResults
                 }
             }
-
-
         }
 
-/*
-        viewModel.getBleManager(this, object : BleManager.bindServiceListeners {
-            override fun onServiceConnected() {
-
-
-
-            }
-
-            override fun onServiceDisconnected() {
-            }
-
-        })*/
-
+        initData()
 
     }
 
+    private fun initData() {
+        viewModel.responLiveData.observe(this){
+            //1.字节数组成bean
+            if (it?.funcode == DATALOG_GETDATA_0X18) {
+                val statusCode = it.statusCode
+                val paramNum = it.paramNum
+                if (paramNum == BLUETOOTH_KEY) { //连接成功
+                    if (statusCode == 0) {
+                        LogUtil.i(TtechApplication.APP_NAME,"发送密钥成功")
+                    } else { //提示失败
+
+                    }
+                }
+            }
+        }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        //扫描wifi
+        wifiManager?.startScan()
+
+
+        //接收蓝牙返回数据
+        BlueToothReceiver.watch(lifecycle, TtechApplication.instance()) {
+            val removePro = ByteDataUtil.BlueToothData.removePro(it)
+            viewModel.parserData(removePro)
+        }
 
 
 
+        viewModel.getBleManager(this, object : BleManager.bindServiceListeners {
+            override fun onServiceConnected() {
+                //发送密钥
+                viewModel.sendCmdConnect()
+            }
 
+            override fun onServiceDisconnected() {}
+
+        })
+
+    }
 
 
     /**
@@ -125,10 +163,10 @@ class SetUpNetActivity : BaseActivity(), OnClickListener {
     private fun showGpsDialog() {
         AlertDialog.showDialog(
             supportFragmentManager,
-            getString(R.string.m104_gps_to_getwifi),
-            getString(R.string.m101_cancel),
-            getString(R.string.m102_comfir),
-            getString(R.string.m103_turn_on_gps)
+            getString(com.tianji.ttech.R.string.m104_gps_to_getwifi),
+            getString(com.tianji.ttech.R.string.m101_cancel),
+            getString(com.tianji.ttech.R.string.m102_comfir),
+            getString(com.tianji.ttech.R.string.m103_turn_on_gps)
         ) {
             val intent = Intent()
             intent.action = Settings.ACTION_LOCATION_SOURCE_SETTINGS
@@ -179,30 +217,53 @@ class SetUpNetActivity : BaseActivity(), OnClickListener {
                 binding.etSsid.setText(ssid)
 
             }
-
-
             scanResults = wifiManager?.scanResults
-
-
         }
 
 
     }
 
     private fun initListeners() {
-        binding.ivScan.setOnClickListener(this)
-
+        binding.ivWifiList.setOnClickListener(this)
+        binding.btFinish.setOnClickListener(this)
     }
 
 
     override fun onClick(p0: View?) {
         when {
-            p0 === binding.ivScan -> {
+            p0 === binding.ivWifiList -> {
+                showWifiList()
+            }
 
+            p0 === binding.btFinish -> {
+
+                val ssid = binding.etSsid.text.toString()
+                val pwd = binding.etPassword.text.toString()
+                viewModel.requestSetting(ssid, pwd)
 
             }
         }
 
+    }
+
+
+    private fun showWifiList() {
+        val options = mutableListOf<ListPopModel>()
+        scanResults?.let {
+            it.forEach {
+                val ssid = it.SSID
+                options.add(ListPopModel(ssid, false))
+            }
+        }
+        val current = binding.etSsid.text.toString()
+        ListPopuwindow.showPop(
+            this,
+            options,
+            binding.llSsid,
+            current
+        ) {
+            binding.etSsid.setText(options[it].title)
+        }
     }
 
 
@@ -211,37 +272,32 @@ class SetUpNetActivity : BaseActivity(), OnClickListener {
 
 
     private val mNetworkCallback =
-        @RequiresApi(Build.VERSION_CODES.S)
-        object : ConnectivityManager.NetworkCallback(FLAG_INCLUDE_LOCATION_INFO) {
-            override fun onAvailable(network: Network) {
-                super.onAvailable(network)
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            object : ConnectivityManager.NetworkCallback(FLAG_INCLUDE_LOCATION_INFO) {
+                override fun onCapabilitiesChanged(
+                    network: Network,
+                    networkCapabilities: NetworkCapabilities
+                ) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        val wifiInfo: WifiInfo = networkCapabilities.transportInfo as WifiInfo
+                        val ssid =
+                            wifiInfo.ssid.replace("\"", "").replace("<", "").replace(">", "")
+                        binding.etSsid.setText(ssid)
 
-            override fun onCapabilitiesChanged(
-                network: Network,
-                networkCapabilities: NetworkCapabilities
-            ) {
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    val wifiInfo: WifiInfo = networkCapabilities.transportInfo as WifiInfo
-                    val ssid =
-                        wifiInfo.getSSID().replace("\"", "").replace("<", "").replace(">", "")
-                    binding.etSsid.setText(ssid)
-
+                    }
                 }
-
-
             }
-
+        } else {
+            null
         }
 
 
     private fun requestNetwork() {
-        connectivityManager?.registerNetworkCallback(request, mNetworkCallback);
+        mNetworkCallback?.let { connectivityManager?.registerNetworkCallback(request, it) };
     }
 
     private fun unrequestNetwork() {
-        connectivityManager?.unregisterNetworkCallback(mNetworkCallback);
+        mNetworkCallback?.let { connectivityManager?.unregisterNetworkCallback(it) };
     }
 
 

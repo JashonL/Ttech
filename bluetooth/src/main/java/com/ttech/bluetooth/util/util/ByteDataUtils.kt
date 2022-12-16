@@ -52,4 +52,54 @@ object ByteDataUtils {
 
 
 
+    fun getMsgByAes(bytes: ByteArray?): ByteArray {
+        val bytes1: ByteArray? = bytes?.let { getbyte16(it, 16) }
+        return AESCBCUtils.AESEncryption(bytes1)
+    }
+
+
+    /**
+     * 将数据补够bitnum的倍数
+     *
+     * @param bitNum
+     * @return
+     */
+    fun getbyte16(data: ByteArray, bitNum: Int): ByteArray {
+        val length = data.size
+        val multiple = length / bitNum
+
+        //目标长度
+        val tagetLent = (multiple + 1) * bitNum
+        val newData = ByteArray(tagetLent)
+        if (length % bitNum == 0) {
+            return data
+        } else {
+            System.arraycopy(data, 0, newData, 0, length)
+        }
+        return newData
+    }
+
+
+    fun byteToString(bytes: ByteArray?): String {
+        if (bytes == null) return ""
+        val strBuilder = java.lang.StringBuilder()
+        for (aByte in bytes) {
+            if (aByte.toInt() != 0) {
+                strBuilder.append(Char(aByte.toUShort()))
+            } else {
+                break
+            }
+        }
+        return strBuilder.toString()
+    }
+
+
+    fun bytes2Int(bytes: ByteArray): Int {
+        //将每个byte依次搬运到int相应的位置
+        var result: Int = (bytes[0] and 0xff.toByte()).toInt()
+        result = result shl 8 or bytes[1].toInt() and 0xff
+        return result
+    }
+
+
 }
