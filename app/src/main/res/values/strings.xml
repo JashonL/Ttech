@@ -129,11 +129,24 @@ of letters, numbers and symbols.</string>
     <string name="m102_comfir">Comfir</string>
     <string name="m103_turn_on_gps">turn on gps</string>
     <string name="m104_gps_to_getwifi">To get the wifi list, you need to turn on gps</string>
+    <string name="m105_pv_station_pic">PV Station Picture</string>
+    <string name="m106_load_pic">Upload Picture</string>
+    <string name="m107_station_type">Station Type</string>
+    <string name="m108_select_station_type">Select the Station Type</string>
+    <string name="m109_station_name">Station name</string>
+    <string name="m110_installtion_date">Select the installtion date</string>
+    <string name="m111_station_address">Station Address</string>
+    <string name="m112_found_revenge">Found Revenge</string>
+    <string name="m113_pv">PV</string>
+    <string name="m114_storage">Storage</string>
+    <string name="m115_enter_the_plant_addr">Enter the plant address</string>
 
-
-
-
-
+    <string name="m116_please_select_city">请选择城市</string>
+    <string name="m117_please_select_symbol">请选择货币符号</string>
+    <string name="m118_please_plant_type">请选择电站类型</string>
+    <string name="m119_please_plant_address">请输入电站地址</string>
+    <string name="m120_crop_image_menu_crop">裁剪</string>
+    <string name="m121_pick_image_intent_chooser_title">選擇圖片</string>
 
 
 
@@ -301,7 +314,7 @@ of letters, numbers and symbols.</string>
     <string name="m127_try_now">Experience immediately</string>
     <string name="m128_power">Power</string>
     <string name="m129_rate">Set Charging Rate</string>
-    <string name="m130_confirm">Ok</string>
+    <string name="m130_confirm">OK</string>
 
     <string name="m131_set_success">success</string>
     <string name="m132_set_fail">fail</string>

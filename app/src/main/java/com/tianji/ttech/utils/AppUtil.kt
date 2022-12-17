@@ -1,12 +1,15 @@
 package com.tianji.ttech.utils
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import androidx.annotation.WorkerThread
 import androidx.core.content.FileProvider
 import com.tianji.ttech.BuildConfig
 import com.tianji.ttech.app.TtechApplication
+import com.tianji.ttech.crop.BitmapUtils
 import com.ttech.lib.LibApplication
 import com.ttech.lib.util.DateUtils
 import java.io.File
@@ -18,7 +21,7 @@ object AppUtil {
     private const val JPEG_FILE_PREFIX = "IMG_"
     private const val JPG_FILE_SUFFIX = "jpg"
 
-/*    @WorkerThread
+    @WorkerThread
     fun saveBitmapToDisk(context: Context?, bitmap: Bitmap?): String? {
         return try {
             val destFile: File = createImageFile()!!
@@ -33,7 +36,7 @@ object AppUtil {
         } catch (e: Exception) {
             null
         }
-    }*/
+    }
 
     /**
      * 在/storage/emulated/0/Android/data/包名/files/Pictures/目录下面生成一个图片文件

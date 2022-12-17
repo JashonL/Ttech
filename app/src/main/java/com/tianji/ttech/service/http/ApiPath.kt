@@ -77,13 +77,13 @@ object ApiPath {
         /**
          * 城市列表
          */
-        const val GET_CITY_LIST = "ATSregister/getProvAndCityList"
+        const val GET_CITY_LIST = "v1/user/getCountryCityList"
 
 
         /**
          * 添加电站
          */
-        const val ADD_PLANT = "ATSplant/addPlant"
+        const val ADD_PLANT = "v1/station/addStation"
 
         /**
          * 修改电站
@@ -94,7 +94,7 @@ object ApiPath {
         /**
          * 删除电站
          */
-        const val DELETE_PLANT = "ATSplant/delplant"
+        const val DELETE_PLANT = "v1/station/deleteStation"
 
         /**
          * 获取电站详情

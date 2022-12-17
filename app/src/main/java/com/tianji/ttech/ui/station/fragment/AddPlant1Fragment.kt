@@ -58,7 +58,6 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
         viewModel.cityListLiveData.observe(viewLifecycleOwner) {
             dismissDialog()
             if (it.second == null) {
-                showProvinceList(it.first)
             } else {
                 ToastUtil.show(it.second)
             }
@@ -154,7 +153,6 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
                 showDialog()
                 viewModel.fetchCityList(viewModel.addPlantModel.country!!)
             } else {
-                showProvinceList(provinceList)
             }
         }
     }

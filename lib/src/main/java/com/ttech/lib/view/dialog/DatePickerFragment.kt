@@ -36,7 +36,26 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
             }.show(fragmentManager, DatePickerFragment::class.java.name)
         }
 
+        fun show(
+            fragmentManager: FragmentManager,
+            maxDateLong: Long? = null,
+            @SelectDateType selectDateType: Int,
+            listener: OnDateSetListener
+        ) {
+            DatePickerFragment().also {
+                it.listener = listener
+                it.maxDateLong = maxDateLong
+                it.selectDateType = selectDateType
+            }.show(fragmentManager, DatePickerFragment::class.java.name)
+        }
+
+
     }
+
+
+    private var selectDateType: Int = SelectDateType.DAY
+
+
 
     private var listener: OnDateSetListener? = null
 

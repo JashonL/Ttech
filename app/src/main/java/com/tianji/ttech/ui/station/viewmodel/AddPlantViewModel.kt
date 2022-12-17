@@ -3,11 +3,10 @@ package com.tianji.ttech.ui.station.viewmodel
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.tianji.ttech.R
+import com.tianji.ttech.app.TtechApplication
 import com.tianji.ttech.base.BaseViewModel
-import com.tianji.ttech.model.AddPlantModel
-import com.tianji.ttech.model.GeneralItemModel
-import com.tianji.ttech.model.ProvinceModel
-import com.tianji.ttech.model.TimeZone
+import com.tianji.ttech.model.*
 import com.tianji.ttech.service.http.ApiPath
 import com.ttech.lib.service.http.HttpCallback
 import com.ttech.lib.service.http.HttpErrorModel
@@ -28,9 +27,12 @@ class AddPlantViewModel : BaseViewModel() {
 
     val addPlantLiveData = MutableLiveData<Pair<String?, String?>>()
 
+    val deletePlantLiveData = MutableLiveData<Pair<Boolean, String?>>()
+
+
     val editPlantLiveData = MutableLiveData<String?>()
 
-    val cityListLiveData = MutableLiveData<Pair<Array<ProvinceModel>?, String?>>()
+    val cityListLiveData = MutableLiveData<Pair<Array<CityModel>?, String?>>()
 
     val currencyListLiveData = MutableLiveData<Pair<Array<GeneralItemModel>, String?>>()
 
@@ -97,14 +99,14 @@ class AddPlantViewModel : BaseViewModel() {
             apiService().postForm(
                 ApiPath.Plant.GET_CITY_LIST,
                 hashMapOf(Pair("country", country)),
-                object : HttpCallback<HttpResult<Array<ProvinceModel>>>() {
-                    override fun success(result: HttpResult<Array<ProvinceModel>>) {
+                object : HttpCallback<HttpResult<Array<CityModel>>>() {
+                    override fun success(result: HttpResult<Array<CityModel>>) {
                         if (result.isBusinessSuccess()) {
-                            val provinceList = result.obj
-                            if (provinceList == null) {
+                            val citylist = result.obj
+                            if (citylist == null) {
                                 cityListLiveData.value = Pair(emptyArray(), null)
                             } else {
-                                cityListLiveData.value = Pair(provinceList, null)
+                                cityListLiveData.value = Pair(citylist, null)
                             }
                         } else {
                             cityListLiveData.value = Pair(emptyArray(), result.msg ?: "")
@@ -125,23 +127,14 @@ class AddPlantViewModel : BaseViewModel() {
     fun addPlant() {
         viewModelScope.launch {
             val params = hashMapOf<String, String>().apply {
-                put("plantName", addPlantModel.plantName!!)
-                put("installDate", addPlantModel.getDateString())
+                put("stationType", addPlantModel.stationType!!)
+                put("stationName", addPlantModel.plantName!!)
+                put("installtionDate", addPlantModel.getDateString())
                 put("country", addPlantModel.country!!)
-                put("city", addPlantModel.city!!)
-                addPlantModel.plantAddress?.also {
-                    put("plantAddress", it)
-                }
-                addPlantModel.plant_lat?.also {
-                    put("plant_lat", it.toString())
-                }
-                addPlantModel.plant_lng?.also {
-                    put("plant_lng", it.toString())
-                }
-                put("plantTimeZone", addPlantModel.plantTimeZone ?: "")
-                put("nominalPower", addPlantModel.totalPower!!)
-                put("formulaMoney", addPlantModel.formulaMoney ?: "0")
-                put("formulaMoneyUnitId", addPlantModel.formulaMoneyUnitId ?: "")
+
+                put("city", addPlantModel.city ?: "")
+                put("address", addPlantModel.address!!)
+                put("incomeUnit", addPlantModel.formulaMoneyUnitId ?: "daller")
             }
 
             apiService().postFile(
@@ -210,4 +203,39 @@ class AddPlantViewModel : BaseViewModel() {
                 })
         }
     }
+
+
+    /**
+     * 删除电站
+     */
+    fun deletePlant(stationId: String) {
+        viewModelScope.launch {
+            val params = hashMapOf<String, String>().apply {
+                put("stationId", addPlantModel.plantID!!)
+            }
+            apiService().postForm(
+                ApiPath.Plant.DELETE_PLANT,
+                params,
+                object : HttpCallback<HttpResult<AddPlantModel>>() {
+                    override fun success(result: HttpResult<AddPlantModel>) {
+                        if (result.isBusinessSuccess()) {
+                            deletePlantLiveData.value = Pair(
+                                true, TtechApplication.instance().getString(
+                                    R.string.m131_set_success
+                                )
+                            )
+                        } else {
+                            deletePlantLiveData.value = Pair(false, result.msg)
+                        }
+                    }
+
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        deletePlantLiveData.value = Pair(false, errorModel.errorMsg ?: "")
+                    }
+
+                })
+        }
+    }
+
+
 }

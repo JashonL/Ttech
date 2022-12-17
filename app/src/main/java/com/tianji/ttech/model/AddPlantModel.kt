@@ -54,6 +54,13 @@ class AddPlantModel {
     //电站图片（服务器图片，修改电站信息的时候会使用到）
     var plantFileService: String? = null
 
+    //电站类型
+    var stationType:String?=null
+
+
+    //电站地址
+    var address:String?=null
+
     fun getDateString(): String {
         if (installDate == null) {
             installDate = Date()

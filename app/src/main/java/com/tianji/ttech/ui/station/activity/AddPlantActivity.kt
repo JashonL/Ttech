@@ -7,7 +7,7 @@ import android.text.TextUtils
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.growatt.atess.ui.plant.fragment.AddPlant2Fragment
+import com.tianji.ttech.ui.station.fragment.AddPlant2Fragment
 import com.growatt.atess.ui.plant.monitor.PlantMonitor
 import com.tianji.ttech.R
 import com.tianji.ttech.app.TtechApplication
@@ -17,11 +17,8 @@ import com.tianji.ttech.model.AddPlantModel
 import com.tianji.ttech.model.PlantModel
 import com.tianji.ttech.ui.station.fragment.AddPlant1Fragment
 import com.tianji.ttech.ui.station.viewmodel.AddPlantViewModel
-import com.tianji.ttech.utils.AppUtil
 import com.ttech.lib.util.ToastUtil
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 /**

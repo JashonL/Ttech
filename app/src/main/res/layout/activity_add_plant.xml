@@ -32,11 +32,13 @@
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragment_add_plant_1"
                 android:layout_width="match_parent"
+                android:name="com.tianji.ttech.ui.station.fragment.AddPlant1Fragment"
                 android:layout_height="wrap_content" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragment_add_plant_2"
                 android:layout_width="match_parent"
+                android:name="com.tianji.ttech.ui.station.fragment.AddPlant2Fragment"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp" />
 
