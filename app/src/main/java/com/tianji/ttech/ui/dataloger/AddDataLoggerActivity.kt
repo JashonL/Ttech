@@ -100,7 +100,10 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
                 }
             }
             v === binding.btFinish -> {
-                val dataLoggerSN = binding.etDataLoggerSn.text.toString().trim()
+                connectBle()
+
+
+      /*          val dataLoggerSN = binding.etDataLoggerSn.text.toString().trim()
                 val checkCode = binding.etCheckCode.text.toString().trim()
                 when {
                     dataLoggerSN.isEmpty() -> {
@@ -113,7 +116,7 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
                         showDialog()
                         viewModel.addDataLogger(dataLoggerSN, checkCode)
                     }
-                }
+                }*/
             }
         }
     }

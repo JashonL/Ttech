@@ -27,6 +27,7 @@ import com.tianji.ttech.databinding.ActivitySetUpNetBinding
 import com.tianji.ttech.model.ble.DatalogResponBean
 import com.tianji.ttech.monitor.WifiMonitor
 import com.tianji.ttech.service.ble.BleCommand.BLUETOOTH_KEY
+import com.tianji.ttech.service.ble.BleCommand.WIFI_PASSWORD
 import com.tianji.ttech.service.ble.BleManager
 import com.tianji.ttech.ui.dataloger.viewmodel.SetUpNetViewModel
 import com.tianji.ttech.utils.ByteDataUtil
@@ -93,16 +94,21 @@ class SetUpNetActivity : BaseActivity(), OnClickListener {
     }
 
     private fun initData() {
-        viewModel.responLiveData.observe(this){
+        viewModel.responLiveData.observe(this) {
             //1.字节数组成bean
             if (it?.funcode == DATALOG_GETDATA_0X18) {
                 val statusCode = it.statusCode
                 val paramNum = it.paramNum
                 if (paramNum == BLUETOOTH_KEY) { //连接成功
                     if (statusCode == 0) {
-                        LogUtil.i(TtechApplication.APP_NAME,"发送密钥成功")
+                        LogUtil.i(TtechApplication.APP_NAME, "发送密钥成功")
                     } else { //提示失败
 
+                    }
+                } else if (paramNum == WIFI_PASSWORD) {//设置WiFi名称密码回应
+                    if (statusCode == 0) {
+                        LogUtil.i(TtechApplication.APP_NAME, "设置wifi和密码设置成功......................")
+                        DatalogerConActivity.start(this)
                     }
                 }
             }
@@ -119,7 +125,7 @@ class SetUpNetActivity : BaseActivity(), OnClickListener {
         //接收蓝牙返回数据
         BlueToothReceiver.watch(lifecycle, TtechApplication.instance()) {
             val removePro = ByteDataUtil.BlueToothData.removePro(it)
-            viewModel.parserData(removePro)
+            viewModel.parserData(it!![7], removePro)
         }
 
 

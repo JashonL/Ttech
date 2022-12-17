@@ -1,9 +1,7 @@
 package com.tianji.ttech.ui.dataloger.viewmodel
 
 
-import android.R.attr.action
 import android.content.Context
-import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.tianji.ttech.base.BaseViewModel
 import com.tianji.ttech.model.ble.DatalogAPSetParam
@@ -80,11 +78,11 @@ class SetUpNetViewModel : BaseViewModel() {
 
 
     /**
-     * 设置wifi账号密码
+     * 解析返回数据
      */
-    fun parserData(dataByte: ByteArray?) {
+    fun parserData(byte: Byte,dataByte: ByteArray?) {
         dataByte?.let {
-            responLiveData.value = ByteDataUtil.BlueToothData.paserData(it)
+            responLiveData.value = ByteDataUtil.BlueToothData.paserData(byte,it)
 
         }
     }

@@ -102,6 +102,78 @@ object ByteDataUtil {
         }
 
 
+        /**
+         * 发送查询命令(0x19)------蓝牙
+         *
+         * @param deviceId 设备序列号
+         * @param valus    查询参数的编号
+         * @param fun      功能码
+         * @return
+         */
+        fun numberServerPro19(`fun`: Byte, deviceId: String, valus: IntArray): ByteArray? {
+            val msgBean = DatalogBlueMsgBean()
+
+            //总长度=协议标识+实际数据长度+设备地址+功能码+数据区内容+AES加密补零区+CRC16码
+            //协议标识固定06
+            //实际数据长度=设备地址+功能码+数据区内容（不包含补0的）
+            msgBean.device_addr = DatalogBlueMsgBean.DEVICE_CODE
+            msgBean.fun_code = `fun`
+            //数据区
+            //采集器序列号
+            val serialBytes = deviceId.toByteArray()
+            //参数编号个数
+            val paramNum = valus.size
+            val funNumByte = int2Byte(paramNum)
+            //设置数据
+            val dataByte = ByteArray(valus.size * 2)
+            for (i in valus.indices) {
+                val valus1 = valus[i]
+                val bytes1 = int2Byte(valus1)
+                System.arraycopy(bytes1, 0, dataByte, bytes1.size * i, bytes1.size)
+            }
+            //有效数据
+            val alllen = serialBytes.size + funNumByte.size + dataByte.size
+            val allDataBytes = ByteArray(alllen)
+            System.arraycopy(serialBytes, 0, allDataBytes, 0, serialBytes.size)
+            System.arraycopy(funNumByte, 0, allDataBytes, serialBytes.size, funNumByte.size)
+            System.arraycopy(
+                dataByte,
+                0,
+                allDataBytes,
+                serialBytes.size + funNumByte.size,
+                dataByte.size
+            )
+
+            //对数据补0(16的倍数) 并进行AES加密
+            val encryptedData = getMsgByAes(allDataBytes)
+            msgBean.data = encryptedData
+
+            //实际内容长度=设备地址+功能码+数据内容长度
+            val realLen = 1 + 1 + alllen
+            val realLenByte = int2Byte(realLen)
+            msgBean.realdata_len = realLenByte
+
+            //总长度=协议标识+实际数据长度+设备地址+功能码+数据区内容+AES加密补零区+CRC16码
+            val allLen = 2 + 2 + 1 + 1 + encryptedData.size + 2
+            val allLenByte = int2Byte(allLen)
+            msgBean.all_len = allLenByte
+
+            //没有CRC的数据
+            val data = msgBean.bytes
+
+            //获取crc效验
+            val crc = CRC16.calcCrc16(data)
+            val crcBytes = int2Byte(crc)
+            msgBean.crcData = crcBytes
+            return msgBean.bytesCRC
+        }
+
+
+
+
+
+
+
         private fun parseBean2Byte(valus: List<DatalogAPSetParam?>): ByteArray {
             //1.将数据集合的转成数组集合
             val byteList: MutableList<ByteArray> = ArrayList()
@@ -167,11 +239,9 @@ object ByteDataUtil {
          * @return
          * @throws Exception
          */
-        fun paserData(bytes: ByteArray?): DatalogResponBean? {
+        fun paserData(byte: Byte,bytes: ByteArray?): DatalogResponBean? {
             if (bytes == null || bytes.size < 8) return null
-            val bean: DatalogResponBean?
-            val byte = bytes[7]
-            bean = when (byte) {
+            val bean: DatalogResponBean? = when (byte) {
                 DATALOG_GETDATA_0X18 -> {
                     parserfun0x18(bytes)
                 }
