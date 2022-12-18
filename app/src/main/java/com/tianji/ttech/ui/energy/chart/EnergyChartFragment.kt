@@ -72,6 +72,7 @@ class EnergyChartFragment : BaseFragment() {
                 childFragmentManager.commit(true) {
                     replace(R.id.fcv_chart, LineChartFragment())
                 }
+
             }
 
 
@@ -86,7 +87,6 @@ class EnergyChartFragment : BaseFragment() {
                 }
             }
         }
-
 
     }
 

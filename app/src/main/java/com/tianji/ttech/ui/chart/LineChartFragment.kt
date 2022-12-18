@@ -14,6 +14,7 @@ import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentLineChartBinding
 import com.tianji.ttech.model.ChartTypeModel
+import com.ttech.lib.util.LogUtil
 import com.ttech.lib.util.Util
 
 class LineChartFragment :BaseFragment(){
@@ -34,6 +35,7 @@ class LineChartFragment :BaseFragment(){
 
 
     fun refresh(chartListDataModel: ChartListDataModel?, unit: String) {
+        LogUtil.i("liaojinsha","刷新数据")
         _binding.tvUnit.text = unit
         chartListDataModel?.let {
             showChartData(it)

@@ -3,6 +3,7 @@ package com.tianji.ttech.ui.energy
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tianji.ttech.base.BaseViewModel
+import com.tianji.ttech.model.ImpactModel
 import com.tianji.ttech.model.StationModel
 import com.tianji.ttech.model.energy.ChartModel
 import com.tianji.ttech.service.http.ApiPath
@@ -18,12 +19,13 @@ import java.util.Date
 
 class EnergyViewModel : BaseViewModel() {
 
-    val impactLiveData = MutableLiveData<Pair<Boolean, Array<StationModel>?>>()
+    val impactLiveData = MutableLiveData<ImpactModel?>()
 
     val stationLiveData = MutableLiveData<Pair<Boolean, ChartModel?>>()
 
-
     val chartLiveData = MutableLiveData<ChartListDataModel>()
+
+    val impactChartLiveData = MutableLiveData<ChartListDataModel>()
 
 
     var currentStation: StationModel? = null
@@ -111,11 +113,30 @@ class EnergyViewModel : BaseViewModel() {
             apiService().postForm(
                 chartApi[dateType],
                 params,
-                object : HttpCallback<HttpResult<Array<StationModel>>>() {
-                    override fun success(result: HttpResult<Array<StationModel>>) {
+                object : HttpCallback<HttpResult<ImpactModel>>() {
+                    override fun success(result: HttpResult<ImpactModel>) {
+                        val impactModel = result.obj
+
+                        impactModel?.let {
+                            val loadList = it.impactList
+                            val timeList = mutableListOf<String>()
+                            for (i in loadList.indices) {
+                                timeList.add(i.toString())
+                            }
+
+                            val dataList = mutableListOf(
+                                ChartYDataList(it.impactList, "impact"),
+                            )
+
+                            val chartListDataModel =
+                                ChartListDataModel(timeList.toTypedArray(), dataList.toTypedArray())
+                            impactLiveData.value = impactModel
+                            impactChartLiveData.value = chartListDataModel
+                        }
                     }
 
                     override fun onFailure(errorModel: HttpErrorModel) {
+                        impactLiveData.value = null
                     }
                 })
         }
