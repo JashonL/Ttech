@@ -25,10 +25,10 @@ annotation class DataType {
 
         fun getDateNameByType(@DataType type: Int): String {
             return when (type) {
-                DataType.TOTAL -> TtechApplication.instance().getString(R.string.m89_total)
-                DataType.YEAR ->  TtechApplication.instance().getString(R.string.m72_year)
-                DataType.MONTH ->  TtechApplication.instance().getString(R.string.m71_month)
-                DataType.DAY ->  TtechApplication.instance().getString(R.string.m70_day)
+                TOTAL -> TtechApplication.instance().getString(R.string.m89_total)
+                YEAR ->  TtechApplication.instance().getString(R.string.m72_year)
+                MONTH ->  TtechApplication.instance().getString(R.string.m71_month)
+                DAY ->  TtechApplication.instance().getString(R.string.m70_day)
                 else -> {
                     ""
                 }

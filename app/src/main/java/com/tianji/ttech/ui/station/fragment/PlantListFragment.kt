@@ -24,6 +24,7 @@ import com.tianji.ttech.databinding.PlantViewHolderBinding
 import com.tianji.ttech.model.PlantModel
 import com.tianji.ttech.ui.home.viewmodel.PlantFilterViewModel
 import com.tianji.ttech.ui.station.activity.AddPlantActivity
+import com.tianji.ttech.ui.station.activity.AddTtchPlantActivity
 import com.tianji.ttech.ui.station.viewmodel.PlantInfoViewModel
 import com.tianji.ttech.ui.station.viewmodel.PlantListViewModel
 import com.tianji.ttech.view.itemdecoration.DividerItemDecoration
@@ -83,7 +84,7 @@ class PlantListFragment : BaseFragment() {
             refresh()
         }
         binding.ivAddPlant.setOnClickListener {
-            AddPlantActivity.start(requireContext())
+            AddTtchPlantActivity.start(requireContext())
         }
     }
 

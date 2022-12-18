@@ -197,10 +197,13 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
      * 请求数据
      */
     private fun getPlantData() {
+
         //1.请求图表数据
         energyViewModel.getPlantChartData()
         //2.请求收益 和二氧化碳
         energyViewModel.getPlantImpactData()
+        //3.设置日期
+        _binding.date.dataSelectView.setDateType(energyViewModel.dateType)
 
     }
 

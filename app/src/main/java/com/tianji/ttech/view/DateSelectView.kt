@@ -8,8 +8,8 @@ import android.widget.LinearLayout
 import androidx.annotation.StringDef
 import com.tianji.ttech.R
 import com.tianji.ttech.databinding.DateSelectBinding
-import com.ttech.lib.util.DateUtils
-import com.ttech.lib.util.Util
+import com.tianji.ttech.ui.common.model.DataType
+import com.ttech.lib.util.*
 import com.ttech.lib.view.dialog.DatePickerFragment
 import com.ttech.lib.view.dialog.OnDateSetListener
 import java.util.*
@@ -28,6 +28,9 @@ class DateSelectView @JvmOverloads constructor(
 
 
     private var selectedListener: OntimeselectedListener? = null
+
+
+    private var dateType = DataType.DAY
 
 
     init {
@@ -51,7 +54,28 @@ class DateSelectView @JvmOverloads constructor(
     }
 
     private fun parserDate() {
-        binding.tvDate.text = DateUtils.parserDate(nowDate, dateFormat)
+        when (dateType) {
+            DataType.TOTAL -> this.invisible()
+            DataType.YEAR -> {
+                this.visible()
+                binding.tvDate.text = DateUtils.yyyy_format(nowDate)
+            }
+            DataType.MONTH -> {
+                this.visible()
+                binding.tvDate.text = DateUtils.yyyy_MM_format(nowDate)
+            }
+            DataType.DAY -> {
+                this.visible()
+                binding.tvDate.text = DateUtils.yyyy_MM_dd_format(nowDate)
+            }
+        }
+
+    }
+
+
+    fun setDateType(@DataType type: Int) {
+        dateType = type
+        parserDate()
     }
 
 
@@ -71,7 +95,7 @@ class DateSelectView @JvmOverloads constructor(
             v === binding.tvDate -> {
                 showDatePickDialog()
             }
-            
+
         }
         selectedListener?.onDateSelectedListener(nowDate)
 
@@ -99,8 +123,6 @@ class DateSelectView @JvmOverloads constructor(
     interface OntimeselectedListener {
         fun onDateSelectedListener(date: Date)
     }
-
-
 
 
 }

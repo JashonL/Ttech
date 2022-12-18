@@ -51,6 +51,28 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         setListener()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initViews()
+
+    }
+
+
+
+    private fun initViews() {
+        val user = accountService().user()
+        user?.let {
+            val email = it.email
+            val password = it.password
+            binding.etPassword.setValue(password)
+            binding.etUsername.setValue(email)
+        }
+
+
+    }
+
+
+
     private fun initData() {
         viewModel.loginLiveData.observe(this) {
             dismissDialog()
