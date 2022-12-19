@@ -1,5 +1,6 @@
 package com.tianji.ttech.ui.energy.chart
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils.replace
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.fragment.app.viewModels
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentEnergyChartBinding
+import com.tianji.ttech.model.ChartColor
 import com.tianji.ttech.model.energy.ChartModel
 import com.tianji.ttech.ui.chart.BarChartFragment
 import com.tianji.ttech.ui.chart.LineChartFragment
@@ -21,11 +23,21 @@ import com.ttech.lib.util.GsonManager
 
 class EnergyChartFragment : BaseFragment() {
 
-    companion object{
+    companion object {
 
-        const val DATALIST_KEY="datalist"
-        const val UNIT="unit"
+        const val DATALIST_KEY = "datalist"
+        const val UNIT = "unit"
+        const val COLORS = "colors"
+        val arrayOf = arrayListOf(
+            ChartColor(Color.parseColor("#F6F6F8"), Color.parseColor("#33F6F6F8")),
+            ChartColor(Color.parseColor("#999999"), Color.parseColor("#33999999")),
+            ChartColor(Color.parseColor("#80DA8A"), Color.parseColor("#3380DA8A")),
+            ChartColor(Color.parseColor("#5E72E4"), Color.parseColor("#335E72E4")),
+        )
+
+
     }
+
 
     private lateinit var _binding: FragmentEnergyChartBinding
 
@@ -39,6 +51,10 @@ class EnergyChartFragment : BaseFragment() {
     ): View {
         _binding = FragmentEnergyChartBinding.inflate(inflater, container, false)
         initData()
+
+
+
+
         return _binding.root
     }
 
@@ -73,7 +89,7 @@ class EnergyChartFragment : BaseFragment() {
         val dateType = energyViewModel.dateType
         val findFragment = this.childFragmentManager.findFragmentById(R.id.fcv_chart)
         if (dateType == DataType.DAY) {//显示曲线图
-            if (findFragment is LineChartFragment) {
+            if (findFragment!=null && findFragment is LineChartFragment){
                 findFragment.refresh(energyViewModel.chartLiveData.value, "kW")
             } else {
                 childFragmentManager.commit(true) {
@@ -81,6 +97,7 @@ class EnergyChartFragment : BaseFragment() {
                     val bundle = Bundle()
                     bundle.putString(DATALIST_KEY, json)
                     bundle.putString(UNIT, "kW")
+                    bundle.putParcelableArrayList(COLORS, arrayOf)
                     val lineChartFragment = LineChartFragment()
                     lineChartFragment.arguments = bundle
                     replace(R.id.fcv_chart, lineChartFragment)
@@ -92,14 +109,18 @@ class EnergyChartFragment : BaseFragment() {
 
         } else {
             //刷新数据
-            if (findFragment is BarChartFragment) {
+            if (findFragment!=null && findFragment is BarChartFragment) {
                 findFragment.refresh(energyViewModel.chartLiveData.value, "kW")
             } else {
                 childFragmentManager.commit(true) {
                     val json = GsonManager.toJson(energyViewModel.chartLiveData.value)
+
+
                     val bundle = Bundle()
                     bundle.putString(DATALIST_KEY, json)
                     bundle.putString(UNIT, "kW")
+                    bundle.putParcelableArrayList(COLORS, arrayOf)
+
                     val barChartFragment = BarChartFragment()
                     barChartFragment.arguments = bundle
                     replace(R.id.fcv_chart, barChartFragment)
@@ -112,3 +133,6 @@ class EnergyChartFragment : BaseFragment() {
 
 
 }
+
+
+

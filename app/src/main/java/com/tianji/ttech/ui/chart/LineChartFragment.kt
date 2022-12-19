@@ -13,7 +13,9 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentLineChartBinding
+import com.tianji.ttech.model.ChartColor
 import com.tianji.ttech.model.ChartTypeModel
+import com.tianji.ttech.ui.energy.chart.EnergyChartFragment.Companion.COLORS
 import com.tianji.ttech.ui.energy.chart.EnergyChartFragment.Companion.DATALIST_KEY
 import com.tianji.ttech.ui.energy.chart.EnergyChartFragment.Companion.UNIT
 import com.ttech.lib.util.GsonManager
@@ -25,7 +27,7 @@ class LineChartFragment : BaseFragment() {
     private lateinit var _binding: FragmentLineChartBinding
 
 
-    private val colors = ChartTypeModel.createChartColors()
+    private var colors = arrayListOf<ChartColor>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +42,14 @@ class LineChartFragment : BaseFragment() {
             val unit = this?.getString(UNIT)
             val chartListDataModel =
                 datalist?.let { GsonManager.fromJson(it, ChartListDataModel::class.java) }
+
+            colors=this?.getParcelableArrayList(COLORS)?: arrayListOf(
+                ChartColor(Color.parseColor("#F6F6F8"), Color.parseColor("#33F6F6F8")),
+                ChartColor(Color.parseColor("#999999"), Color.parseColor("#33999999")),
+                ChartColor(Color.parseColor("#80DA8A"), Color.parseColor("#3380DA8A")),
+                ChartColor(Color.parseColor("#5E72E4"), Color.parseColor("#335E72E4"))
+            )
+
             refresh(chartListDataModel, unit)
         }
 

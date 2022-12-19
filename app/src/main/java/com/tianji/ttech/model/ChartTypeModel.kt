@@ -1,7 +1,9 @@
 package com.tianji.ttech.model
 
 import android.graphics.Color
+import android.os.Parcelable
 import androidx.annotation.ColorInt
+import kotlinx.android.parcel.Parcelize
 
 /**
  * 图表类型
@@ -65,4 +67,5 @@ data class ChartTypeModel(
     }
 }
 
-data class ChartColor(@ColorInt val color: Int, @ColorInt val alphaColor: Int)
+@Parcelize
+data class ChartColor(@ColorInt val color: Int, @ColorInt val alphaColor: Int) : Parcelable
