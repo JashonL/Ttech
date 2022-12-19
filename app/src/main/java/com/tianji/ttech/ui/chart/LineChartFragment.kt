@@ -14,10 +14,13 @@ import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentLineChartBinding
 import com.tianji.ttech.model.ChartTypeModel
+import com.tianji.ttech.ui.energy.chart.EnergyChartFragment.Companion.DATALIST_KEY
+import com.tianji.ttech.ui.energy.chart.EnergyChartFragment.Companion.UNIT
+import com.ttech.lib.util.GsonManager
 import com.ttech.lib.util.LogUtil
 import com.ttech.lib.util.Util
 
-class LineChartFragment :BaseFragment(){
+class LineChartFragment : BaseFragment() {
 
     private lateinit var _binding: FragmentLineChartBinding
 
@@ -29,13 +32,23 @@ class LineChartFragment :BaseFragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        LogUtil.i("liaojinsha", "LineChartFragment onCreateView")
         _binding = FragmentLineChartBinding.inflate(inflater, container, false)
+
+        arguments.apply {
+            val datalist = this?.getString(DATALIST_KEY)
+            val unit = this?.getString(UNIT)
+            val chartListDataModel =
+                datalist?.let { GsonManager.fromJson(it, ChartListDataModel::class.java) }
+            refresh(chartListDataModel, unit)
+        }
+
         return _binding.root
     }
 
 
-    fun refresh(chartListDataModel: ChartListDataModel?, unit: String) {
-        LogUtil.i("liaojinsha","刷新数据")
+    fun refresh(chartListDataModel: ChartListDataModel?, unit: String?) {
+        LogUtil.i("liaojinsha", "LineChartFragment刷新数据")
         _binding.tvUnit.text = unit
         chartListDataModel?.let {
             showChartData(it)
@@ -50,9 +63,9 @@ class LineChartFragment :BaseFragment(){
     }
 
 
-
     private fun initChartView(data: ChartListDataModel) {
         val timeList = data.timeList
+        val multipleChartMarkView = MultipleChartMarkView(requireContext())
         _binding.lineChart.also {
             it.setDrawGridBackground(false)
             it.description.isEnabled = false //不显示描述（右下角）
@@ -99,7 +112,11 @@ class LineChartFragment :BaseFragment(){
             })
 
             marker.chartView = _binding.barChart*/
-            _binding.lineChart.marker = MultipleChartMarkView(requireContext())
+
+
+
+            _binding.lineChart.marker = multipleChartMarkView
+            multipleChartMarkView.chartView = it
         }
 
         //X轴
@@ -149,7 +166,6 @@ class LineChartFragment :BaseFragment(){
     }
 
 
-
     private fun setchartData(data: ChartListDataModel) {
 
         //设置highlight为空，刷新后不显示MarkerView
@@ -168,14 +184,14 @@ class LineChartFragment :BaseFragment(){
             if (chartYData.getYDataList().isNullOrEmpty()) {
                 continue
             }
-       /*     for (yDataIndex in chartYData.getYDataList().indices) {
-                val time =
-                    DateUtils.HH_mm_format.parse(timeList[yDataIndex]).time / MINUTES_INTERVAL
-                val y = chartYData.getYDataList()[yDataIndex]
-                lineDataValues.add(Entry(yDataIndex, y))
-            }*/
+            /*     for (yDataIndex in chartYData.getYDataList().indices) {
+                     val time =
+                         DateUtils.HH_mm_format.parse(timeList[yDataIndex]).time / MINUTES_INTERVAL
+                     val y = chartYData.getYDataList()[yDataIndex]
+                     lineDataValues.add(Entry(yDataIndex, y))
+                 }*/
 
-            for (x in timeList.indices){
+            for (x in timeList.indices) {
                 val y = chartYData.getYDataList()[x]
                 lineDataValues.add(Entry(x.toFloat(), y))
             }
@@ -239,8 +255,8 @@ class LineChartFragment :BaseFragment(){
     }
 
 
-
     override fun onDestroyView() {
         super.onDestroyView()
+        LogUtil.i("liaojinsha", "LineChartFragment onDestroyView")
     }
 }

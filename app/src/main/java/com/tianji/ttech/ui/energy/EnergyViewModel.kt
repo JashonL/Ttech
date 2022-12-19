@@ -39,7 +39,12 @@ class EnergyViewModel : BaseViewModel() {
         ApiPath.Plant.GET_INVERTER_DATA_DAY
     )
 
-
+    private val impactApi = listOf(
+        ApiPath.Plant.GET_IMPACT_TOTAL,
+        ApiPath.Plant.GET_IMPACT_YEAR,
+        ApiPath.Plant.GET_IMPACT_MONTH,
+        ApiPath.Plant.GET_IMPACT_DAY
+    )
     var time: String = ""
 
 
@@ -111,7 +116,7 @@ class EnergyViewModel : BaseViewModel() {
                 put("time", time)
             }
             apiService().postForm(
-                chartApi[dateType],
+                impactApi[dateType],
                 params,
                 object : HttpCallback<HttpResult<ImpactModel>>() {
                     override fun success(result: HttpResult<ImpactModel>) {
@@ -120,6 +125,7 @@ class EnergyViewModel : BaseViewModel() {
                         impactModel?.let {
                             val loadList = it.impactList
                             val timeList = mutableListOf<String>()
+                            if (loadList == null) return
                             for (i in loadList.indices) {
                                 timeList.add(i.toString())
                             }

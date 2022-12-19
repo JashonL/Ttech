@@ -101,4 +101,6 @@ dependencies {
     //下拉刷新与加载更多 https://github.com/scwang90/SmartRefreshLayout
     implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5'
     implementation 'io.github.scwang90:refresh-header-material:2.0.5'
+
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 }

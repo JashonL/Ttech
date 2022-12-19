@@ -17,8 +17,15 @@ import com.tianji.ttech.ui.chart.BarChartFragment
 import com.tianji.ttech.ui.chart.LineChartFragment
 import com.tianji.ttech.ui.common.model.DataType
 import com.tianji.ttech.ui.energy.EnergyViewModel
+import com.ttech.lib.util.GsonManager
 
 class EnergyChartFragment : BaseFragment() {
+
+    companion object{
+
+        const val DATALIST_KEY="datalist"
+        const val UNIT="unit"
+    }
 
     private lateinit var _binding: FragmentEnergyChartBinding
 
@@ -67,24 +74,37 @@ class EnergyChartFragment : BaseFragment() {
         val findFragment = this.childFragmentManager.findFragmentById(R.id.fcv_chart)
         if (dateType == DataType.DAY) {//显示曲线图
             if (findFragment is LineChartFragment) {
-                findFragment.refresh(energyViewModel.chartLiveData.value,"kW")
+                findFragment.refresh(energyViewModel.chartLiveData.value, "kW")
             } else {
                 childFragmentManager.commit(true) {
-                    replace(R.id.fcv_chart, LineChartFragment())
+                    val json = GsonManager.toJson(energyViewModel.chartLiveData.value)
+                    val bundle = Bundle()
+                    bundle.putString(DATALIST_KEY, json)
+                    bundle.putString(UNIT, "kW")
+                    val lineChartFragment = LineChartFragment()
+                    lineChartFragment.arguments = bundle
+                    replace(R.id.fcv_chart, lineChartFragment)
                 }
 
-            }
 
+            }
 
 
         } else {
             //刷新数据
             if (findFragment is BarChartFragment) {
-                findFragment.refresh(energyViewModel.chartLiveData.value,"kW")
+                findFragment.refresh(energyViewModel.chartLiveData.value, "kW")
             } else {
                 childFragmentManager.commit(true) {
-                    replace(R.id.fcv_chart, BarChartFragment())
+                    val json = GsonManager.toJson(energyViewModel.chartLiveData.value)
+                    val bundle = Bundle()
+                    bundle.putString(DATALIST_KEY, json)
+                    bundle.putString(UNIT, "kW")
+                    val barChartFragment = BarChartFragment()
+                    barChartFragment.arguments = bundle
+                    replace(R.id.fcv_chart, barChartFragment)
                 }
+
             }
         }
 

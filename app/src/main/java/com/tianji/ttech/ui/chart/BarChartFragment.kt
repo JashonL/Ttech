@@ -17,32 +17,53 @@ import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentBarChartBinding
 import com.tianji.ttech.model.ChartTypeModel
+import com.tianji.ttech.ui.energy.chart.EnergyChartFragment.Companion.DATALIST_KEY
+import com.tianji.ttech.ui.energy.chart.EnergyChartFragment.Companion.UNIT
+import com.ttech.lib.service.http.HttpCallback
+import com.ttech.lib.util.GsonManager
 import com.ttech.lib.util.LogUtil
 import com.ttech.lib.util.Util
+import com.ttech.lib.util.gone
 
 /**
  * 柱状图表
  */
 class BarChartFragment : BaseFragment() {
 
+
+
+
     private lateinit var _binding: FragmentBarChartBinding
-
-
     private val colors = ChartTypeModel.createChartColors()
+
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        LogUtil.i("liaojinsha", "BarChartFragment onCreateView")
         _binding = FragmentBarChartBinding.inflate(inflater, container, false)
+
+        arguments.apply {
+            val datalist = this?.getString(DATALIST_KEY)
+            val unit = this?.getString(UNIT)
+            val chartListDataModel = datalist?.let { GsonManager.fromJson(it, ChartListDataModel::class.java) }
+            refresh(chartListDataModel,unit)
+        }
+
+
         return _binding.root
     }
 
 
-    fun refresh(chartListDataModel: ChartListDataModel?, unit: String) {
-        LogUtil.i("liaojinsha","刷新数据")
+    fun refresh(chartListDataModel: ChartListDataModel?, unit: String?) {
+        LogUtil.i("liaojinsha", "BarChartFragment刷新数据")
         _binding.tvUnit.text = unit
+
         chartListDataModel?.let {
             showChartData(it)
         }
@@ -56,9 +77,11 @@ class BarChartFragment : BaseFragment() {
     }
 
 
-
     private fun initChartView(data: ChartListDataModel) {
         val timeList = data.timeList
+        val multipleChartMarkView = MultipleChartMarkView(requireContext())
+
+
         _binding.barChart.also {
             it.setDrawGridBackground(false)
             it.description.isEnabled = false //不显示描述（右下角）
@@ -105,7 +128,11 @@ class BarChartFragment : BaseFragment() {
             })
 
             marker.chartView = _binding.barChart*/
-            _binding.barChart.marker = MultipleChartMarkView(requireContext())
+
+
+            _binding.barChart.marker = multipleChartMarkView
+
+            multipleChartMarkView.chartView=it
         }
 
         //X轴
@@ -153,7 +180,6 @@ class BarChartFragment : BaseFragment() {
         }
 
     }
-
 
 
     private fun setchartData(data: ChartListDataModel) {
@@ -255,8 +281,9 @@ class BarChartFragment : BaseFragment() {
     }
 
 
-
     override fun onDestroyView() {
         super.onDestroyView()
+        LogUtil.i("liaojinsha", "BarChartFragment onDestroyView")
+
     }
 }

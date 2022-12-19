@@ -8,10 +8,8 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
-import com.tianji.ttech.databinding.FragmentEnergyChartBinding
 import com.tianji.ttech.databinding.FragmentImpactBinding
 import com.tianji.ttech.ui.chart.BarChartFragment
-import com.tianji.ttech.ui.chart.LineChartFragment
 import com.tianji.ttech.ui.common.model.DataType
 import com.tianji.ttech.ui.energy.EnergyViewModel
 import com.ttech.lib.util.gone
