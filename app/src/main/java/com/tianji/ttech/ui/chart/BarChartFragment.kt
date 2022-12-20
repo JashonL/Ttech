@@ -21,6 +21,7 @@ import com.tianji.ttech.model.ChartTypeModel
 import com.tianji.ttech.ui.energy.chart.EnergyChartFragment
 import com.tianji.ttech.ui.energy.chart.EnergyChartFragment.Companion.DATALIST_KEY
 import com.tianji.ttech.ui.energy.chart.EnergyChartFragment.Companion.UNIT
+import com.tianji.ttech.view.ChartLegend
 import com.ttech.lib.service.http.HttpCallback
 import com.ttech.lib.util.GsonManager
 import com.ttech.lib.util.LogUtil
@@ -186,6 +187,17 @@ class BarChartFragment : BaseFragment() {
                 }
             }
         }
+
+        //自定义图例图标
+        _binding.flexboxChartLenged.removeAllViews()
+        for (i in 0 until  data.getYDataList().size) {
+            val chartLegend = ChartLegend(requireContext())
+            chartLegend.setLabel(data.getYDataList()[i].getLegend().first)
+            chartLegend.setCbstyle(data.getYDataList()[i].getLegend().second)
+            _binding.flexboxChartLenged.addView(chartLegend)
+
+        }
+
 
     }
 

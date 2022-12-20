@@ -9,7 +9,6 @@
     <CheckBox
         android:id="@+id/cb_ledgend"
         android:layout_width="wrap_content"
-        android:button="@drawable/cb_blue"
         android:layout_height="wrap_content" />
 
 

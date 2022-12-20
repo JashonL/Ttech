@@ -29,7 +29,7 @@
 
 
     <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/flexbox_ll_chart_lenged"
+        android:id="@+id/flexbox_chart_lenged"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -39,6 +39,7 @@
         app:dividerDrawableVertical="@drawable/divider_search_horizontal"
         app:flexDirection="row"
         app:flexWrap="wrap"
+        app:justifyContent="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bar_chart"

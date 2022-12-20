@@ -1,5 +1,8 @@
 package com.tianji.ttech.ui.chart
 
+import com.tianji.ttech.R
+import com.tianji.ttech.app.TtechApplication
+
 
 /**
  * 图表数据模型
@@ -60,5 +63,34 @@ data class ChartYDataList(val chartDataList: Array<Float>?, val label: String?) 
     fun getYDataList(): Array<Float> {
         return chartDataList ?: arrayOf()
     }
+
+
+    fun getLegend():Pair<String,Int>{
+        return when{
+            label=="bat"->{
+                Pair(TtechApplication.instance().getString(R.string.m33_bat),R.drawable.bat_check)
+            }
+
+            label=="grid"->{
+                Pair(TtechApplication.instance().getString(R.string.m12_grid),R.drawable.grid_check)
+            }
+
+            label=="solar"->{
+                Pair(TtechApplication.instance().getString(R.string.m9_solar),R.drawable.solar_check)
+            }
+
+            label=="load"->{
+                Pair(TtechApplication.instance().getString(R.string.m32_load),R.drawable.load_check)
+            }
+
+            else -> {
+                Pair(TtechApplication.instance().getString(R.string.m33_bat),R.drawable.bat_check)
+            }
+        }
+
+
+
+    }
+
 
 }
