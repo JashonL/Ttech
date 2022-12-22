@@ -245,7 +245,7 @@ class PlantListFragment : BaseFragment() {
 
         fun bindData(plantModel: PlantModel, fragment: PlantListFragment) {
 
-            Glide.with(fragment).load(plantModel.stationName)
+            Glide.with(fragment).load(plantModel.pictureAddress)
                 .placeholder(R.drawable.ic_placeholder)
                 .into(binding.ivPlantImage)
 
@@ -253,7 +253,7 @@ class PlantListFragment : BaseFragment() {
                 ViewUtil.createShape(getColor(R.color.color_33000000), 0, 0, 2, 2)
             binding.tvCity.text = plantModel.city
             binding.tvPlantName.text = plantModel.stationName
-            when (plantModel.hasDeviceOnLine) {
+            when (plantModel.onlineStatus) {
                 PlantModel.PLANT_STATUS_ONLINE -> {
                     binding.tvPlantStatus.text = getString(R.string.m37_online)
                     binding.tvPlantStatus.background =

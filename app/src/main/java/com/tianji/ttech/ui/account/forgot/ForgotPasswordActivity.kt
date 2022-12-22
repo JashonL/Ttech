@@ -32,13 +32,17 @@ class ForgotPasswordActivity : BaseActivity(), OnClickListener {
     private val verifyCodeViewModel: VerifyCodeViewModel by viewModels()
     private val forgotPasswordViewModel: FotgotPasswordViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding = ActivityForgotBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initData()
         initListeners()
     }
+
+
+
 
     private fun initListeners() {
         binding.etCode.setOnRightClickListener {

@@ -1,6 +1,5 @@
 package com.tianji.ttech.ui.account.register
 
-import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tianji.ttech.base.BaseViewModel
@@ -11,6 +10,7 @@ import com.ttech.lib.service.http.HttpErrorModel
 import com.ttech.lib.service.http.HttpResult
 import com.ttech.lib.util.MD5Util
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 class RegisterViewModel : BaseViewModel() {
 
@@ -23,6 +23,8 @@ class RegisterViewModel : BaseViewModel() {
 
 
     var selectArea: String = ""
+
+
 
 
     /**

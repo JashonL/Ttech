@@ -8,6 +8,7 @@
 
     <com.ttech.lib.view.StatusBarWhiteHeightView
         android:id="@+id/status_bar"
+        android:background="@color/color_app_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

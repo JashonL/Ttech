@@ -21,6 +21,7 @@ import com.tianji.ttech.ui.account.viewmodel.VerifyCodeViewModel
 import com.tianji.ttech.ui.common.activity.CountryActivity
 import com.tianji.ttech.ui.common.activity.WebActivity
 import com.tianji.ttech.utils.AppUtil
+import com.tianji.ttech.utils.TimeZoneUtil
 import com.ttech.lib.util.ActivityBridge
 import com.ttech.lib.util.MD5Util
 import com.ttech.lib.util.ToastUtil
@@ -163,7 +164,9 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
 
     private fun setListeners() {
         binding.ivSelect.setOnClickListener(this)
-        binding.etZone.setOnClickListener(this)
+        binding.etZone.setOnRightClickListener {
+            setTimeZone()
+        }
         binding.etCountry.setOnClickListener(this)
         binding.btLogin.setOnClickListener(this)
         binding.etVertificationCode.setOnRightClickListener {
@@ -191,7 +194,6 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when {
             p0 === binding.ivSelect -> updateSelectView(!viewModel.isAgree)
-            p0 === binding.etZone -> setTimeZone()
             p0 === binding.etCountry -> selectArea()
             p0 === binding.btLogin -> checkInputInfo()
         }
@@ -209,9 +211,10 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                     data: Intent?
                 ) {
                     if (resultCode == RESULT_OK && data?.hasExtra(CountryActivity.KEY_AREA) == true) {
-                        viewModel.selectArea =
-                            data.getStringExtra(CountryActivity.KEY_AREA) ?: ""
+                        viewModel.selectArea = data.getStringExtra(CountryActivity.KEY_AREA) ?: ""
                         binding.etCountry.setValue(viewModel.selectArea)
+                        val timeZone = TimeZoneUtil.getTimeZoneByCountry(viewModel.selectArea)
+                        binding.etZone.setValue(timeZone)
                     }
                 }
             })
@@ -270,7 +273,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                 country!!,
                 timeZone!!,
                 username!!,
-                md5?:"",
+                md5 ?: "",
                 code!!,
                 installerCoder!!
             )

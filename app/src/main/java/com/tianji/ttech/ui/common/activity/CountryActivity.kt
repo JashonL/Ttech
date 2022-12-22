@@ -32,7 +32,7 @@ class CountryActivity : BaseActivity() {
             context?.startActivity(getIntent(context))
         }
 
-         fun getIntent(context: Context?): Intent {
+        fun getIntent(context: Context?): Intent {
             return Intent(context, CountryActivity::class.java)
         }
     }
@@ -50,7 +50,6 @@ class CountryActivity : BaseActivity() {
     }
 
 
-
     private fun initView() {
         binding.rvList.addItemDecoration(
             DividerItemDecoration(
@@ -60,11 +59,31 @@ class CountryActivity : BaseActivity() {
             )
         )
         binding.rvList.adapter = Adapter()
+
+
+
+
+
     }
 
     private fun setListener() {
         binding.etSearch.addTextChangedListener {
-            viewModel.fetchAreaList()
+            val adapter = binding.rvList.adapter as Adapter
+            val countryList = viewModel.areaListLiveData.value?.first
+            val newList = mutableListOf<String>()
+
+            if (countryList!=null) {
+                for (s in countryList) {
+                    if (s.contains(it.toString())) {
+                        newList.add(s)
+                    }
+                }
+
+            }
+
+
+            adapter.refresh(newList)
+
         }
     }
 

@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentSystemStatusBinding
+import com.tianji.ttech.utils.ValueUtil
 import kotlinx.coroutines.delay
 
 class HomeStatusFragment : BaseFragment() {
@@ -49,24 +50,35 @@ class HomeStatusFragment : BaseFragment() {
     private fun initData() {
         viewModel.statusLiveData.observe(viewLifecycleOwner) {
             _binding.srlRefresh.finishRefresh()
-            _binding.tvGridPower.text = it?.grid
-            _binding.tvHomePower.text = it?.home
-            _binding.tvSolarPower.text = it?.solar
-            _binding.tvBatPower.text = it?.bat
-            _binding.tvLoadPower.text = it?.load
-
-
-            val onlineStatus = it?.onlineStatus
-            if ("1" == onlineStatus){
-                _binding.ivStatus.setImageResource(R.drawable.check_normal)
-                _binding.tvStatus.text = getString(R.string.m82_system_nomal)
-            }else{
-                _binding.ivStatus.setImageResource(R.drawable.exception)
-                _binding.tvStatus.text = getString(R.string.m83_system_exception)
-
+            ValueUtil.valueFromW(it?.grid?.toDouble()).apply {
+                _binding.tvGridPower.text = String.format("%s%s", first, second)
+            }
+            ValueUtil.valueFromW(it?.home?.toDouble()).apply {
+                _binding.tvHomePower.text = String.format("%s%s", first, second)
+            }
+            ValueUtil.valueFromW(it?.solar?.toDouble()).apply {
+                _binding.tvSolarPower.text = String.format("%s%s", first, second)
+            }
+            ValueUtil.valueFromW(it?.bat?.toDouble()).apply {
+                _binding.tvBatPower.text = String.format("%s%s", first, second)
+            }
+            ValueUtil.valueFromW(it?.load?.toDouble()).apply {
+                _binding.tvLoadPower.text = String.format("%s%s", first, second)
             }
 
+            val onlineStatus = it?.onlineStatus
+            if ("1" == onlineStatus) {
+                _binding.ivStatus.setImageResource(R.drawable.check_normal)
+                _binding.tvStatus.text = getString(R.string.m82_system_nomal)
 
+                _binding.tvOlStatus.text = getString(R.string.m124_on_line)
+
+            } else {
+                _binding.ivStatus.setImageResource(R.drawable.exception)
+                _binding.tvStatus.text = getString(R.string.m83_system_exception)
+                _binding.tvOlStatus.text = getString(R.string.m125_off_line)
+
+            }
 
 
         }
@@ -94,9 +106,6 @@ class HomeStatusFragment : BaseFragment() {
     public fun getDataByStationId(id: String) {
 
     }
-
-
-
 
 
 }

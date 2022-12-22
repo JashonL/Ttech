@@ -65,11 +65,21 @@ class AddTtchPlantActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityAddTechPlantBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        initViews()
+
         initData()
-        inilistener()
+        initlistener()
     }
 
-    private fun inilistener() {
+
+    private fun initViews() {
+        //默认用户国家
+        binding.tvCountry.text = accountService().user()?.country
+
+    }
+
+    private fun initlistener() {
         binding.llPic.setOnClickListener(this)
         binding.llStationType.setOnClickListener(this)
         binding.llInstalltionDate.setOnClickListener(this)
@@ -122,9 +132,9 @@ class AddTtchPlantActivity : BaseActivity(), View.OnClickListener {
 
 
 
-        viewModel.moneyUtilListLiveData.observe(this){
+        viewModel.moneyUtilListLiveData.observe(this) {
             dismissDialog()
-            if (it!=null){
+            if (it != null) {
                 selectCurrency(it)
             }
 
@@ -165,12 +175,10 @@ class AddTtchPlantActivity : BaseActivity(), View.OnClickListener {
                 checkInput()
             }
 
-            binding.llFoundRevenge->{
+            binding.llFoundRevenge -> {
                 //货币
                 selectIncomeUnit()
             }
-
-
 
 
         }
@@ -280,9 +288,6 @@ class AddTtchPlantActivity : BaseActivity(), View.OnClickListener {
     private fun refreshSelectAreaView() {
         binding.tvCountry.text = viewModel.addPlantModel.country
     }
-
-
-
 
 
     private fun selectIncomeUnit() {

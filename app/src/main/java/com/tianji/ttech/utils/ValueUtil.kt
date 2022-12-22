@@ -36,16 +36,27 @@ object ValueUtil {
      * 功率单位(平均)：数值转换，基础单位是w
      */
     fun valueFromW(wValue: Double?): Pair<String, String> {
-        return when {
-            wValue == null -> {
-                Pair("0", TtechApplication.instance().getString(R.string.m52_kw))
+        return when (wValue) {
+            null -> {
+                Pair("0", TtechApplication.instance().getString(R.string.m126_w))
             }
-            wValue < 1000000000 -> {
+
+            in (0.0..10000.0) -> {
+                Pair(
+                    Util.getDoubleText(wValue / 1000),
+                    TtechApplication.instance().getString(R.string.m126_w)
+                )
+            }
+
+
+            in (10000.0..1000000.0) -> {
                 Pair(
                     Util.getDoubleText(wValue / 1000),
                     TtechApplication.instance().getString(R.string.m52_kw)
                 )
             }
+
+
             else -> {
                 Pair(
                     Util.getDoubleText(wValue / 1000000),
@@ -113,7 +124,6 @@ object ValueUtil {
         val f1: Double = bg.setScale(num, BigDecimal.ROUND_HALF_UP).toDouble()
         return f1.toString()
     }
-
 
 
 }

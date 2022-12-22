@@ -12,6 +12,7 @@ import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentSystemInvStatusBinding
 import com.tianji.ttech.ui.home.pv.viewmodel.PvStationViewmodel
+import com.tianji.ttech.utils.ValueUtil
 import kotlinx.coroutines.delay
 
 class PvStatusFragment : BaseFragment() {
@@ -47,14 +48,25 @@ class PvStatusFragment : BaseFragment() {
         viewModel.statusLiveData.observe(viewLifecycleOwner) {
             _binding.srlRefresh.finishRefresh()
 
-            _binding.tvSolarPower.text = it?.solar
-            _binding.tvGridPower.text = it?.grid
-            _binding.tvHomePower.text = it?.home
+            ValueUtil.valueFromW(it?.solar?.toDouble()).apply {
+                _binding.tvSolarPower.text = String.format("%s%s", first, second)
+            }
+            ValueUtil.valueFromW(it?.grid?.toDouble()).apply {
+                _binding.tvGridPower.text = String.format("%s%s", first, second)
+            }
+            ValueUtil.valueFromW(it?.home?.toDouble()).apply {
+                _binding.tvHomePower.text = String.format("%s%s", first, second)
+            }
 
-            _binding.tvPower.text = it?.power
-            _binding.tvEnergyToday.text = it?.energyToday
-            _binding.tvEnergyTotal.text = it?.energyTotal
-
+            ValueUtil.valueFromW(it?.power?.toDouble()).apply {
+                _binding.tvPower.text = String.format("%s%s", first, second)
+            }
+            ValueUtil.valueFromW(it?.energyToday?.toDouble()).apply {
+                _binding.tvEnergyToday.text = String.format("%s%s", first, second)
+            }
+            ValueUtil.valueFromW(it?.energyTotal?.toDouble()).apply {
+                _binding.tvEnergyToday.text = String.format("%s%s", first, second)
+            }
 
 
             val onlineStatus = it?.onlineStatus

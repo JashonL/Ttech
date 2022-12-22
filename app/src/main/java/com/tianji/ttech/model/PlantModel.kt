@@ -35,11 +35,12 @@ data class PlantModel @JvmOverloads constructor(
     val incomeUnit: String,
     val pictureAddress: String,
     val userId: String,
-    val onlineStatus: String,
+    val onlineStatus: Int,
     val currencyPower: String,
     val pvcapacity: String,
     val today: String?,
     val total: String?
+
 ) : Parcelable {
 
     companion object {
@@ -56,12 +57,12 @@ data class PlantModel @JvmOverloads constructor(
         /**
          * 类型-故障
          */
-        const val PLANT_STATUS_TROUBLE = 1
+        const val PLANT_STATUS_TROUBLE = 2
 
         /**
          * 类型-在线
          */
-        const val PLANT_STATUS_ONLINE = 2
+        const val PLANT_STATUS_ONLINE = 1
 
     }
 
