@@ -67,7 +67,7 @@ object ApiPath {
         /**
          * 货币列表
          */
-        const val CURRENCY_LIST = "ATSregister/moneyUnitList"
+        const val CURRENCY_LIST = "v1/station/getIncomeUnit"
 
         /**
          * 根据国家来获取时区列表

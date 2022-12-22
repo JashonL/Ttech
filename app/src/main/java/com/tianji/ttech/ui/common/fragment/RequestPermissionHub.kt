@@ -1,4 +1,4 @@
-package com.growatt.atess.ui.common.fragment
+package com.tianji.ttech.ui.common.fragment
 
 import android.Manifest
 import android.content.Context
@@ -11,8 +11,6 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.tianji.ttech.R
-import com.tianji.ttech.app.TtechApplication
-import kotlinx.coroutines.NonCancellable.cancel
 
 /**
  * 权限请求工具

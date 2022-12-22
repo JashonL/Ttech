@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.findFragment
 import androidx.fragment.app.viewModels
-import com.growatt.atess.ui.common.fragment.RequestPermissionHub
+import com.tianji.ttech.ui.common.fragment.RequestPermissionHub
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentHomeBinding

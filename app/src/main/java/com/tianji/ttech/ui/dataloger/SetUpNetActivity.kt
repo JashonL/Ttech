@@ -1,7 +1,6 @@
 package com.tianji.ttech.ui.dataloger
 
 import android.Manifest
-import android.R
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -16,15 +15,13 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.text.TextUtils
-import android.view.Gravity
 import android.view.View
 import android.view.View.OnClickListener
 import androidx.activity.viewModels
-import com.growatt.atess.ui.common.fragment.RequestPermissionHub
+import com.tianji.ttech.ui.common.fragment.RequestPermissionHub
 import com.tianji.ttech.app.TtechApplication
 import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivitySetUpNetBinding
-import com.tianji.ttech.model.ble.DatalogResponBean
 import com.tianji.ttech.monitor.WifiMonitor
 import com.tianji.ttech.service.ble.BleCommand.BLUETOOTH_KEY
 import com.tianji.ttech.service.ble.BleCommand.WIFI_PASSWORD

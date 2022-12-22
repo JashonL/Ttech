@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.growatt.atess.ui.common.fragment.RequestPermissionHub
+import com.tianji.ttech.ui.common.fragment.RequestPermissionHub
 import com.growatt.atess.ui.plant.monitor.PlantMonitor
 import com.tianji.ttech.BuildConfig
 import com.tianji.ttech.R
@@ -75,8 +75,9 @@ class AddTtchPlantActivity : BaseActivity(), View.OnClickListener {
         binding.llInstalltionDate.setOnClickListener(this)
         binding.tvCountry.setOnClickListener(this)
         binding.tvCity.setOnClickListener(this)
-
         binding.btnAdd.setOnClickListener(this)
+        binding.llFoundRevenge.setOnClickListener(this)
+
     }
 
 
@@ -119,6 +120,17 @@ class AddTtchPlantActivity : BaseActivity(), View.OnClickListener {
             }
         }
 
+
+
+        viewModel.moneyUtilListLiveData.observe(this){
+            dismissDialog()
+            if (it!=null){
+                selectCurrency(it)
+            }
+
+        }
+
+
     }
 
 
@@ -153,6 +165,13 @@ class AddTtchPlantActivity : BaseActivity(), View.OnClickListener {
                 checkInput()
             }
 
+            binding.llFoundRevenge->{
+                //货币
+                selectIncomeUnit()
+            }
+
+
+
 
         }
 
@@ -184,7 +203,9 @@ class AddTtchPlantActivity : BaseActivity(), View.OnClickListener {
             TextUtils.isEmpty(addPlantModel.address) -> {
                 ToastUtil.show(getString(R.string.m119_please_plant_address))
             }
-
+            TextUtils.isEmpty(addPlantModel.formulaMoneyUnitId) -> {
+                ToastUtil.show(getString(R.string.m117_please_select_symbol))
+            }
 
             else -> {
                 requestAddPlant(addPlantModel)
@@ -258,6 +279,29 @@ class AddTtchPlantActivity : BaseActivity(), View.OnClickListener {
      */
     private fun refreshSelectAreaView() {
         binding.tvCountry.text = viewModel.addPlantModel.country
+    }
+
+
+
+
+
+    private fun selectIncomeUnit() {
+        val currencyList = viewModel.moneyUtilListLiveData.value
+        if (currencyList.isNullOrEmpty()) {
+            showDialog()
+            viewModel.fetchCurrencyList()
+        } else {
+            selectCurrency(currencyList)
+        }
+
+    }
+
+
+    private fun selectCurrency(currencyList: Array<CurrencyModel>) {
+        PickerDialog.show(supportFragmentManager, currencyList) {
+            viewModel.addPlantModel.formulaMoneyUnitId = currencyList[it].id.toString()
+            binding.tvCurrency.text = currencyList[it].incomeUnit
+        }
     }
 
 

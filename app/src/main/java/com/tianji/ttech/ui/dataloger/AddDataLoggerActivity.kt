@@ -8,8 +8,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import com.tianji.ttech.ui.common.activity.ScanActivity
-import com.growatt.atess.ui.common.fragment.RequestPermissionHub
-import com.tianji.ttech.R
+import com.tianji.ttech.ui.common.fragment.RequestPermissionHub
 import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivityAddDataLoggerBinding
 import com.tianji.ttech.service.ble.BleManager
@@ -18,7 +17,6 @@ import com.ttech.bluetooth.util.`interface`.IBleConnetLisener
 import com.ttech.bluetooth.util.`interface`.IScanResult
 import com.ttech.bluetooth.util.bean.BleModel
 import com.ttech.lib.util.ActivityBridge
-import com.ttech.lib.util.LogUtil
 import com.ttech.lib.util.ToastUtil
 import com.ttech.lib.util.Util
 

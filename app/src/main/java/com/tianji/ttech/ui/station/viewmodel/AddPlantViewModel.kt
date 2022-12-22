@@ -36,6 +36,9 @@ class AddPlantViewModel : BaseViewModel() {
 
     val currencyListLiveData = MutableLiveData<Pair<Array<GeneralItemModel>, String?>>()
 
+    val moneyUtilListLiveData = MutableLiveData<Array<CurrencyModel>?>()
+
+
     /**
      * 获取时区列表
      */
@@ -65,26 +68,24 @@ class AddPlantViewModel : BaseViewModel() {
      * 获取货币列表
      */
     fun fetchCurrencyList() {
+        val map = HashMap<String, String>().apply {
+            put("email", accountService().user()?.email ?: "")
+        }
         viewModelScope.launch {
-            apiService().httpGet(
+            apiService().postForm(
                 ApiPath.Plant.CURRENCY_LIST,
-                object : HttpCallback<HttpResult<Array<String>>>() {
-                    override fun success(result: HttpResult<Array<String>>) {
+                map,
+                object : HttpCallback<HttpResult<Array<CurrencyModel>>>() {
+                    override fun success(result: HttpResult<Array<CurrencyModel>>) {
                         if (result.isBusinessSuccess()) {
-                            val currencyList = result.obj
-                            if (currencyList == null) {
-                                currencyListLiveData.value = Pair(emptyArray(), null)
-                            } else {
-                                currencyListLiveData.value =
-                                    Pair(GeneralItemModel.convert(currencyList), null)
-                            }
+                            moneyUtilListLiveData.value = result.obj
                         } else {
-                            currencyListLiveData.value = Pair(emptyArray(), result.msg ?: "")
+                            moneyUtilListLiveData.value = null
                         }
                     }
 
                     override fun onFailure(errorModel: HttpErrorModel) {
-                        currencyListLiveData.value = Pair(emptyArray(), errorModel.errorMsg ?: "")
+                        moneyUtilListLiveData.value = null
                     }
 
                 })

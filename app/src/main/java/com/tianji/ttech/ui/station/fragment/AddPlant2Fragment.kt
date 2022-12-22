@@ -17,7 +17,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.growatt.atess.ui.common.fragment.RequestPermissionHub
+import com.tianji.ttech.ui.common.fragment.RequestPermissionHub
 import com.tianji.ttech.BuildConfig
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment

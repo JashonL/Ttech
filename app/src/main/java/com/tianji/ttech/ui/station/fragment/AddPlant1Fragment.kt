@@ -1,17 +1,13 @@
 package com.tianji.ttech.ui.station.fragment
 
 import android.Manifest
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.growatt.atess.ui.common.fragment.RequestPermissionHub
+import com.tianji.ttech.ui.common.fragment.RequestPermissionHub
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentAddPlant1Binding
@@ -20,7 +16,6 @@ import com.tianji.ttech.ui.station.viewmodel.AddPlantViewModel
 import com.tianji.ttech.view.dialog.PickerDialog
 import com.ttech.lib.service.location.LocationInfo
 import com.ttech.lib.service.location.OnLocationListener
-import com.ttech.lib.util.ActivityBridge
 import com.ttech.lib.util.ToastUtil
 import com.ttech.lib.util.Util
 import com.ttech.lib.view.dialog.DatePickerFragment
