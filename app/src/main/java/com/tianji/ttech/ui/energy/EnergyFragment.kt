@@ -11,10 +11,12 @@ import androidx.fragment.app.viewModels
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentEnergyBinding
-import com.tianji.ttech.model.StationModel
+import com.tianji.ttech.model.PlantModel
 import com.tianji.ttech.ui.common.model.DataType
 import com.tianji.ttech.ui.energy.chart.EnergyChartFragment
 import com.tianji.ttech.ui.energy.impact.ImpactFragment
+import com.tianji.ttech.ui.home.pv.PvStatusFragment
+import com.tianji.ttech.ui.home.storage.HomeStatusFragment
 import com.tianji.ttech.ui.station.viewmodel.StationViewModel
 import com.tianji.ttech.view.DateSelectView
 import com.tianji.ttech.view.pop.ListPopuwindow
@@ -99,6 +101,12 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
                 }
             }
         }
+
+
+
+
+
+
         fetchPlantList()
     }
 
@@ -147,7 +155,7 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
                 options.add(ListPopModel(plant.stationName, false))
             }
 
-            val curItem: String = if (viewModel.currentStation != null) {
+            val curItem: String? = if (viewModel.currentStation != null) {
                 viewModel.currentStation!!.id
             } else {
                 ""
@@ -157,16 +165,31 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
                     it,
                     options,
                     _binding.header.tvTitle,
-                    curItem
+                    curItem.toString()
                 ) {
-                    _binding.header.tvTitle.text = options[it].title
-                    //选择电站
-                    energyViewModel.currentStation = second[it]
-                    //重新请求数据
-                    getPlantData()
+                    /*  _binding.header.tvTitle.text = options[it].title
+                      //选择电站
+                      energyViewModel.currentStation = second[it]
+                      //重新请求数据
+                      getPlantData()*/
+
+                    showPlantData(second[it])
+
                 }
             }
         }
+    }
+
+
+    private fun showPlantData(station: PlantModel) {
+        _binding.header.tvTitle.text = station.stationName
+
+        //选择电站
+        energyViewModel.currentStation = station
+        //重新请求数据
+        getPlantData()
+
+
     }
 
 

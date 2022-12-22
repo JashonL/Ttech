@@ -64,6 +64,13 @@ data class PlantModel @JvmOverloads constructor(
          */
         const val PLANT_STATUS_ONLINE = 1
 
+
+
+
+        //电站类型
+        const val PLANT_PV="PV"
+        const val PLANT_STORAGE="storage"
+
     }
 
     fun convert(): AddPlantModel {

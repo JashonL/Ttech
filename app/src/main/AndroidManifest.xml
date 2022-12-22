@@ -154,6 +154,13 @@
         </provider>
 
 
+
+        <activity
+            android:name=".crop.CropImageActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="stateAlwaysHidden" />
     </application>
 
 </manifest>

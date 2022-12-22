@@ -3,7 +3,7 @@ package com.tianji.ttech.ui.station.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tianji.ttech.base.BaseViewModel
-import com.tianji.ttech.model.StationModel
+import com.tianji.ttech.model.PlantModel
 import com.tianji.ttech.service.http.ApiPath
 import com.ttech.lib.service.http.HttpCallback
 import com.ttech.lib.service.http.HttpErrorModel
@@ -12,9 +12,11 @@ import kotlinx.coroutines.launch
 
 class StationViewModel : BaseViewModel() {
 
-    val getPlantListLiveData = MutableLiveData<Pair<Boolean, Array<StationModel>?>>()
+    val getPlantListLiveData = MutableLiveData<Pair<Boolean, Array<PlantModel>?>>()
 
-    var currentStation: StationModel? = null
+    var currentStation: PlantModel? = null
+
+
 
 
     /**
@@ -29,8 +31,8 @@ class StationViewModel : BaseViewModel() {
             apiService().postForm(
                 ApiPath.Plant.STATIONLIST,
                 params,
-                object : HttpCallback<HttpResult<Array<StationModel>>>() {
-                    override fun success(result: HttpResult<Array<StationModel>>) {
+                object : HttpCallback<HttpResult<Array<PlantModel>>>() {
+                    override fun success(result: HttpResult<Array<PlantModel>>) {
                         getPlantListLiveData.value = Pair(result.isBusinessSuccess(), result.obj)
                     }
 
@@ -40,6 +42,9 @@ class StationViewModel : BaseViewModel() {
                 })
         }
     }
+
+
+
 
 
 }

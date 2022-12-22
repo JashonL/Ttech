@@ -11,6 +11,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.tianji.ttech.R
 import com.tianji.ttech.databinding.ActivityMainBinding
+import com.tianji.ttech.model.PlantModel
 import com.tianji.ttech.ui.array.ArrayFragment
 import com.tianji.ttech.ui.energy.EnergyFragment
 import com.tianji.ttech.ui.home.HomeFragment
@@ -61,11 +62,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.navView.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.navigation_home -> mainViewpager.setCurrentItem(0,false)
-                R.id.navigation_eneger -> mainViewpager.setCurrentItem(1,false)
-                R.id.navigation_array -> mainViewpager.setCurrentItem(2,false)
-                R.id.navigation_station -> mainViewpager.setCurrentItem(3,false)
-                R.id.navigation_menu -> mainViewpager.setCurrentItem(4,false)
+                R.id.navigation_home -> mainViewpager.setCurrentItem(0, false)
+                R.id.navigation_eneger -> mainViewpager.setCurrentItem(1, false)
+                R.id.navigation_array -> mainViewpager.setCurrentItem(2, false)
+                R.id.navigation_station -> mainViewpager.setCurrentItem(3, false)
+                R.id.navigation_menu -> mainViewpager.setCurrentItem(4, false)
             }
             false
         }
@@ -93,6 +94,16 @@ class MainActivity : AppCompatActivity() {
             this.fragments.addAll(fragments)
             notifyDataSetChanged()
         }
+
+
     }
+
+
+    fun showHomeFragment(station: PlantModel) {
+        val mainViewpager = binding.mainViewpager
+        mainViewpager.setCurrentItem(0, false)
+        (fragments[0] as HomeFragment).showSystemSatus(station)
+    }
+
 
 }

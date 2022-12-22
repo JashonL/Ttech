@@ -4,10 +4,8 @@ import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tianji.ttech.base.BaseViewModel
-import com.tianji.ttech.model.PlantListResultModel
 import com.tianji.ttech.model.PlantModel
 import com.tianji.ttech.model.PlantStatusNumModel
-import com.tianji.ttech.model.StationModel
 import com.tianji.ttech.service.http.ApiPath
 import com.ttech.lib.service.http.HttpCallback
 import com.ttech.lib.service.http.HttpErrorModel

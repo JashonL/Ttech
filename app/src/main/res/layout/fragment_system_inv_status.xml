@@ -20,7 +20,7 @@
                 android:id="@+id/iv_sys_ppv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/system_grid"
+                android:src="@drawable/system_ppv"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_dc_ac"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/tv_dc_ac"
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_50"
-                android:src="@drawable/system_grid"
+                android:src="@drawable/system_home"
                 app:layout_constraintLeft_toLeftOf="@+id/tv_dc_ac"
                 app:layout_constraintRight_toRightOf="@+id/tv_dc_ac"
                 app:layout_constraintTop_toBottomOf="@+id/tv_dc_ac" />

@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tianji.ttech.base.BaseViewModel
 import com.tianji.ttech.model.ImpactModel
-import com.tianji.ttech.model.StationModel
+import com.tianji.ttech.model.PlantModel
 import com.tianji.ttech.model.energy.ChartModel
 import com.tianji.ttech.service.http.ApiPath
 import com.tianji.ttech.ui.chart.ChartListDataModel
@@ -28,7 +28,7 @@ class EnergyViewModel : BaseViewModel() {
     val impactChartLiveData = MutableLiveData<ChartListDataModel>()
 
 
-    var currentStation: StationModel? = null
+    var currentStation: PlantModel? = null
 
     var dateType = DataType.TOTAL
 

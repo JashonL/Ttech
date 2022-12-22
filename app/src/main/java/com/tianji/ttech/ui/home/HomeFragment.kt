@@ -17,7 +17,7 @@ import com.tianji.ttech.ui.common.fragment.RequestPermissionHub
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentHomeBinding
-import com.tianji.ttech.model.StationModel
+import com.tianji.ttech.model.PlantModel
 import com.tianji.ttech.ui.common.activity.ScanActivity
 import com.tianji.ttech.ui.dataloger.AddDataLoggerActivity
 import com.tianji.ttech.ui.home.pv.PvStatusFragment
@@ -80,19 +80,22 @@ class HomeFragment : BaseFragment(), OnClickListener {
                 }
             }
         }
+
+
         fetchPlantList()
     }
 
 
-    private fun showSystemSatus(station: StationModel) {
+    fun showSystemSatus(station: PlantModel) {
         viewModel.currentStation = station
         val stationType = station.stationType
+        _binding.header.tvTitle.text = station.stationName
         //根据电站类型显示不同界面
         childFragmentManager.commit(true) {
             val findFragment = _binding.fragmentSystem.findFragment<Fragment>()
-            if ("PV Station" == stationType) {//纯光伏电站
+            if (PlantModel.PLANT_PV.equals(stationType,ignoreCase = true)) {//纯光伏电站
                 if (findFragment is PvStatusFragment) {
-                    findFragment.getDataByStationId(station.id)
+                    findFragment.getDataByStationId(station.id.toString())
                 } else {
                     val pvStatusFragment = PvStatusFragment()
                     //传参过去
@@ -104,7 +107,7 @@ class HomeFragment : BaseFragment(), OnClickListener {
 
             } else {
                 if (findFragment is HomeStatusFragment) {
-                    findFragment.getDataByStationId(station.id)
+                    findFragment.getDataByStationId(station.id.toString())
                 } else {
                     val homeStatusFragment = HomeStatusFragment()
                     //传参过去
@@ -158,7 +161,7 @@ class HomeFragment : BaseFragment(), OnClickListener {
                 options.add(ListPopModel(plant.stationName, false))
             }
 
-            val curItem: String = if (viewModel.currentStation != null) {
+            val curItem: String? = if (viewModel.currentStation != null) {
                 viewModel.currentStation!!.id
             } else {
                 ""
@@ -168,7 +171,7 @@ class HomeFragment : BaseFragment(), OnClickListener {
                     it,
                     options,
                     _binding.header.tvTitle,
-                    curItem
+                    curItem?:""
                 ) {
                     showSystemSatus(second[it])
                 }

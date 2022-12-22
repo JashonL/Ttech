@@ -84,4 +84,33 @@ class SettingViewModel : BaseViewModel() {
     }
 
 
+
+
+
+
+    /**
+     * 设置-上传用户头像
+     */
+    fun uploadUserAvatar(filePath: String) {
+        viewModelScope.launch {
+            apiService().postFile(
+                ApiPath.Mine.UPLOADAVATAR, hashMapOf(), File(filePath),
+                object : HttpCallback<HttpResult<String>>() {
+                    override fun success(result: HttpResult<String>) {
+                        if (result.isBusinessSuccess()) {
+                            uploadUserAvatarLiveData.value = Pair(result.obj, result.msg ?: "")
+                        } else {
+                            uploadUserAvatarLiveData.value = Pair(null, result.msg ?: "")
+                        }
+                    }
+
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        uploadUserAvatarLiveData.value = Pair(null, errorModel.errorMsg ?: "")
+                    }
+
+                })
+        }
+    }
+
+
 }

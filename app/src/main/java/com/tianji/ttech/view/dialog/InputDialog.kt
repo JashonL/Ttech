@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.tianji.ttech.base.BaseDialogFragment
 import com.tianji.ttech.databinding.DialogInputBinding
 import com.ttech.lib.util.gone
 
-class InputDialog : BottomSheetDialogFragment(),View.OnClickListener{
+class InputDialog : BaseDialogFragment(),View.OnClickListener{
 
 
     companion object {
@@ -32,7 +33,7 @@ class InputDialog : BottomSheetDialogFragment(),View.OnClickListener{
             dialog.redButtonText = redButtonText
             dialog.onGrayButtonClick = onGrayButtonClick
             dialog.onRedButtonClick = onRedButtonClick
-            dialog.show(fm, AlertDialog::class.java.name)
+            dialog.show(fm, InputDialog::class.java.name)
         }
     }
 

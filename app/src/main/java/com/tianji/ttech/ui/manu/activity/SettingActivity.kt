@@ -1,20 +1,32 @@
 package com.tianji.ttech.ui.manu.activity
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
+import com.tianji.ttech.BuildConfig
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseActivity
+import com.tianji.ttech.crop.CropShape
+import com.tianji.ttech.crop.ImageCrop
 import com.tianji.ttech.databinding.ActivitySettingBinding
 import com.tianji.ttech.ui.common.activity.CountryActivity
+import com.tianji.ttech.ui.common.fragment.RequestPermissionHub
 import com.tianji.ttech.ui.manu.viewmodel.SettingViewModel
+import com.tianji.ttech.utils.AppUtil
 import com.tianji.ttech.view.dialog.InputDialog
+import com.tianji.ttech.view.dialog.OptionsDialog
 import com.ttech.lib.service.account.IAccountService
 import com.ttech.lib.util.ActivityBridge
 import com.ttech.lib.util.ToastUtil
+import com.ttech.lib.util.Util
+import java.io.File
 
 
 /**
@@ -33,6 +45,10 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
 
     private lateinit var binding: ActivitySettingBinding
     private val viewModel: SettingViewModel by viewModels()
+
+
+
+    private var takePictureFile: File? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,15 +96,21 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
                 ToastUtil.show(it)
             }
         }
+
+
+
         viewModel.uploadUserAvatarLiveData.observe(this) {
             dismissDialog()
-            if (it.second == null) {
+            ToastUtil.show(it.second)
+            if (it.first != null) {
                 accountService().saveUserAvatar(it.first)
                 refreshUserProfile()
-            } else {
-                ToastUtil.show(it.second)
             }
         }
+
+
+
+
     }
 
     override fun onClick(v: View?) {
@@ -108,8 +130,121 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
                 showInstallationDialog(title,installerCode.toString())
             }
 
+
+            v===binding.ivAvatar->{
+                selectPictureMode()
+            }
+
+
         }
     }
+
+
+
+
+    private fun selectPictureMode() {
+        val takeAPicture = getString(R.string.m156_take_photo)
+        val fromTheAlbum = getString(R.string.m157_select_album)
+        val options =
+            arrayOf(takeAPicture, fromTheAlbum)
+        OptionsDialog.show(supportFragmentManager, options) {
+            when (options[it]) {
+                takeAPicture -> takeAPicture()
+                fromTheAlbum -> fromTheAlbum()
+            }
+        }
+    }
+
+
+
+
+
+
+    /**
+     * Android官方说明：Intent(MediaStore.ACTION_IMAGE_CAPTURE) 调用系统相机拍照，不需要申请Camera权限
+     * 1.小米手机不申请权限会崩溃，所以都申请权限进行适配
+     */
+    private fun takeAPicture() {
+        RequestPermissionHub.requestPermission(
+            supportFragmentManager,
+            arrayOf(Manifest.permission.CAMERA)
+        ) { isGranted ->
+            if (isGranted) {
+                ActivityBridge.startActivity(
+                    this,
+                    Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
+                        takePictureFile = AppUtil.createImageFile()?.apply {
+                            putExtra(
+                                MediaStore.EXTRA_OUTPUT,
+                                FileProvider.getUriForFile(
+                                    this@SettingActivity,
+                                    BuildConfig.APPLICATION_ID + ".fileProvider",
+                                    this
+                                )
+                            )
+                        }
+                    },
+                    object :
+                        ActivityBridge.OnActivityForResult {
+                        override fun onActivityForResult(
+                            context: Context?,
+                            resultCode: Int,
+                            data: Intent?
+                        ) {
+                            if (resultCode == RESULT_OK) {
+                                takePictureFile?.also {
+                                    Util.galleryAddPic(it.absolutePath)
+                                    cropImage(Uri.fromFile(it))
+                                }
+                            }
+                        }
+                    })
+            }
+        }
+    }
+
+
+    private fun fromTheAlbum() {
+        RequestPermissionHub.requestPermission(
+            supportFragmentManager,
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+        ) { isGranted ->
+            if (isGranted) {
+                ActivityBridge.startActivity(
+                    this,
+                    Intent(Intent.ACTION_PICK).apply {
+                        type = "image/*"
+                        data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    },
+                    object :
+                        ActivityBridge.OnActivityForResult {
+                        override fun onActivityForResult(
+                            context: Context?,
+                            resultCode: Int,
+                            data: Intent?
+                        ) {
+                            if (resultCode == RESULT_OK) {
+                                cropImage(data?.data)
+                            }
+                        }
+                    })
+            }
+        }
+    }
+
+
+    private fun cropImage(imageUri: Uri?) {
+        imageUri?.also {
+            ImageCrop.activity(it)
+                .setCropShape(CropShape.CIRCLE)
+                .start(this@SettingActivity)
+        }
+    }
+
+
+
+
+
 
     private fun showInstallationDialog(title:String,content:String) {
             InputDialog.showDialog(
@@ -148,7 +283,15 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
+        if (resultCode == RESULT_OK) {
+            //剪裁图片回调
+            if (requestCode == ImageCrop.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                ImageCrop.getActivityResult(data).uri?.path?.also {
+                    showDialog()
+                    viewModel.uploadUserAvatar(it)
+                }
+            }
+        }
     }
 
     override fun onUserProfileChange(account: IAccountService) {

@@ -76,6 +76,7 @@
             android:id="@+id/item_country"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            app:showSubName="true"
             app:itemName="@string/m79_country" />
 
         <com.tianji.ttech.view.SettingItemView

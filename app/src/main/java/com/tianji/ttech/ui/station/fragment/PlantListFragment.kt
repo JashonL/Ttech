@@ -22,11 +22,14 @@ import com.tianji.ttech.base.OnItemClickListener
 import com.tianji.ttech.databinding.FragmentPlantListBinding
 import com.tianji.ttech.databinding.PlantViewHolderBinding
 import com.tianji.ttech.model.PlantModel
+import com.tianji.ttech.ui.MainActivity
 import com.tianji.ttech.ui.home.viewmodel.PlantFilterViewModel
 import com.tianji.ttech.ui.station.activity.AddPlantActivity
 import com.tianji.ttech.ui.station.activity.AddTtchPlantActivity
 import com.tianji.ttech.ui.station.viewmodel.PlantInfoViewModel
 import com.tianji.ttech.ui.station.viewmodel.PlantListViewModel
+import com.tianji.ttech.ui.station.viewmodel.StationViewModel
+import com.tianji.ttech.utils.ValueUtil
 import com.tianji.ttech.view.itemdecoration.DividerItemDecoration
 import com.ttech.lib.util.ToastUtil
 import com.ttech.lib.util.ViewUtil
@@ -49,6 +52,8 @@ class PlantListFragment : BaseFragment() {
     private val viewModel: PlantListViewModel by viewModels()
     private val filterViewModel: PlantFilterViewModel by activityViewModels()
     private val plantInfoViewModel: PlantInfoViewModel by viewModels()
+
+    private val stationViewModel: StationViewModel by viewModels()
 
 
     override fun onAttach(context: Context) {
@@ -146,7 +151,7 @@ class PlantListFragment : BaseFragment() {
 
     private fun refresh() {
         filterViewModel.getPlantFilterLiveData.value?.let {
-            viewModel.getPlantList(plantStatus?:0, it, searchWord.toString())
+            viewModel.getPlantList(plantStatus ?: 0, it, searchWord.toString())
         }
     }
 
@@ -200,9 +205,7 @@ class PlantListFragment : BaseFragment() {
         }
 
         override fun onItemClick(v: View?, position: Int) {
-            getItem(position).id?.let {
-
-            }
+            (activity as MainActivity).showHomeFragment(getItem(position))
         }
 
         override fun onItemLongClick(v: View?, position: Int) {
@@ -274,7 +277,7 @@ class PlantListFragment : BaseFragment() {
                 ViewUtil.createShape(getColor(R.color.color_1A0087FD), 2)
             binding.tvCurrentPower.text = plantModel.currencyPower
             binding.tvInstallDate.text = plantModel.installtionDate
-            binding.tvTotalComponentPower.text = plantModel.pvcapacity
+            binding.tvTotalComponentPower.text =ValueUtil.valueFromWp(plantModel.pvcapacity.toDouble()).first
             binding.tvPower.text = getTvSpan(plantModel)
             binding.root.tag = plantModel
         }
