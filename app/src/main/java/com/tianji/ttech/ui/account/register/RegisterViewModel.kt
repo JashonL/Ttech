@@ -14,7 +14,7 @@ import org.json.JSONObject
 
 class RegisterViewModel : BaseViewModel() {
 
-    val registerLiveData = MutableLiveData<String?>()
+    val registerLiveData = MutableLiveData<User?>()
 
     /**
      * 是否同意隐私政策
@@ -40,7 +40,7 @@ class RegisterViewModel : BaseViewModel() {
                 put("country", country)
                 put("timeZone", timeZone)
                 put("email", email)
-                put("password", password)
+                put("password", MD5Util.md5(password)?:"")
                 put("verificationCode", verificationCode)
                 put("installerCode", installerCode)
 
@@ -49,14 +49,18 @@ class RegisterViewModel : BaseViewModel() {
                 HttpCallback<HttpResult<User>>() {
                 override fun success(result: HttpResult<User>) {
                     if (result.isBusinessSuccess()) {
-                        registerLiveData.value = null
+
+                        val user = result.obj
+                        user?.password = password
+
+                        registerLiveData.value = user
                     } else {
-                        registerLiveData.value = result.msg ?: ""
+                        registerLiveData.value = null
                     }
                 }
 
                 override fun onFailure(errorModel: HttpErrorModel) {
-                    registerLiveData.value = errorModel.errorMsg ?: ""
+                    registerLiveData.value = null
                 }
 
             })

@@ -15,13 +15,17 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.tianji.ttech.R
+import com.tianji.ttech.app.TtechApplication
 import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivityRegisterBinding
+import com.tianji.ttech.ui.MainActivity
+import com.tianji.ttech.ui.account.login.viewmodel.LoginViewModel
 import com.tianji.ttech.ui.account.viewmodel.VerifyCodeViewModel
 import com.tianji.ttech.ui.common.activity.CountryActivity
 import com.tianji.ttech.ui.common.activity.WebActivity
 import com.tianji.ttech.utils.AppUtil
 import com.tianji.ttech.utils.TimeZoneUtil
+import com.ttech.lib.service.account.User
 import com.ttech.lib.util.ActivityBridge
 import com.ttech.lib.util.MD5Util
 import com.ttech.lib.util.ToastUtil
@@ -42,6 +46,8 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
 
     private val viewModel: RegisterViewModel by viewModels()
     private val verifyCodeViewModel: VerifyCodeViewModel by viewModels()
+
+    private val loginViewModel: LoginViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,10 +86,13 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     private fun initData() {
         viewModel.registerLiveData.observe(this) {
             dismissDialog()
-            if (it == null) {
+            if (it != null) {
                 ToastUtil.show(getString(R.string.m90_register_success))
                 //注册成功，关闭页面返回登录页面
                 finish()
+
+                //去登录
+                login(it.email, it.password)
             } else {
 //                ToastUtil.show(it)
                 showResultDialog(it, null, null)
@@ -101,7 +110,48 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
             }
         }
 
+
+
+
+        loginViewModel.loginLiveData.observe(this) {
+            dismissDialog()
+            if (it.second == null) {
+                val user = it.first
+                loginSuccess(user)
+            } else {
+                ToastUtil.show(it.second)
+            }
+        }
+
+
     }
+
+
+
+
+    private fun login(password: String, userName: String) {
+        if (!TextUtils.isEmpty(password)) {
+            showDialog()
+            val pwd_md5 = MD5Util.md5(password)
+            var version = Util.getVersion(this)
+            val phoneModel = Util.getPhoneModel()
+            if (version == null) version = "";
+            if (pwd_md5 != null) {
+                loginViewModel.login(userName, pwd_md5, TtechApplication.APP_OS, phoneModel, version)
+            }
+        }
+
+    }
+
+
+
+
+    private fun loginSuccess(user: User?) {
+        accountService().saveUserInfo(user)
+        MainActivity.start(this)
+        finish()
+    }
+
 
 
     private fun initView() {
@@ -267,13 +317,12 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
             ToastUtil.show(getString(R.string.m15_installer_code_not_empty))
         } else {
             showDialog()
-            val md5 = MD5Util.md5(password)
 
             viewModel.register(
                 country!!,
                 timeZone!!,
                 username!!,
-                md5 ?: "",
+                password,
                 code!!,
                 installerCoder!!
             )
