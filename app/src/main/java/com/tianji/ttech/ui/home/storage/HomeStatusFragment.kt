@@ -103,8 +103,10 @@ class HomeStatusFragment : BaseFragment() {
     }
 
 
-    public fun getDataByStationId(id: String) {
-
+    fun getDataByStationId(id: String) {
+        viewModel.stationId = id
+        //获取数据
+        viewModel.getDataOverview()
     }
 
 
