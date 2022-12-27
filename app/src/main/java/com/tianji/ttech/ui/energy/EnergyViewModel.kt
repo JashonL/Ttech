@@ -19,13 +19,15 @@ import java.util.Date
 
 class EnergyViewModel : BaseViewModel() {
 
-    val impactLiveData = MutableLiveData<ImpactModel?>()
 
     val stationLiveData = MutableLiveData<Pair<Boolean, ChartModel?>>()
 
     val chartLiveData = MutableLiveData<ChartListDataModel>()
 
     val impactChartLiveData = MutableLiveData<ChartListDataModel>()
+
+    val impactLiveData = MutableLiveData<ImpactModel?>()
+
 
 
     var currentStation: PlantModel? = null
@@ -79,20 +81,25 @@ class EnergyViewModel : BaseViewModel() {
                         chartModel?.let {
                             val loadList = it.loadList
                             val timeList = mutableListOf<String>()
-                            for (i in loadList.indices) {
-                                timeList.add(i.toString())
+
+                            if (loadList!=null){
+                                for (i in loadList.indices) {
+                                    timeList.add(i.toString())
+                                }
+
+                                val dataList = mutableListOf(
+                                    ChartYDataList(it.batList, "bat"),
+                                    ChartYDataList(it.gridList, "grid"),
+                                    ChartYDataList(it.solarList, "solar"),
+                                    ChartYDataList(it.loadList, "load"),
+                                )
+
+                                val chartListDataModel =
+                                    ChartListDataModel(timeList.toTypedArray(), dataList.toTypedArray())
+                                chartLiveData.value = chartListDataModel
                             }
 
-                            val dataList = mutableListOf(
-                                ChartYDataList(it.batList, "bat"),
-                                ChartYDataList(it.gridList, "grid"),
-                                ChartYDataList(it.solarList, "solar"),
-                                ChartYDataList(it.loadList, "load"),
-                            )
 
-                            val chartListDataModel =
-                                ChartListDataModel(timeList.toTypedArray(), dataList.toTypedArray())
-                            chartLiveData.value = chartListDataModel
 
                         }
                         stationLiveData.value = Pair(result.isBusinessSuccess(), result.obj)
