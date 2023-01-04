@@ -57,6 +57,9 @@
         </attr>
 
 
+
+        <attr name="compose_content_ismust" format="boolean"/>
+
     </declare-styleable>
 
 

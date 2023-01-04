@@ -12,6 +12,7 @@ import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import com.tianji.ttech.R
 import com.tianji.ttech.databinding.EditextComposeBinding
 import com.ttech.lib.util.gone
+import com.ttech.lib.util.invisible
 import com.ttech.lib.util.visible
 
 class EditTextComposeView @JvmOverloads constructor(
@@ -34,6 +35,7 @@ class EditTextComposeView @JvmOverloads constructor(
 
 
     private var isPasswrod: Boolean
+    private var isMust: Boolean = false
 
 
     //设置  获取值
@@ -66,6 +68,8 @@ class EditTextComposeView @JvmOverloads constructor(
 
                 isPasswrod =
                     getBoolean(R.styleable.EditTextComposeView_compose_item_ispassword, false)
+
+                isMust = getBoolean(R.styleable.EditTextComposeView_compose_item_ispassword, false)
 
 
             } finally {
@@ -116,6 +120,14 @@ class EditTextComposeView @JvmOverloads constructor(
             bingding.etContent.inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD
         }
 
+        //
+        if (isMust) {
+            bingding.tvStar.visible()
+        } else {
+            bingding.tvStar.invisible()
+        }
+
+
         bingding.flRight.setOnClickListener(this)
     }
 
@@ -138,11 +150,9 @@ class EditTextComposeView @JvmOverloads constructor(
     }
 
 
-
     fun setRightText(value: String) {
         bingding.tvRightText.setText(value)
     }
-
 
 
     fun setOnRightClickListener(rightClick: ((View) -> Unit)?) {
