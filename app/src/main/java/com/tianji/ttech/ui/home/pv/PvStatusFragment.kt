@@ -100,6 +100,31 @@ class PvStatusFragment : BaseFragment() {
 
             }
 
+
+
+
+            //根据值的大小设置图片
+            if (it?.grid?.toDouble() != null && it.grid.toDouble() != 0.0) {
+                _binding.ivSysGrid.setImageResource(R.drawable.system_grid)
+            } else {
+                _binding.ivSysGrid.setImageResource(R.drawable.system_grid_offline)
+            }
+
+
+            if (it?.home?.toDouble() != null && it.home.toDouble() != 0.0) {
+                _binding.ivSysLoad.setImageResource(R.drawable.system_home)
+            } else {
+                _binding.ivSysLoad.setImageResource(R.drawable.system_home_offline)
+            }
+
+            if (it?.solar?.toDouble() != null && it.solar.toDouble() != 0.0) {
+                _binding.ivSysPpv.setImageResource(R.drawable.system_bat)
+            } else {
+                _binding.ivSysPpv.setImageResource(R.drawable.system_bat_offline)
+            }
+
+
+
         }
 
         //获取数据

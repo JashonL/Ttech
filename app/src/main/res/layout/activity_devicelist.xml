@@ -6,10 +6,10 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.ttech.lib.view.StatusBarHeightView
+    <com.ttech.lib.view.StatusBarWhiteHeightView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white" />
+        android:background="@color/color_app_main" />
 
     <com.tianji.ttech.view.TitleBarLayout
         android:id="@+id/title"
