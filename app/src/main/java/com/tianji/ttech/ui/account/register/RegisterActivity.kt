@@ -92,7 +92,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                 finish()
 
                 //去登录
-                login(it.email, it.password)
+                login(it.password, it.email)
             } else {
 //                ToastUtil.show(it)
                 showResultDialog(it, null, null)
@@ -127,8 +127,6 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     }
 
 
-
-
     private fun login(password: String, userName: String) {
         if (!TextUtils.isEmpty(password)) {
             showDialog()
@@ -137,13 +135,17 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
             val phoneModel = Util.getPhoneModel()
             if (version == null) version = "";
             if (pwd_md5 != null) {
-                loginViewModel.login(userName, pwd_md5, TtechApplication.APP_OS, phoneModel, version)
+                loginViewModel.login(
+                    userName,
+                    pwd_md5,
+                    TtechApplication.APP_OS,
+                    phoneModel,
+                    version
+                )
             }
         }
 
     }
-
-
 
 
     private fun loginSuccess(user: User?) {
@@ -151,7 +153,6 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
         MainActivity.start(this)
         finish()
     }
-
 
 
     private fun initView() {

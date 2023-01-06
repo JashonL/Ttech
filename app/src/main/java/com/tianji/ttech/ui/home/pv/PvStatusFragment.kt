@@ -6,6 +6,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.tianji.ttech.R
@@ -13,6 +14,8 @@ import com.tianji.ttech.base.BaseFragment
 import com.tianji.ttech.databinding.FragmentSystemInvStatusBinding
 import com.tianji.ttech.ui.home.pv.viewmodel.PvStationViewmodel
 import com.tianji.ttech.utils.ValueUtil
+import com.ttech.lib.util.setDrawableStart
+import com.ttech.lib.util.textColor
 import kotlinx.coroutines.delay
 
 class PvStatusFragment : BaseFragment() {
@@ -73,9 +76,27 @@ class PvStatusFragment : BaseFragment() {
             if ("1" == onlineStatus){
                 _binding.ivStatus.setImageResource(R.drawable.check_normal)
                 _binding.tvStatus.text = getString(R.string.m82_system_nomal)
+
+                _binding.tvStatus.textColor(R.color.status_online)
+                _binding.tvOlStatus.text = getString(R.string.m124_on_line)
+                _binding.tvOlStatus.setDrawableStart(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.wifi_normal
+                    )
+                )
             }else{
                 _binding.ivStatus.setImageResource(R.drawable.exception)
                 _binding.tvStatus.text = getString(R.string.m83_system_exception)
+
+                _binding.tvOlStatus.text = getString(R.string.m125_off_line)
+                _binding.tvStatus.textColor(R.color.status_offline)
+                _binding.tvOlStatus.setDrawableStart(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.wifi_offline
+                    )
+                )
 
             }
 

@@ -135,6 +135,14 @@
         <activity
             android:name=".ui.station.activity.AddTtchPlantActivity"
             android:exported="true"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="nosensor" />
+
+
+        <activity
+            android:name=".ui.device.activity.DeviceListActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="nosensor" />
 
 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.device.activity.HvBatBoxActivity">
+
+    <com.ttech.lib.view.StatusBarHeightView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" />
+
+
+    <com.tianji.ttech.view.TitleBarLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        app:titleText="@string/m118_electricity"
+        android:layout_height="wrap_content" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rlv_data"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_margin="@dimen/dp_10"
+        android:background="@drawable/shape_cancel"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/tv_down_my_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_5"
+            android:text="@string/m190_down_my_data"
+            android:textColor="@color/black_333333"
+            android:textSize="@dimen/size_content_sp_14" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

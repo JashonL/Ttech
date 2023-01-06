@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_10">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_5"
+            android:textColor="@color/black_333333"
+            android:textSize="@dimen/text_medium"
+            tools:text="sub1" />
+
+
+        <TextView
+            android:id="@+id/tv_soc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_5"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_medium"
+            tools:text="99.6" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/pb_progress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_20"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/dp_10"
+                android:max="100"
+                android:progressDrawable="@drawable/progress_style1" />
+
+
+            <TextView
+                android:id="@+id/tv_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/dp_10"
+                android:padding="@dimen/dp_5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_medium"
+                tools:text="99.6" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_10"
+            android:background="@color/gray_eeeeeee"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/m182_max_voltage"
+                android:textColor="@color/black_333333"
+                android:textSize="@dimen/size_content_sp_12" />
+
+            <TextView
+                android:id="@+id/tv_max_vol"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/black_333333"
+                android:textSize="@dimen/size_content_sp_12" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_10"
+            android:background="@color/gray_eeeeeee"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/m183_min_voltage"
+                android:textColor="@color/black_333333"
+                android:textSize="@dimen/size_content_sp_12" />
+
+            <TextView
+                android:id="@+id/tv_min_vol"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/black_333333"
+                android:textSize="@dimen/size_content_sp_12" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_10"
+            android:background="@color/gray_eeeeeee"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/m185_max_temperature"
+                android:textColor="@color/black_333333"
+                android:textSize="@dimen/size_content_sp_12" />
+
+            <TextView
+                android:id="@+id/tv_max_temp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/black_333333"
+                android:textSize="@dimen/size_content_sp_12" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@color/gray_eeeeeee"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/m186_min_temperature"
+                android:textColor="@color/black_333333"
+                android:textSize="@dimen/size_content_sp_12" />
+
+            <TextView
+                android:id="@+id/tv_min_temp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/black_333333"
+                android:textSize="@dimen/size_content_sp_12" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

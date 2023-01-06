@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.fragment.app.findFragment
 import androidx.fragment.app.viewModels
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
@@ -15,8 +13,6 @@ import com.tianji.ttech.model.PlantModel
 import com.tianji.ttech.ui.common.model.DataType
 import com.tianji.ttech.ui.energy.chart.EnergyChartFragment
 import com.tianji.ttech.ui.energy.impact.ImpactFragment
-import com.tianji.ttech.ui.home.pv.PvStatusFragment
-import com.tianji.ttech.ui.home.storage.HomeStatusFragment
 import com.tianji.ttech.ui.station.viewmodel.StationViewModel
 import com.tianji.ttech.view.DateSelectView
 import com.tianji.ttech.view.pop.ListPopuwindow

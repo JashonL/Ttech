@@ -112,6 +112,17 @@ class TabLayout @JvmOverloads constructor(
 
 }
 
+
+
+
+
 interface OnTabSelectedListener {
     fun onTabSelect(selectTab: Tab, selectPosition: Int)
+    fun onTabSelect(selectTab: TextTab, selectPosition: Int)
+}
+
+
+interface TabSelect {
+    fun isSelect(): Boolean
+    fun setSelect(isSelect: Boolean)
 }

@@ -50,8 +50,24 @@ class PlantListViewModel : BaseViewModel() {
                 object : HttpCallback<HttpResult<Array<PlantModel>>>() {
                     override fun success(result: HttpResult<Array<PlantModel>>) {
                         if (result.isBusinessSuccess()) {
+                            val plants = result.obj ?: emptyArray()
+                            var showPlants: MutableList<PlantModel> = mutableListOf()
+                            when (plantStatus) {
+                                PlantModel.PLANT_STATUS_ALL -> {
+                                    showPlants = plants.toMutableList()
+                                }
+                                else -> {
+                                    for (i in plants.indices) {
+                                        val status = plants[i].onlineStatus
+                                        if (status == plantStatus) {
+                                            showPlants.add(plants[i])
+                                        }
+
+                                    }
+                                }
+                            }
                             getPlantListLiveData.value =
-                                Pair(result.obj ?: emptyArray(), null)
+                                Pair(showPlants.toTypedArray(), null)
                         } else {
                             getPlantListLiveData.value = Pair(null, result.msg ?: "")
                         }

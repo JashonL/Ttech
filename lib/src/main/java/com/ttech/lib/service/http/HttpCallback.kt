@@ -13,14 +13,13 @@ abstract class HttpCallback<R> : IHttpCallback {
     override fun onSuccess(response: String?) {
         //统一处理登录失效的问题
         try {
-            response?.also {
-                val status_code = JSONObject(response).optString("status_code").toString()
-                if (status_code == "90001") {
-                    LibApplication.instance().accountService().tokenExpired()
-                    val errorMsg = JSONObject(response).optString("msg").toString()
-                    ToastUtil.show(errorMsg)
-                    return
-                }
+            val result = JSONObject(response).optString("result").toString()
+            if (result == "10000") {
+                //做自动登录处理
+                LibApplication.instance().accountService().tokenExpired()
+                val errorMsg = JSONObject(response).optString("msg").toString()
+                ToastUtil.show(errorMsg)
+                return
             }
         } catch (e: JSONException) {
         }

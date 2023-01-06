@@ -131,5 +131,29 @@
     <color name="color_5E72E4">#5E72E4</color>
 
 
+    <color name="color_bottom_menu">#FFA244</color>
+    <color name="color_bottom_blue">#5793C8</color>
+
+
+    <color name="status_online">#80DA8A</color>
+    <color name="status_offline">#FD8307</color>
+
+
+    <color name="color_consuption">#FFA244</color>
+    <color name="color_consuption_end">#FE6704</color>
+
+
+    <color name="color_storage">#21E854</color>
+    <color name="color_storage_end">#02AF2F</color>
+
+    <color name="color_sold">#62B2F8</color>
+    <color name="color_sold_">#4482E3</color>
+
+
+    <color name="color_ring_circle">#4B83FD</color>
+    <color name="color_ring_1">#91B3FD</color>
+    <color name="color_ring_2">#EDF3FF</color>
+
+
 
 </resources>

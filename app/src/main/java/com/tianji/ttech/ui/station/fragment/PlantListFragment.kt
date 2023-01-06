@@ -23,6 +23,7 @@ import com.tianji.ttech.databinding.FragmentPlantListBinding
 import com.tianji.ttech.databinding.PlantViewHolderBinding
 import com.tianji.ttech.model.PlantModel
 import com.tianji.ttech.ui.MainActivity
+import com.tianji.ttech.ui.device.activity.DeviceListActivity
 import com.tianji.ttech.ui.home.viewmodel.PlantFilterViewModel
 import com.tianji.ttech.ui.station.activity.AddPlantActivity
 import com.tianji.ttech.ui.station.activity.AddTtchPlantActivity
@@ -205,7 +206,7 @@ class PlantListFragment : BaseFragment() {
         }
 
         override fun onItemClick(v: View?, position: Int) {
-            (activity as MainActivity).showHomeFragment(getItem(position))
+            getItem(position).id?.let { DeviceListActivity.start(requireActivity(), it) }
         }
 
         override fun onItemLongClick(v: View?, position: Int) {

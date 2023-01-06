@@ -76,7 +76,7 @@ class AddTtchPlantActivity : BaseActivity(), View.OnClickListener {
     private fun initViews() {
         //默认用户国家
         binding.tvCountry.text = accountService().user()?.country
-
+        viewModel.addPlantModel.country=accountService().user()?.country
     }
 
     private fun initlistener() {

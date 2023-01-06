@@ -1,9 +1,5 @@
 package com.tianji.ttech.model
 
-import com.tianji.ttech.R
-import com.tianji.ttech.app.TtechApplication
-import com.tianji.ttech.utils.ValueUtil
-
 
 /**
  * 设备列表Model
@@ -23,10 +19,16 @@ data class DeviceModel(
     val vol: Double?,//Combiner汇流箱-电压1.0
     val cur: Double?,//Combiner汇流箱-电流2.0
     val signal: String?,//采集器-良
+    val inverterSn: String,
 ) {
 
 
-
+    fun getRealDeviceType(): Int {
+        return when (deviceType) {
+            "INVERTER" -> DeviceType.INVERTER
+            else -> 0
+        }
+    }
 
 
 }
