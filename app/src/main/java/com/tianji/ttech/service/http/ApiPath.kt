@@ -148,7 +148,7 @@ object ApiPath {
         /**
          * 设备列表
          */
-        const val GETDEVICELIST = "v1/plant/getDeviceList"
+        const val GETDEVICELIST = "v1/station/deviceList"
 
         const val SETHMIINFO = "v1/manager/setHmiInfo"
 
@@ -162,6 +162,7 @@ object ApiPath {
 
         const val GETDEVICEDETAILS = "/v1/plant/getDeviceDetails"
 
+        const val GETINVERTERDATA = "/v1/station/getInverterData"
 
     }
 

@@ -36,6 +36,7 @@
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_30"
         app:compose_hide="@string/m5_email_address"
+        app:compose_content_ismust="false"
         app:compose_content_type="content_input"
         app:compose_left_icon="@drawable/login_user"
         app:compose_right_show="false" />
@@ -48,7 +49,8 @@
         android:layout_marginStart="@dimen/dp_30"
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_30"
-        app:compose_hide="@string/m5_email_address"
+        app:compose_hide="@string/m77_password"
+        app:compose_content_ismust="false"
         app:compose_content_type="content_input"
         app:compose_left_icon="@drawable/lock"
         app:compose_right_show="false" />

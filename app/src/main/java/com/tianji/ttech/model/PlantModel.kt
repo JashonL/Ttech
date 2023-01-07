@@ -9,7 +9,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class PlantModel @JvmOverloads constructor(
     val id: String? = null,//电站ID
-    val plantName: String? = null,//电站名
     val plantImgName: String? = null,//电站图片
     val createDateText: String? = null,//安装日期-2022-03-03
     val hasDeviceOnLine: Int = 0,//电站状态   0：离线  1：故障  2：在线
@@ -76,7 +75,7 @@ data class PlantModel @JvmOverloads constructor(
     fun convert(): AddPlantModel {
         val addPlantModel = AddPlantModel()
         addPlantModel.plantID = id
-        addPlantModel.plantName = plantName
+        addPlantModel.plantName = stationName
         addPlantModel.plantFileService = plantImgName
         addPlantModel.installDate = DateUtils.from_yyyy_MM_dd_format(createDateText ?: "")
         addPlantModel.country = country

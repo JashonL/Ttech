@@ -22,7 +22,7 @@ abstract class BaseDeviceViewHolder(
             onItemClickListener: OnItemClickListener,
         ): BaseDeviceViewHolder {
             return when (deviceType) {
-                DeviceType.XP -> XPViewHolder.create(parent, onItemClickListener)
+                DeviceType.INVERTER -> InverterViewHolder.create(parent, onItemClickListener)
                 else -> HvbatboxViewHolder.create(parent, onItemClickListener)
             }
         }

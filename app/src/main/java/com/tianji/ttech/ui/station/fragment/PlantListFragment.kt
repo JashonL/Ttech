@@ -105,9 +105,8 @@ class PlantListFragment : BaseFragment() {
             }
         }
         viewModel.getPlantStatusNumLiveData.observe(viewLifecycleOwner) {
-            if (it.second == null) {
-//                listener.onPlantStatusNumChange(it.first)
-            }
+            (parentFragment as PlantTabFragment).onPlantStatusNumChange(it)
+
         }
         filterViewModel.getPlantFilterLiveData.observe(viewLifecycleOwner) {
             binding.srfRefresh.autoRefresh()
@@ -132,6 +131,12 @@ class PlantListFragment : BaseFragment() {
             binding.srfRefresh.autoRefresh()
         }
 
+
+        filterViewModel.getPlantSearchLiveData.observe(viewLifecycleOwner) {
+            searchWord = it
+            binding.srfRefresh.autoRefresh()
+        }
+
     }
 
     private fun refreshEmptyView(plantModels: Array<PlantModel>?) {
@@ -152,7 +157,7 @@ class PlantListFragment : BaseFragment() {
 
     private fun refresh() {
         filterViewModel.getPlantFilterLiveData.value?.let {
-            viewModel.getPlantList(plantStatus ?: 0, it, searchWord.toString())
+            viewModel.getPlantList(plantStatus ?: 0, it, searchWord ?: "")
         }
     }
 

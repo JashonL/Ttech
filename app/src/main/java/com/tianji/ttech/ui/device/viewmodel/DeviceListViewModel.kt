@@ -23,7 +23,7 @@ class DeviceListViewModel : BaseViewModel() {
     fun getDevicelist() {
         viewModelScope.launch {
             val params = hashMapOf<String, String>().apply {
-                put("plantId", currentPlantId.toString())
+                put("stationId", currentPlantId.toString())
             }
             apiService().postForm(
                 ApiPath.Device.GETDEVICELIST,

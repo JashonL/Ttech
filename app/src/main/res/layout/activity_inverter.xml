@@ -6,18 +6,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.device.activity.HvBatBoxActivity">
+    tools:context=".ui.device.activity.InverterActivity">
 
     <com.ttech.lib.view.StatusBarHeightView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white" />
+        android:background="@color/color_app_main" />
 
 
     <com.tianji.ttech.view.TitleBarLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
-        app:titleText="@string/m189_hv_battery_box"
+        app:titleText="@string/m187_inverter"
         android:layout_height="wrap_content" />
 
     <androidx.viewpager2.widget.ViewPager2
@@ -27,30 +27,19 @@
         android:layout_weight="1" />
 
 
+
+    <!--指示器  暂时这样搞-->
     <LinearLayout
+        android:id="@+id/ll_indicator"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_margin="@dimen/dp_10"
-        android:background="@drawable/shape_cancel"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        android:layout_height="@dimen/dp_50"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_10"/>
 
 
-        <TextView
-            android:id="@+id/tv_down_my_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dp_5"
-            android:text="@string/m190_down_my_data"
-            android:textColor="@color/black_333333"
-            android:textSize="@dimen/size_content_sp_14" />
 
 
-    </LinearLayout>
 
 
 </LinearLayout>

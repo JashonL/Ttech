@@ -69,7 +69,7 @@ class EditTextComposeView @JvmOverloads constructor(
                 isPasswrod =
                     getBoolean(R.styleable.EditTextComposeView_compose_item_ispassword, false)
 
-                isMust = getBoolean(R.styleable.EditTextComposeView_compose_item_ispassword, false)
+                isMust = getBoolean(R.styleable.EditTextComposeView_compose_content_ismust, true)
 
 
             } finally {

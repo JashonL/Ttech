@@ -6,18 +6,19 @@ import com.tianji.ttech.ui.device.model.HvBox
 import com.tianji.ttech.base.BaseViewModel
 import com.tianji.ttech.model.DeviceType
 import com.tianji.ttech.service.http.ApiPath
+import com.tianji.ttech.ui.device.model.Inverter
 import com.ttech.lib.service.http.HttpCallback
 import com.ttech.lib.service.http.HttpErrorModel
 import com.ttech.lib.service.http.HttpResult
 import kotlinx.coroutines.launch
 
-class HvBatBoxViewModel : BaseViewModel() {
+class InverterViewModel : BaseViewModel() {
 
 
-    val hvBatBoxLiveData = MutableLiveData<Pair<Boolean, HvBox?>>()
+    val inverterLiveData = MutableLiveData<Pair<Boolean, Inverter?>>()
 
 
-    var deviceType: Int = DeviceType.HVBOX
+    var deviceType: Int = DeviceType.INVERTER
 
     var deviceSn: String = ""
 
@@ -33,15 +34,15 @@ class HvBatBoxViewModel : BaseViewModel() {
 
             }
             apiService().postForm(
-                ApiPath.Device.GETDEVICEDETAILS,
+                ApiPath.Device.GETINVERTERDATA,
                 params,
-                object : HttpCallback<HttpResult<HvBox>>() {
-                    override fun success(result: HttpResult<HvBox>) {
-                        hvBatBoxLiveData.value = Pair(result.isBusinessSuccess(), result.obj)
+                object : HttpCallback<HttpResult<Inverter>>() {
+                    override fun success(result: HttpResult<Inverter>) {
+                        inverterLiveData.value = Pair(result.isBusinessSuccess(), result.obj)
                     }
 
                     override fun onFailure(errorModel: HttpErrorModel) {
-                        hvBatBoxLiveData.value = Pair(false, null)
+                        inverterLiveData.value = Pair(false, null)
 
                     }
                 })

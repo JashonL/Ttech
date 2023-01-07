@@ -8,7 +8,7 @@ import com.tianji.ttech.base.OnItemClickListener
 import com.tianji.ttech.databinding.Xte8kHolderBinding
 import com.tianji.ttech.model.DeviceModel
 
-class XPViewHolder(
+class InverterViewHolder(
     itemView: View,
     onItemClickListener: OnItemClickListener
 ) : BaseDeviceViewHolder(itemView, onItemClickListener) {
@@ -18,13 +18,13 @@ class XPViewHolder(
         fun create(
             parent: ViewGroup,
             onItemClickListener: OnItemClickListener
-        ): XPViewHolder {
+        ): InverterViewHolder {
             val binding = Xte8kHolderBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-            val holder = XPViewHolder(binding.root, onItemClickListener)
+            val holder = InverterViewHolder(binding.root, onItemClickListener)
             holder.binding = binding
             binding.root.setOnClickListener(holder)
             return holder
@@ -34,11 +34,11 @@ class XPViewHolder(
     private lateinit var binding: Xte8kHolderBinding
 
     override fun bindData(deviceModel: DeviceModel) {
-        binding.tvDeviceName.text = deviceModel.deviceSn
+        binding.tvDeviceName.text = deviceModel.inverterSn
 //        binding.tvStatus.text = deviceModel.deviceName
 //        binding.tvBatPercent.text = deviceModel.deviceName
 
-        val s = getString(R.string.m188_device_type) + ":" + deviceModel.getRealDeviceType()
+        val s = getString(R.string.m188_device_type) + ":" + deviceModel.deviceType
         binding.tvDeviceType.text =s
     }
 }

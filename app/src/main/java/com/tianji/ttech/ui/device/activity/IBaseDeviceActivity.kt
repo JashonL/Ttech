@@ -18,9 +18,11 @@ interface IBaseDeviceActivity {
             deviceSN: String?
         ) {
             when (deviceType) {
-                DeviceType.XP -> {}
+                DeviceType.INVERTER -> {
+                    context?.let { InverterActivity.start(it, deviceSN.toString()) }
+                }
                 DeviceType.HVBOX -> {
-                    context?.let { HvBatBoxActivity.start(it, deviceSN.toString()) }
+
                 }
             }
         }

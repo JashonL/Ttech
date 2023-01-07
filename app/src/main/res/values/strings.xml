@@ -169,7 +169,6 @@ of letters, numbers and symbols.</string>
     <string name="m170_current">Current</string>
 
 
-
     <string name="m171_discharge_power">Discharge Power</string>
     <string name="m172_battery_soc">Battery SOC</string>
     <string name="m173_max_volt">Max Volt</string>
@@ -193,9 +192,6 @@ of letters, numbers and symbols.</string>
     <string name="m188_device_type">Device type</string>
     <string name="m189_hv_battery_box">HV Battery Box</string>
     <string name="m190_down_my_data">Download My Data</string>
-
-
-
 
 
     <string name="m187_device_sn">Device SN</string>
@@ -223,7 +219,6 @@ of letters, numbers and symbols.</string>
     <string name="m226_work_mode">Work Mode</string>
 
 
-
     <string name="m227_input_voltage">Input Voltage</string>
     <string name="m228_inlet_temp">Inlet Temp.</string>
     <string name="m227_input_power">Input Power</string>
@@ -247,7 +242,6 @@ of letters, numbers and symbols.</string>
     <string name="m221_forbid_charge">Forbid Charge</string>
     <string name="m222_min_cell_voltage">Min Cell Voltage</string>
     <string name="m223_forbid_discharge">Forbid disCharge</string>
-
 
 
     <string name="m232_pcs_data_2">PCS Data 2</string>
@@ -506,6 +500,63 @@ confirmation after plug in your car。</string>
     <string name="m185_total_consumpion">Total consumpion</string>
     <string name="m186_total_storage">Total Storage</string>
     <string name="m187_total_sold">Total Sold</string>
+
+
+    <string name="m188_inv_model">INV model</string>
+    <string name="m189_inv_sn">INV SN</string>
+    <string name="m190_software_version">Software Version</string>
+    <string name="m191_work_pattern">Work Pattern</string>
+    <string name="m192_grid_voltage">Grid Voltage</string>
+    <string name="m193_grid_current">Grid Current</string>
+    <string name="m194_output_voltage">Output Voltage</string>
+    <string name="m195_output_current">Output Current</string>
+    <string name="m196_out_power">Output Power</string>
+    <string name="m197_bus_voltage">BUS Voltage</string>
+    <string name="m198_gt_current">GT Current</string>
+    <string name="m199_reserved_bit">Reserved Bit</string>
+    <string name="m200_inv_temp">INV Temp</string>
+    <string name="m201_inv_Power">INV Power</string>
+
+
+    <string name="m202_energy_real">Energy(Real)</string>
+    <string name="m203_energy_day">Energy(Day)</string>
+    <string name="m204_energy_week">Energy(Week)</string>
+    <string name="m205_energy_month">Energy(Month)</string>
+    <string name="m206_energy_year">Energy(Year)</string>
+    <string name="m207_energy_total">Energy(Total)</string>
+    <string name="m208_host">Host</string>
+    <string name="m209_stave1">Stave1</string>
+    <string name="m210_stave2">Stave2</string>
+    <string name="m211_stave3">Stave3</string>
+    <string name="m212_ph1">PH1</string>
+    <string name="m213_ph2">PH2</string>
+    <string name="m214_ph3">PH3</string>
+    <string name="m215_reserved_temp_bit">Reserved Temp Bit</string>
+
+
+    <string name="m216_pv1_current">PV1 Current</string>
+    <string name="m217_PV1_Voltage">PV1 Voltage</string>
+    <string name="m218_PV1_Power">PV1 Power</string>
+    <string name="m219_PV2_Current">PV2 Current</string>
+    <string name="m220_PV2_Voltage">PV2 Voltage</string>
+    <string name="m221_PV2_Power">PV2 Power</string>
+    <string name="m222_charge_current">Charge Current</string>
+    <string name="m223_temp">Temp</string>
+    <string name="m224_charge_voltage">Charge Voltage</string>
+    <string name="m225_Charge_Current">Charge Current</string>
+    <string name="m226_Charge_Power">Charge Power</string>
+    <string name="m227_Charge_Voltage">Charge Voltage</string>
+    <string name="m228_BAT_Energy">BAT Energy</string>
+    <string name="m229_BAT_Capacity">BAT Capacity</string>
+
+
+
+    <string name="m230_DisCharge_Energy">DisCharge Energy</string>
+    <string name="m231_DisCharge_Current">DisCharge Current</string>
+    <string name="m232_Charge_Voltage">Charge Voltage</string>
+    <string name="m233_Charge_Energy">Charge Energy</string>
+    <string name="m234_Charge_Power">Charge Power</string>
+    <string name="m235_Charge_Current">Charge Current</string>
 
 
 </resources>

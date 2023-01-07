@@ -19,7 +19,7 @@ class PlantListViewModel : BaseViewModel() {
 
     val getPlantListLiveData = MutableLiveData<Pair<Array<PlantModel>?, String?>>()
 
-    val getPlantStatusNumLiveData = MutableLiveData<Pair<PlantStatusNumModel, String?>>()
+    val getPlantStatusNumLiveData = MutableLiveData<PlantStatusNumModel>()
 
     val deletePlantLiveData = MutableLiveData<String?>()
 
@@ -39,7 +39,7 @@ class PlantListViewModel : BaseViewModel() {
                     put("order", orderType.toString())
                 }
                 if (!TextUtils.isEmpty(searchWord)) {
-                    put("searchWord", searchWord)
+                    put("stationName", searchWord)
                 }
 
                 put("email", email.toString())
@@ -52,6 +52,13 @@ class PlantListViewModel : BaseViewModel() {
                         if (result.isBusinessSuccess()) {
                             val plants = result.obj ?: emptyArray()
                             var showPlants: MutableList<PlantModel> = mutableListOf()
+
+
+                            var allNum = showPlants.size
+                            var onlineNum = 0
+                            var offline = 0
+                            var faultNum = 0
+
                             when (plantStatus) {
                                 PlantModel.PLANT_STATUS_ALL -> {
                                     showPlants = plants.toMutableList()
@@ -66,6 +73,21 @@ class PlantListViewModel : BaseViewModel() {
                                     }
                                 }
                             }
+
+
+
+                            for (i in plants.indices) {
+                                when (plants[i].onlineStatus) {
+                                    PlantModel.PLANT_STATUS_OFFLINE -> offline++
+                                    PlantModel.PLANT_STATUS_TROUBLE -> faultNum++
+                                    PlantModel.PLANT_STATUS_ONLINE -> onlineNum++
+                                }
+                            }
+
+
+                            getPlantStatusNumLiveData.value =
+                                PlantStatusNumModel(allNum, onlineNum, offline, faultNum)
+
                             getPlantListLiveData.value =
                                 Pair(showPlants.toTypedArray(), null)
                         } else {
@@ -79,10 +101,6 @@ class PlantListViewModel : BaseViewModel() {
                 })
         }
     }
-
-
-
-
 
 
     /**

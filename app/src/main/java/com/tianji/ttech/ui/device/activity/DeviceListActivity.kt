@@ -67,7 +67,7 @@ class DeviceListActivity : BaseActivity() {
         } else {
             val options = mutableListOf<ListPopModel>()
             for (plant in second) {
-                options.add(ListPopModel(plant.plantName.toString(), false))
+                options.add(ListPopModel(plant.stationName, false))
             }
 
             val curItem: String? = if (viewModel.currentStation != null) {
@@ -81,7 +81,7 @@ class DeviceListActivity : BaseActivity() {
                 _binding.title.getTitilView(),
                 curItem ?: ""
             ) {
-                _binding.title.setTitleText(second[it].plantName)
+                _binding.title.setTitleText(second[it].stationName)
                 //请求设备列表
                 deviceListViewModel.currentPlantId = second[it].id
                 showDeviceList()
@@ -140,7 +140,7 @@ class DeviceListActivity : BaseActivity() {
                 }
 
                 //设置当前选中
-                val name = viewModel.currentStation?.plantName
+                val name = viewModel.currentStation?.stationName
                 deviceListViewModel.currentPlantId = viewModel.currentStation?.id
                 _binding.title.setTitleText(name)
 

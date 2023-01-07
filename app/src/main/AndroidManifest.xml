@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -135,20 +135,24 @@
         <activity
             android:name=".ui.station.activity.AddTtchPlantActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="adjustPan" />
 
 
         <activity
             android:name=".ui.device.activity.DeviceListActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="adjustPan" />
 
+        <activity
+            android:name=".ui.device.activity.InverterActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="adjustPan" />
 
 
         <service android:name="com.ttech.bluetooth.util.service.BleConnectService" />
-
 
 
         <provider
@@ -160,7 +164,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
 
 
         <activity
