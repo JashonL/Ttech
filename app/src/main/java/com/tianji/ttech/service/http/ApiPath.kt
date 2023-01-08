@@ -167,6 +167,12 @@ object ApiPath {
     }
 
 
+
+    object OperatorLog{
+        const val OPERATIONLIST = "v1/station/operationList"
+    }
+
+
     object Dataloger {
 
         /**

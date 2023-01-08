@@ -550,13 +550,17 @@ confirmation after plug in your car。</string>
     <string name="m229_BAT_Capacity">BAT Capacity</string>
 
 
-
     <string name="m230_DisCharge_Energy">DisCharge Energy</string>
     <string name="m231_DisCharge_Current">DisCharge Current</string>
     <string name="m232_Charge_Voltage">Charge Voltage</string>
     <string name="m233_Charge_Energy">Charge Energy</string>
     <string name="m234_Charge_Power">Charge Power</string>
     <string name="m235_Charge_Current">Charge Current</string>
+    <string name="m236_operator">Operator</string>
+    <string name="m237_operation_record">Operation record: charging selection</string>
+    <string name="m238_log">Log</string>
+    <string name="m239_operation_log">Operation Log</string>
+    <string name="m240_bluetooth_connection_failed">Bluetooth connection failed,please scan the code again to add</string>
 
 
 </resources>

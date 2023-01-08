@@ -172,6 +172,15 @@
             android:exported="false"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
+
+        <activity
+            android:name=".ui.device.activity.OperationLogActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="adjustPan" />
+
+
     </application>
 
 </manifest>

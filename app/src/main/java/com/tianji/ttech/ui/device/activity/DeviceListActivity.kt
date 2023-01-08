@@ -3,6 +3,7 @@ package com.tianji.ttech.ui.device.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tianji.ttech.ui.device.adapter.DeviceAdapter
@@ -57,6 +58,11 @@ class DeviceListActivity : BaseActivity() {
         _binding.title.setOnTitleClickListener {
             showPlantList()
         }
+
+        _binding.title.setOnRightTextClickListener {
+            OperationLogActivity.start(this,)
+        }
+
     }
 
 
