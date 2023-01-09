@@ -9,7 +9,8 @@ data class ChartModel(
     val solarList: Array<Float>?,
     val gridList: Array<Float>?,
     val batList: Array<Float>?,
-    val loadList: Array<Float>?
+    val loadList: Array<Float>?,
+    val timeList:Array<String>?
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

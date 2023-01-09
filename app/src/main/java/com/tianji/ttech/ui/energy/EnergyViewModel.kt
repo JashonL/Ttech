@@ -10,11 +10,13 @@ import com.tianji.ttech.service.http.ApiPath
 import com.tianji.ttech.ui.chart.ChartListDataModel
 import com.tianji.ttech.ui.chart.ChartYDataList
 import com.tianji.ttech.ui.common.model.DataType
+import com.ttech.lib.service.http.HttpCallBackString
 import com.ttech.lib.service.http.HttpCallback
 import com.ttech.lib.service.http.HttpErrorModel
 import com.ttech.lib.service.http.HttpResult
 import com.ttech.lib.util.DateUtils
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import java.util.Date
 
 class EnergyViewModel : BaseViewModel() {
@@ -27,7 +29,6 @@ class EnergyViewModel : BaseViewModel() {
     val impactChartLiveData = MutableLiveData<ChartListDataModel>()
 
     val impactLiveData = MutableLiveData<ImpactModel?>()
-
 
 
     var currentStation: PlantModel? = null
@@ -74,40 +75,114 @@ class EnergyViewModel : BaseViewModel() {
             apiService().postForm(
                 chartApi[dateType],
                 params,
-                object : HttpCallback<HttpResult<ChartModel>>() {
-                    override fun success(result: HttpResult<ChartModel>) {
-                        val chartModel = result.obj
+                object : HttpCallBackString() {
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        stationLiveData.value = Pair(false, null)
+                    }
 
-                        chartModel?.let {
-                            val loadList = it.loadList
-                            val timeList = mutableListOf<String>()
+                    override fun success(result: String?) {
+                        val jsonObject = result?.let { JSONObject(it) }
+                        val respone = jsonObject?.optJSONObject("result")?:"1"
+                        val objJsonObject = jsonObject?.optJSONObject("obj")
 
-                            if (loadList!=null){
-                                for (i in loadList.indices) {
-                                    timeList.add(i.toString())
+                        objJsonObject?.let {
+                            val solarTotal = it.optString("solarTotal")
+                            val gridTotal = it.optString("gridTotal")
+                            val batTotal = it.optString("batTotal")
+                            val loadTotal = it.optString("loadTotal")
+                            val energyTotal = it.optString("energyTotal")
+
+                            //解析图表数据
+                            val solarMap = it.optJSONObject("solarMap")
+                            val gridMap = it.optJSONObject("gridMap")
+                            val batMap = it.optJSONObject("batMap")
+                            val loadMap = it.optJSONObject("loadMap")
+
+                            val timeList: MutableList<String> = mutableListOf()
+                            val solarList: MutableList<Float> = mutableListOf()
+                            val gridList: MutableList<Float> = mutableListOf()
+                            val batList: MutableList<Float> = mutableListOf()
+                            val loadList: MutableList<Float> = mutableListOf()
+
+
+                            solarMap.apply {
+                                val keys = this?.keys()
+                                val iterator = keys?.iterator()
+                                while (iterator?.hasNext() == true) {
+                                    val key = iterator.next()
+                                    val value = this?.optString(key)
+                                    timeList.add(key)
+                                    solarList.add(value!!.toFloat())
                                 }
+                            }
 
-                                val dataList = mutableListOf(
-                                    ChartYDataList(it.batList, "bat"),
-                                    ChartYDataList(it.gridList, "grid"),
-                                    ChartYDataList(it.solarList, "solar"),
-                                    ChartYDataList(it.loadList, "load"),
-                                )
 
-                                val chartListDataModel =
-                                    ChartListDataModel(timeList.toTypedArray(), dataList.toTypedArray())
-                                chartLiveData.value = chartListDataModel
+                            gridMap.apply {
+                                val keys = this?.keys()
+                                val iterator = keys?.iterator()
+                                while (iterator?.hasNext() == true) {
+                                    val key = iterator.next()
+                                    val value = this?.optString(key)
+                                    gridList.add(value!!.toFloat())
+                                }
                             }
 
 
 
+                            batMap.apply {
+                                val keys = this?.keys()
+                                val iterator = keys?.iterator()
+                                while (iterator?.hasNext() == true) {
+                                    val key = iterator.next()
+                                    val value = this?.optString(key)
+                                    batList.add(value!!.toFloat())
+                                }
+                            }
+
+
+                            loadMap.apply {
+                                val keys = this?.keys()
+                                val iterator = keys?.iterator()
+                                while (iterator?.hasNext() == true) {
+                                    val key = iterator.next()
+                                    val value = this?.optString(key)
+                                    loadList.add(value!!.toFloat())
+                                }
+                            }
+
+
+                            val chartModel = ChartModel(
+                                solarTotal,
+                                gridTotal,
+                                batTotal,
+                                loadTotal,
+                                energyTotal,
+                                solarList.toTypedArray(),
+                                solarList.toTypedArray(),
+                                solarList.toTypedArray(),
+                                solarList.toTypedArray(),
+                                timeList.toTypedArray()
+                            )
+
+
+                            val dataList = mutableListOf(
+                                ChartYDataList(chartModel.batList, "bat"),
+                                ChartYDataList(chartModel.gridList, "grid"),
+                                ChartYDataList(chartModel.solarList, "solar"),
+                                ChartYDataList(chartModel.loadList, "load"),
+                            )
+
+                            val chartListDataModel =
+                                ChartListDataModel(timeList.toTypedArray(), dataList.toTypedArray())
+                            chartLiveData.value = chartListDataModel
+
+                            stationLiveData.value = Pair(respone == "0", chartModel)
+
                         }
-                        stationLiveData.value = Pair(result.isBusinessSuccess(), result.obj)
+
                     }
 
-                    override fun onFailure(errorModel: HttpErrorModel) {
-                        stationLiveData.value = Pair(false, null)
-                    }
+
                 })
         }
     }
@@ -128,24 +203,23 @@ class EnergyViewModel : BaseViewModel() {
                 object : HttpCallback<HttpResult<ImpactModel>>() {
                     override fun success(result: HttpResult<ImpactModel>) {
                         val impactModel = result.obj
+                        var loadList: Array<Float>? = arrayOf()
+                        val timeList = mutableListOf<String>()
 
                         impactModel?.let {
-                            val loadList = it.impactList
-                            val timeList = mutableListOf<String>()
-                            if (loadList == null) return
-                            for (i in loadList.indices) {
+                             loadList = it.impactList
+                            if (loadList == null) loadList= arrayOf()
+                            for (i in loadList!!.indices) {
                                 timeList.add(i.toString())
                             }
-
-                            val dataList = mutableListOf(
-                                ChartYDataList(it.impactList, "impact"),
-                            )
-
-                            val chartListDataModel =
-                                ChartListDataModel(timeList.toTypedArray(), dataList.toTypedArray())
-                            impactLiveData.value = impactModel
-                            impactChartLiveData.value = chartListDataModel
                         }
+
+
+                        val dataList = mutableListOf(ChartYDataList(loadList, "impact"))
+                        val chartListDataModel = ChartListDataModel(timeList.toTypedArray(), dataList.toTypedArray())
+                        impactLiveData.value = impactModel
+                        impactChartLiveData.value = chartListDataModel
+
                     }
 
                     override fun onFailure(errorModel: HttpErrorModel) {
