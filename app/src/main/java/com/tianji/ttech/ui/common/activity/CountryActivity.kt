@@ -74,7 +74,7 @@ class CountryActivity : BaseActivity() {
 
             if (countryList!=null) {
                 for (s in countryList) {
-                    if (s.contains(it.toString())) {
+                    if ( s.lowercase().contains(it.toString())) {
                         newList.add(s)
                     }
                 }

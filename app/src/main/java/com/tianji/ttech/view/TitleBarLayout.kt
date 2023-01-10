@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
+import android.widget.TextView
 import com.tianji.ttech.R
 import com.tianji.ttech.databinding.TitleBarLayoutBinding
 import com.ttech.lib.util.gone
@@ -175,6 +176,11 @@ class TitleBarLayout @JvmOverloads constructor(
     fun setTitleText(titleText: String?) {
         this.titleText = titleText
         binding.tvTitle.text = titleText ?: ""
+    }
+
+
+    fun getTitilView(): TextView {
+        return binding.tvTitle
     }
 
 }

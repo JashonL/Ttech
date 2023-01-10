@@ -26,6 +26,7 @@ import com.tianji.ttech.monitor.WifiMonitor
 import com.tianji.ttech.service.ble.BleCommand.BLUETOOTH_KEY
 import com.tianji.ttech.service.ble.BleCommand.WIFI_PASSWORD
 import com.tianji.ttech.service.ble.BleManager
+import com.tianji.ttech.ui.MainActivity
 import com.tianji.ttech.ui.dataloger.viewmodel.SetUpNetViewModel
 import com.tianji.ttech.utils.ByteDataUtil
 import com.tianji.ttech.utils.ByteDataUtil.BlueToothData.DATALOG_GETDATA_0X18
@@ -122,6 +123,7 @@ class SetUpNetActivity : BaseActivity(), OnClickListener {
         //接收蓝牙返回数据
         BlueToothReceiver.watch(lifecycle, TtechApplication.instance()) {
             val removePro = ByteDataUtil.BlueToothData.removePro(it)
+            dismissDialog()
             viewModel.parserData(it!![7], removePro)
         }
 
@@ -229,6 +231,7 @@ class SetUpNetActivity : BaseActivity(), OnClickListener {
     private fun initListeners() {
         binding.ivWifiList.setOnClickListener(this)
         binding.btFinish.setOnClickListener(this)
+        binding.btCancel.setOnClickListener(this)
     }
 
 
@@ -242,9 +245,16 @@ class SetUpNetActivity : BaseActivity(), OnClickListener {
 
                 val ssid = binding.etSsid.text.toString()
                 val pwd = binding.etPassword.text.toString()
+                showDialog()
                 viewModel.requestSetting(ssid, pwd)
 
             }
+
+            p0===binding.btCancel->{
+                MainActivity.start(this)
+                finish()
+            }
+
         }
 
     }

@@ -40,6 +40,7 @@
                 app:compose_right_type="right_type_icon"
                 app:compose_rigth_icon="@drawable/icon_next"
                 app:compose_left_icon="@drawable/country"
+                app:compose_content_ismust="true"
                 app:compose_right_show="true" />
 
             <com.tianji.ttech.view.EditTextComposeView
@@ -52,6 +53,7 @@
                 app:compose_hide="@string/m80_time_zone"
                 app:compose_left_icon="@drawable/zone"
                 app:compose_right_show="true"
+                app:compose_content_ismust="true"
                 app:compose_content_type="content_input"
                 app:compose_right_type="right_type_text"
                 app:compose_rigth_text="@string/m4_auto" />
@@ -64,6 +66,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_30"
                 app:compose_hide="@string/m5_email_address"
+                app:compose_content_ismust="true"
                 app:compose_content_type="content_input"
                 app:compose_left_icon="@drawable/login_user"
                 app:compose_right_show="false" />
@@ -78,6 +81,7 @@
                 app:compose_hide="@string/m158_send_verify_code"
                 app:compose_left_icon="@drawable/code"
                 app:compose_right_show="true"
+                app:compose_content_ismust="true"
                 app:compose_content_type="content_input"
                 app:compose_right_type="right_type_text"
                 app:compose_rigth_text="@string/m158_send_verify_code" />
@@ -94,6 +98,7 @@
                 app:compose_right_show="true"
                 app:compose_content_type="content_input"
                 app:compose_item_ispassword="true"
+                app:compose_content_ismust="true"
                 app:compose_right_type="right_type_icon"
                 app:compose_rigth_icon="@drawable/eye_open" />
 
@@ -116,6 +121,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_30"
                 app:compose_item_ispassword="true"
+                app:compose_content_ismust="true"
                 app:compose_content_type="content_input"
                 app:compose_hide="@string/m152_new_password_again"
                 app:compose_left_icon="@drawable/lock_comfir"
@@ -130,6 +136,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_30"
                 app:compose_item_ispassword="true"
+                app:compose_content_ismust="true"
                 app:compose_hide="@string/m186_installer_code"
                 app:compose_content_type="content_input"
                 app:compose_left_icon="@drawable/login_user"

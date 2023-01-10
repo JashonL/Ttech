@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.fragment.app.findFragment
 import androidx.fragment.app.viewModels
 import com.tianji.ttech.R
 import com.tianji.ttech.base.BaseFragment
@@ -15,10 +13,9 @@ import com.tianji.ttech.model.PlantModel
 import com.tianji.ttech.ui.common.model.DataType
 import com.tianji.ttech.ui.energy.chart.EnergyChartFragment
 import com.tianji.ttech.ui.energy.impact.ImpactFragment
-import com.tianji.ttech.ui.home.pv.PvStatusFragment
-import com.tianji.ttech.ui.home.storage.HomeStatusFragment
 import com.tianji.ttech.ui.station.viewmodel.StationViewModel
 import com.tianji.ttech.view.DateSelectView
+import com.tianji.ttech.view.dialog.OptionsDialog
 import com.tianji.ttech.view.pop.ListPopuwindow
 import com.tianji.ttech.view.popuwindow.ListPopModel
 import com.ttech.lib.util.gone
@@ -194,6 +191,25 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
 
 
     private fun showDateChoose() {
+
+
+        val date = listOf(
+            getString(R.string.m89_total),
+            getString(R.string.m72_year),
+            getString(R.string.m71_month),
+            getString(R.string.m70_day)
+        )
+
+        OptionsDialog.show(childFragmentManager, date.toTypedArray()) {
+            //根据日期请求图表数据
+            _binding.date.tvDateType.text = date[it]
+            energyViewModel.dateType = it
+
+            //重新请求求数据
+            getPlantData()
+        }
+
+      /*
         val date = listOf(
             getString(R.string.m89_total),
             getString(R.string.m72_year),
@@ -220,7 +236,7 @@ class EnergyFragment : BaseFragment(), View.OnClickListener {
                 //重新请求求数据
                 getPlantData()
             }
-        }
+        }*/
     }
 
 

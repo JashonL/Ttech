@@ -6,17 +6,21 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import androidx.activity.viewModels
+import com.tianji.ttech.R
 import com.tianji.ttech.ui.common.activity.ScanActivity
 import com.tianji.ttech.ui.common.fragment.RequestPermissionHub
 import com.tianji.ttech.base.BaseActivity
 import com.tianji.ttech.databinding.ActivityAddDataLoggerBinding
 import com.tianji.ttech.service.ble.BleManager
 import com.tianji.ttech.ui.station.viewmodel.AddDataLoggerViewModel
+import com.tianji.ttech.view.dialog.BottomDialog
 import com.ttech.bluetooth.util.`interface`.IBleConnetLisener
 import com.ttech.bluetooth.util.`interface`.IScanResult
 import com.ttech.bluetooth.util.bean.BleModel
 import com.ttech.lib.util.ActivityBridge
+import com.ttech.lib.util.LogUtil
 import com.ttech.lib.util.ToastUtil
 import com.ttech.lib.util.Util
 
@@ -64,10 +68,12 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
         viewModel.addDataLoggerLiveData.observe(this) {
             dismissDialog()
             if (it == null) {
+                showDialog()
                 //开始查找并且连接对应蓝牙
                 connectBle()
             } else {
                 ToastUtil.show(it)
+                connectBle()
             }
         }
         viewModel.getCheckCodeLiveData.observe(this) {
@@ -98,10 +104,7 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
                 }
             }
             v === binding.btFinish -> {
-                connectBle()
-
-
-      /*          val dataLoggerSN = binding.etDataLoggerSn.text.toString().trim()
+                val dataLoggerSN = binding.etDataLoggerSn.text.toString().trim()
                 val checkCode = binding.etCheckCode.text.toString().trim()
                 when {
                     dataLoggerSN.isEmpty() -> {
@@ -114,7 +117,7 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
                         showDialog()
                         viewModel.addDataLogger(dataLoggerSN, checkCode)
                     }
-                }*/
+                }
             }
         }
     }
@@ -176,20 +179,32 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
                                         if (it.toString() == name) {
                                             viewModel.bleManager?.stopScan()
                                         }
-
-
                                     }
                                 }
 
                                 override fun scanResult(results: List<BleModel>) {
+                                    LogUtil.i("liaojinsha",results.toString())
                                     val text = binding.etDataLoggerSn.text.toString()
+
+                                    var isBle = false
+                                    var address = ""
+
+
+                                    dismissDialog()
+
+
                                     //找到对应的蓝牙-连接
                                     results.forEach {
-                                        if (text==it.name){
-                                            val address = it.address
+                                        if (text == it.name) {
+                                            isBle = true
+                                            address = it.address ?: ""
+                                        }
+                                    }
 
-                                            //去连接蓝牙
-                                            viewModel.bleManager?.connect(address?:"",object :IBleConnetLisener{
+                                    if (isBle) {
+                                        //去连接蓝牙
+                                        viewModel.bleManager?.connect(address ?: "",
+                                            object : IBleConnetLisener {
                                                 override fun connectError() {
                                                     //连接失败了
                                                 }
@@ -204,10 +219,35 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
                                                 }
 
                                             })
-                                            return
-                                        }
+                                    } else {
+                                        //弹框提示
+                                        BottomDialog.show(
+                                            supportFragmentManager,
+                                            R.layout.dialog_bluetooth_connet_fail,
+                                            object : BottomDialog.OnviewListener {
+                                                override fun onViewLisener(
+                                                    view: View,
+                                                    dialog: BottomDialog
+                                                ) {
+                                                    val btCancel =
+                                                        view.findViewById<Button>(R.id.bt_cancel)
+                                                    val btComfir =
+                                                        view.findViewById<Button>(R.id.bt_comfirm)
+                                                    btCancel.setOnClickListener {
+                                                        dialog.dismissAllowingStateLoss()
 
+                                                    }
+                                                    btComfir.setOnClickListener {
+                                                        dialog.dismissAllowingStateLoss()
+
+                                                    }
+
+                                                }
+
+                                            })
                                     }
+
+
                                 }
 
                             })

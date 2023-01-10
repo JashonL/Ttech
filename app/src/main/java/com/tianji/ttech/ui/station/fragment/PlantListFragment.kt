@@ -23,6 +23,7 @@ import com.tianji.ttech.databinding.FragmentPlantListBinding
 import com.tianji.ttech.databinding.PlantViewHolderBinding
 import com.tianji.ttech.model.PlantModel
 import com.tianji.ttech.ui.MainActivity
+import com.tianji.ttech.ui.device.activity.DeviceListActivity
 import com.tianji.ttech.ui.home.viewmodel.PlantFilterViewModel
 import com.tianji.ttech.ui.station.activity.AddPlantActivity
 import com.tianji.ttech.ui.station.activity.AddTtchPlantActivity
@@ -104,9 +105,8 @@ class PlantListFragment : BaseFragment() {
             }
         }
         viewModel.getPlantStatusNumLiveData.observe(viewLifecycleOwner) {
-            if (it.second == null) {
-//                listener.onPlantStatusNumChange(it.first)
-            }
+            (parentFragment as PlantTabFragment).onPlantStatusNumChange(it)
+
         }
         filterViewModel.getPlantFilterLiveData.observe(viewLifecycleOwner) {
             binding.srfRefresh.autoRefresh()
@@ -131,6 +131,12 @@ class PlantListFragment : BaseFragment() {
             binding.srfRefresh.autoRefresh()
         }
 
+
+        filterViewModel.getPlantSearchLiveData.observe(viewLifecycleOwner) {
+            searchWord = it
+            binding.srfRefresh.autoRefresh()
+        }
+
     }
 
     private fun refreshEmptyView(plantModels: Array<PlantModel>?) {
@@ -151,7 +157,7 @@ class PlantListFragment : BaseFragment() {
 
     private fun refresh() {
         filterViewModel.getPlantFilterLiveData.value?.let {
-            viewModel.getPlantList(plantStatus ?: 0, it, searchWord.toString())
+            viewModel.getPlantList(plantStatus ?: 0, it, searchWord ?: "")
         }
     }
 
@@ -205,7 +211,7 @@ class PlantListFragment : BaseFragment() {
         }
 
         override fun onItemClick(v: View?, position: Int) {
-            (activity as MainActivity).showHomeFragment(getItem(position))
+            getItem(position).id?.let { DeviceListActivity.start(requireActivity(), it) }
         }
 
         override fun onItemLongClick(v: View?, position: Int) {

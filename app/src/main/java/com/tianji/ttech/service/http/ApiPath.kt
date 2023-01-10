@@ -149,6 +149,36 @@ object ApiPath {
     }
 
 
+    object Device {
+
+        /**
+         * 设备列表
+         */
+        const val GETDEVICELIST = "v1/station/deviceList"
+
+        const val SETHMIINFO = "v1/manager/setHmiInfo"
+
+        const val SETMGRNINFO = "v1/manager/setMgrnInfo"
+
+        const val ELECSETTING = "v1/manager/elecSetting"
+
+        const val GETPCSSETINFO = "v1/manager/getPcsSetInfo"
+
+        const val GETMGRNSETINFO = "v1/manager/getMgrnSetInfo"
+
+        const val GETDEVICEDETAILS = "/v1/plant/getDeviceDetails"
+
+        const val GETINVERTERDATA = "/v1/station/getInverterData"
+
+    }
+
+
+
+    object OperatorLog{
+        const val OPERATIONLIST = "v1/station/operationList"
+    }
+
+
     object Dataloger {
 
         /**

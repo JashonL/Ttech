@@ -97,7 +97,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private fun loginSuccess(user: User?) {
         user?.password = binding.etPassword.getValue().toString()
-        accountService().saveUserInfo(user)
+        if (binding.cbRemember.isChecked) {
+            accountService().saveUserInfo(user)
+        }
         MainActivity.start(this)
         finish()
     }

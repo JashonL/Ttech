@@ -40,6 +40,11 @@ class StationFragment :Fragment(),OnClickListener{
 
     private fun initData() {
         filterViewModel.setFilterType(PlantFilterModel.getDefaultFilter().filterType)
+
+        _binding.ivSearch.setOnClickListener {
+            val plantName = _binding.tvSearch.text.toString()
+            filterViewModel.setSearchWord(plantName)
+        }
     }
 
     override fun onClick(v: View?) {

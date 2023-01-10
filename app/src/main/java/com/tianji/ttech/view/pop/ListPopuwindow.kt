@@ -41,22 +41,39 @@ class ListPopuwindow(
             context: Context, list: List<ListPopModel>,
             dropView: View, curItem: String, chooselisener: ((pos: Int) -> Unit)? = null
         ) {
-            ListPopuwindow(context, list, curItem, chooselisener).showAsDropDown(dropView)
+
+            //计算显示的位置
+            val listPopuwindow = ListPopuwindow(context, list, curItem, chooselisener)
+            val width = listPopuwindow.getViewWidth() / 2
+            listPopuwindow.showAsDropDown(
+                dropView,
+                -width / 2,
+                0
+            )
+
+
         }
     }
 
 
     var binding: ListPopLayoutBinding
+    var popWidth: Int = 0
 
 
     init {
+
+        /*        this.contentView = inflater.inflate(R.layout.list_pop_layout, null) //布局xml
+        ListPopLayoutBinding.bind(this.contentView)*/
+
         val inflater = LayoutInflater.from(context)
-//        this.contentView = inflater.inflate(R.layout.list_pop_layout, null) //布局xml
-//        ListPopLayoutBinding.bind(this.contentView)
         binding = ListPopLayoutBinding.inflate(inflater)
         this.contentView = binding.root
 
         initContentView(context, list, curItem)
+
+        this.contentView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        popWidth = this.contentView.measuredWidth
+
 
         this.width = LinearLayout.LayoutParams.WRAP_CONTENT //父布局减去padding
         this.height = LinearLayout.LayoutParams.WRAP_CONTENT
@@ -80,6 +97,9 @@ class ListPopuwindow(
         binding.rlvList.layoutManager = LinearLayoutManager(context)
         binding.rlvList.adapter = ListAdapter(context, list.toMutableList(), this)
     }
+
+
+    private fun getViewWidth() = this.popWidth
 
 
     override fun onItemClick(v: View?, position: Int) {
@@ -108,7 +128,7 @@ class ListPopuwindow(
 
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-            return ListViewHolder.create(context, listener)
+            return ListViewHolder.create(context, listener, parent)
         }
 
         override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
@@ -148,9 +168,11 @@ class ListPopuwindow(
         companion object {
             fun create(
                 context: Context,
-                onItemClickListener: OnItemClickListener?
+                onItemClickListener: OnItemClickListener?,
+                parent: ViewGroup
             ): ListViewHolder {
-                val view = LayoutInflater.from(context).inflate(R.layout.pop_list_item, null)
+                val view =
+                    LayoutInflater.from(context).inflate(R.layout.pop_list_item, parent, false)
                 val bind = PopListItemBinding.bind(view)
                 val listViewHolder = ListViewHolder(view, onItemClickListener)
                 listViewHolder.binding = bind
