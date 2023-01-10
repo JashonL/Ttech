@@ -20,6 +20,7 @@ import com.ttech.bluetooth.util.`interface`.IBleConnetLisener
 import com.ttech.bluetooth.util.`interface`.IScanResult
 import com.ttech.bluetooth.util.bean.BleModel
 import com.ttech.lib.util.ActivityBridge
+import com.ttech.lib.util.LogUtil
 import com.ttech.lib.util.ToastUtil
 import com.ttech.lib.util.Util
 
@@ -72,6 +73,7 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
                 connectBle()
             } else {
                 ToastUtil.show(it)
+                connectBle()
             }
         }
         viewModel.getCheckCodeLiveData.observe(this) {
@@ -102,23 +104,20 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
                 }
             }
             v === binding.btFinish -> {
-                connectBle()
-
-
-                /*          val dataLoggerSN = binding.etDataLoggerSn.text.toString().trim()
-                          val checkCode = binding.etCheckCode.text.toString().trim()
-                          when {
-                              dataLoggerSN.isEmpty() -> {
-                                  ToastUtil.show(getString(R.string.m90_serial_number_not_null))
-                              }
-                              checkCode.isEmpty() -> {
-                                  ToastUtil.show(getString(R.string.m91_check_code_not_null))
-                              }
-                              else -> {
-                                  showDialog()
-                                  viewModel.addDataLogger(dataLoggerSN, checkCode)
-                              }
-                          }*/
+                val dataLoggerSN = binding.etDataLoggerSn.text.toString().trim()
+                val checkCode = binding.etCheckCode.text.toString().trim()
+                when {
+                    dataLoggerSN.isEmpty() -> {
+                        ToastUtil.show(getString(R.string.m90_serial_number_not_null))
+                    }
+                    checkCode.isEmpty() -> {
+                        ToastUtil.show(getString(R.string.m91_check_code_not_null))
+                    }
+                    else -> {
+                        showDialog()
+                        viewModel.addDataLogger(dataLoggerSN, checkCode)
+                    }
+                }
             }
         }
     }
@@ -184,6 +183,7 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
                                 }
 
                                 override fun scanResult(results: List<BleModel>) {
+                                    LogUtil.i("liaojinsha",results.toString())
                                     val text = binding.etDataLoggerSn.text.toString()
 
                                     var isBle = false
@@ -198,7 +198,6 @@ class AddDataLoggerActivity : BaseActivity(), View.OnClickListener {
                                         if (text == it.name) {
                                             isBle = true
                                             address = it.address ?: ""
-                                            return
                                         }
                                     }
 

@@ -561,6 +561,12 @@ confirmation after plug in your car。</string>
     <string name="m238_log">Log</string>
     <string name="m239_operation_log">Operation Log</string>
     <string name="m240_bluetooth_connection_failed">Bluetooth connection failed,please scan the code again to add</string>
+    <string name="m241_please_wait">Please wait a moment</string>
+    <string name="m242_ok">OK</string>
+    <string name="m243_fail">fail</string>
+
+
+
 
 
 </resources>
