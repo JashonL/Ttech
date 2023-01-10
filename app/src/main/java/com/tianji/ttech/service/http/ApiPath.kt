@@ -119,6 +119,12 @@ object ApiPath {
         const val GET_IMPACT_TOTAL = "v1/manage/getImpactTotal"
 
 
+        /**
+         * 根据日期获取
+         */
+        const val GET_ARRAY_DATADAY = "v1/manage/getArrayDataDay"
+        const val GET_ARRAY_DATAMONTH = "v1/manage/getArrayDataMonth"
+        const val GET_ARRAY_DATAYEAR = "v1/manage/getArrayDataYear"
     }
 
 

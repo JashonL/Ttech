@@ -14,10 +14,10 @@
         layout="@layout/title_date" />
 
 
-    <ImageView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rlv_invert"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/array_pic" />
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>
